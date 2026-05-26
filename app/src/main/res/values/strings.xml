@@ -1,0 +1,57 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">RadiantHub</string>
+
+    <!-- TopBar -->
+    <string name="topbar_home_title">Home</string>
+    <string name="topbar_agents_title">Agents</string>
+    <string name="topbar_maps_title">Maps</string>
+    <string name="topbar_favorites_title">Favorites</string>
+    <string name="topbar_principal_title">Radiant Hub</string>
+
+    <!-- BottomBar -->
+    <string name="bottom_bar_home_title">Home</string>
+    <string name="bottom_bar_agents_title">Agents</string>
+    <string name="bottom_bar_maps_title">Maps</string>
+    <string name="bottom_bar_favorites_title">Favorites</string>
+
+    <!-- NavigationDrawer -->
+    <string name="drawer_title">Radiant Hub</string>
+    <string name="drawer_sub_title">Explore agents, maps and more</string>
+    <string name="drawer_item_home">Home</string>
+    <string name="drawer_item_agents">Agents</string>
+    <string name="drawer_item_maps">Maps</string>
+    <string name="drawer_item_favorites">Favorites</string>
+    <string name="drawer_item_theme">Theme</string>
+    <string name="drawer_item_language">Language</string>
+    <string name="drawer_item_themes_cd">Theme</string>
+    <string name="drawer_item_language_cd">Language</string>
+    <string name="drawer_category_preference">Preferences</string>
+
+    <!-- LoadingScreen -->
+    <string name="loading_screen_label" tools:ignore="TypographyEllipsis">Loading...</string>
+
+    <!-- Buttons -->
+    <string name="button_retry">Try again</string>
+    <string name="view_skills">View Skills</string>
+
+    <!-- UiState -->
+    <string name="ui_state_io_exception">
+        No internet access.\n
+        Check your connection
+    </string>
+    <string name="ui_state_http_exception">Server error: %1$d</string>
+    <string name="ui_state_generic_error">An unexpected error occurred!</string>
+
+    <!-- Theme -->
+    <string name="theme_dialog_title">Choose a theme</string>
+    <string name="theme_darkmode">Dark</string>
+    <string name="theme_lightmode">Light</string>
+    <string name="theme_system">System</string>
+
+    <!-- AlertDialog -->
+    <string name="dialog_action_confirm">Confirm</string>
+    <string name="dialog_action_dismiss">Cancel</string>
+
+    <!-- Features (Coming soon) -->
+    <string name="feat_coming_soon">Coming Soon</string>
+</resources>
