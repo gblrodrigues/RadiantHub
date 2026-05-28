@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.gblrod.radianthub.domain.agents.model.Agent
+import com.gblrod.radianthub.ui.shared.components.SectionHeader
 import com.gblrod.radianthub.ui.theme.NavigationSelected
 
 @Composable
@@ -42,7 +43,7 @@ fun AgentInfoCard(
                 horizontal = 16.dp
             )
         ) {
-            AgentHeader(
+            SectionHeader(
                 name = agent.name,
                 onFavoriteClick = {}
             )

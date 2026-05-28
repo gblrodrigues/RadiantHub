@@ -1,6 +1,6 @@
 # RadiantHub
 
-RadiantHub is an Android application focused on Valorant, designed to explore agents, abilities, maps, and other game-related information, developed in Kotlin with Jetpack Compose.
+RadiantHub is an Android application developed in Kotlin with Jetpack Compose, designed to explore agents, abilities, maps, and other content from Valorant.
 
 I built this project to practice API integration, local persistence, state management, and modern Android UI development while exploring a more immersive visual experience.
 
@@ -32,7 +32,6 @@ I built this project to practice API integration, local persistence, state manag
 * Immersive fullscreen agent presentation:
   * Blurred cinematic background  
   * Centered agent artwork  
-  * Layered UI inspired by Valorant's visual identity  
 * Agent details:
   * Name  
   * Role  
@@ -46,12 +45,19 @@ I built this project to practice API integration, local persistence, state manag
   * Ability name  
   * Description
 
+### Maps
+* Browse Valorant maps
+* Fullscreen map presentation
+* Smooth horizontal navigation between maps using `HorizontalPager`
+* Map details
+  * Name
+  * Visual map overview
+
 ### Navigation & UI
 * TopBar and BottomBar navigation
 * Navigation Drawer with:
   * App routes  
   * Theme preferences  
-* Dynamic UI inspired by Valorant visuals
 * Theme support:
   * `Dark`
   * `Light`
@@ -70,8 +76,11 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/1b8e88ff-fce6-49ba-b115-fd0c6ea13239" width="250"/>
 <img src="https://github.com/user-attachments/assets/d841cfac-046f-4fc8-a82f-d0f03451bc39" width="250"/>
 
+### Maps Screen
+<img src="https://github.com/user-attachments/assets/bbb0f532-370b-454c-bc2a-0b3b59049e0d" width="250"/>
+
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/bdca169b-81fe-4648-8e01-9482588dde5a
+> https://github.com/user-attachments/assets/02e5ba1c-529a-4e1c-93fe-f9107b38362e
 
 ## Technical Decisions
 

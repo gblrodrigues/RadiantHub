@@ -12,10 +12,12 @@ import com.gblrod.radianthub.navigation.graph.favoritesRoute
 import com.gblrod.radianthub.navigation.graph.homeRoute
 import com.gblrod.radianthub.navigation.graph.mapsRoute
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
+import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 
 @Composable
 fun NavigationGraph(
     agentsViewModel: AgentsViewModel,
+    mapsViewModel: MapsViewModel,
     paddingValues: PaddingValues,
     navHostController: NavHostController,
     snackbarHostState: SnackbarHostState
@@ -31,7 +33,9 @@ fun NavigationGraph(
             agentsViewModel = agentsViewModel
         )
 
-        mapsRoute()
+        mapsRoute(
+            mapsViewModel = mapsViewModel
+        )
 
         favoritesRoute()
     }
