@@ -30,6 +30,11 @@
     <!-- LoadingScreen -->
     <string name="loading_screen_label" tools:ignore="TypographyEllipsis">Loading...</string>
 
+    <!-- Empty Favorites Screen -->
+    <string name="favorites_empty_title">No favorites yet</string>
+    <string name="favorites_empty_description">Start exploring and save your favorite content.</string>
+    <string name="favorites_agents">Agents</string>
+
     <!-- Buttons -->
     <string name="button_retry">Try again</string>
     <string name="view_skills">View Skills</string>
@@ -51,6 +56,10 @@
     <!-- AlertDialog -->
     <string name="dialog_action_confirm">Confirm</string>
     <string name="dialog_action_dismiss">Cancel</string>
+
+    <!-- Types name -->
+    <string name="type_name_agents_title">Agents</string>
+    <string name="type_name_cards_title">Cards</string>
 
     <!-- Features (Coming soon) -->
     <string name="feat_coming_soon">Coming Soon</string>

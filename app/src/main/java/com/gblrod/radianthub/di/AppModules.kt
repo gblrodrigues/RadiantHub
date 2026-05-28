@@ -2,14 +2,17 @@ package com.gblrod.radianthub.di
 
 import com.gblrod.radianthub.data.agents.remote.api.AgentsApi
 import com.gblrod.radianthub.data.agents.repository.AgentsRepositoryImpl
+import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
+import com.gblrod.radianthub.data.favorite.repository.FavoriteRepositoryImpl
 import com.gblrod.radianthub.data.maps.remote.api.MapsApi
 import com.gblrod.radianthub.data.maps.repository.MapsRepositoryImpl
 import com.gblrod.radianthub.domain.agents.repository.AgentsRepository
 import com.gblrod.radianthub.domain.maps.repository.MapsRepository
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
+import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
-import org.koin.dsl.module
 import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -35,6 +38,12 @@ val appModule = module {
         )
     }
 
+    single<FavoriteRepository> {
+        FavoriteRepositoryImpl(
+            dao = get()
+        )
+    }
+
     // API (Agents)
     single<AgentsApi> {
         get<Retrofit>().create(AgentsApi::class.java)
@@ -48,12 +57,19 @@ val appModule = module {
     // ViewModels
     viewModel {
         AgentsViewModel(
-            repository = get()
+            repository = get(),
+            favoriteRepository = get()
         )
     }
 
     viewModel {
         MapsViewModel(
+            repository = get()
+        )
+    }
+
+    viewModel {
+        FavoritesViewModel(
             repository = get()
         )
     }
