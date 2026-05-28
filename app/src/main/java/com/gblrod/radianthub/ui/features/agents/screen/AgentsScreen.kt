@@ -60,7 +60,8 @@ fun AgentsScreen(
                     agent = state.agents[page],
                     onViewSkills = { selectedAgent = it},
                     currentPage = pagerState.currentPage,
-                    pageCount = state.agents.size
+                    pageCount = state.agents.size,
+                    agentsViewModel = agentsViewModel
                 )
             }
 

@@ -21,6 +21,7 @@ I built this project to practice API integration, local persistence, state manag
 - [Koin](https://insert-koin.io/) — Dependency Injection for simpler and cleaner dependency management
 - [Coil](https://coil-kt.github.io/coil/compose/) — Asynchronous image loading via URL
 - [Navigation](https://developer.android.com/jetpack/compose/navigation) — Navigation management between screens
+- [Room](https://developer.android.com/training/data-storage/room) — Local database persistence for storing favorite agents
 - [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) — User preference persistence
 - MVVM Architecture — Project organization using ViewModel and StateFlow for state management and separation of responsibilities
 - Text management with `strings.xml` — Centralized text management for easier maintenance and future localization
@@ -53,6 +54,12 @@ I built this project to practice API integration, local persistence, state manag
   * Name
   * Visual map overview
 
+### Favorites
+* Persistent local favorites system for agents
+* Grid-based favorites screen
+* Empty state experience for users without saved favorites
+* Dynamic favorite toggling directly from agent pages
+
 ### Navigation & UI
 * TopBar and BottomBar navigation
 * Navigation Drawer with:
@@ -79,8 +86,13 @@ I built this project to practice API integration, local persistence, state manag
 ### Maps Screen
 <img src="https://github.com/user-attachments/assets/bbb0f532-370b-454c-bc2a-0b3b59049e0d" width="250"/>
 
+### Favorites Screen
+<img src="https://github.com/user-attachments/assets/fd055175-585f-45e4-a271-00668c04905c" width="250"/>
+<img src="https://github.com/user-attachments/assets/c043fb82-1cf2-43e6-9967-acd907fad699" width="250"/>
+<img src="https://github.com/user-attachments/assets/0c7f747c-577a-4ba1-910f-b8e1d7838ca2" width="250"/>
+
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/02e5ba1c-529a-4e1c-93fe-f9107b38362e
+> https://github.com/user-attachments/assets/b5f2ebd4-c917-4f57-9fa0-855165737bd1
 
 ## Technical Decisions
 
@@ -103,6 +115,10 @@ This allowed me to practice:
 * UI state management for loading, success, and error scenarios
 
 > 🔗 API Link: https://valorant-api.com/
+
+### Data Persistence (Room + DataStore)
+
+I implemented Room for local persistence of favorite agents and DataStore for managing user personalization preferences such as theme selection.
 
 ### UI State Management (UiState)
 To handle screen states (loading, success, and error), I used an approach with sealed class (UiState) along with StateFlow.  

@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.gblrod.radianthub.navigation.NavigationGraph
 import com.gblrod.radianthub.navigation.state.mapRouteToNavigationUiState
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
+import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import com.gblrod.radianthub.ui.shared.components.RadiantBackground
 import com.gblrod.radianthub.ui.shared.components.bottombar.RadiantHubBottomBar
@@ -48,6 +49,7 @@ class MainActivity : ComponentActivity() {
             val agentsViewModel: AgentsViewModel = koinViewModel()
             val themeViewModel: ThemeViewModel = koinViewModel()
             val mapsViewModel: MapsViewModel = koinViewModel()
+            val favoritesViewModel: FavoritesViewModel = koinViewModel()
 
             val navHostController = rememberNavController()
             val scope = rememberCoroutineScope()
@@ -115,6 +117,7 @@ class MainActivity : ComponentActivity() {
                                     NavigationGraph(
                                         agentsViewModel = agentsViewModel,
                                         mapsViewModel = mapsViewModel,
+                                        favoritesViewModel = favoritesViewModel,
                                         navHostController = navHostController,
                                         paddingValues = paddingValues,
                                         snackbarHostState = snackbarHostState

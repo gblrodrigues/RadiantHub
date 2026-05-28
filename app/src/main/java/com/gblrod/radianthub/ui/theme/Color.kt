@@ -22,6 +22,10 @@ val NavigationSelected = Color(0xFF00FFAC)
 val ButtonRetry = Color(0xFF0CA200)
 val ViewAbilities = Color(0xFF0CAAC2)
 val ButtonContainerDialog = Color(0xFF2FE8BA)
+val ButtonHome = Color(0xFF5FA7C7)
 
 // Actions
 val RetryActions = Color(0xFF00FF55)
+val YellowActions = Color(0xFFEFEA02)
+val PinkActions = Color(0xFFE74A8E)
+val PurpleActions = Color(0xFF713DEE)
