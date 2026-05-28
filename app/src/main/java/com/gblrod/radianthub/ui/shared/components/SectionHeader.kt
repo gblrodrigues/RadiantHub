@@ -1,4 +1,4 @@
-package com.gblrod.radianthub.ui.features.agents.components
+package com.gblrod.radianthub.ui.shared.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun AgentHeader(
+fun SectionHeader(
     name: String,
     onFavoriteClick: () -> Unit
 ) {
