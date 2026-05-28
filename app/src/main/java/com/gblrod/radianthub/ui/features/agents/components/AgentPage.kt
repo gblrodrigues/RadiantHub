@@ -7,12 +7,15 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import com.gblrod.radianthub.domain.agents.model.Agent
+import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.shared.components.PagerIndicator
 
 @Composable
@@ -21,8 +24,11 @@ fun AgentPage(
     onViewSkills: (Agent) -> Unit,
     currentPage: Int,
     pageCount: Int,
+    agentsViewModel: AgentsViewModel,
     modifier: Modifier = Modifier
 ) {
+    val isFavorite by agentsViewModel.isFavorite(agent.uuid).collectAsState(initial = false)
+
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -51,7 +57,9 @@ fun AgentPage(
         ) {
             AgentInfoCard(
                 agent = agent,
-                onViewSkills = { onViewSkills(agent) }
+                onViewSkills = { onViewSkills(agent) },
+                onFavoriteClick = { agentsViewModel.toggleFavorite(agent) },
+                isFavorite = isFavorite
             )
 
             PagerIndicator(

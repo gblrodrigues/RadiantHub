@@ -24,6 +24,8 @@ import com.gblrod.radianthub.ui.theme.NavigationSelected
 fun AgentInfoCard(
     agent: Agent,
     onViewSkills: () -> Unit,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -45,7 +47,8 @@ fun AgentInfoCard(
         ) {
             SectionHeader(
                 name = agent.name,
-                onFavoriteClick = {}
+                onFavoriteClick = { onFavoriteClick() },
+                isFavorite = isFavorite
             )
 
             Spacer(modifier = Modifier.height(4.dp))
