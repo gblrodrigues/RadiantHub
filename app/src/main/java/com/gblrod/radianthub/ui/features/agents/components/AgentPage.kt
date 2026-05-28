@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import com.gblrod.radianthub.domain.agents.model.Agent
+import com.gblrod.radianthub.ui.shared.components.PagerIndicator
 
 @Composable
 fun AgentPage(
