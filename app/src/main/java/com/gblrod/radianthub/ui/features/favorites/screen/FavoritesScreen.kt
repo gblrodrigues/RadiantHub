@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -105,6 +106,7 @@ fun FavoritesScreen(
                                     val result = snackbarHostState.showSnackbar(
                                         message = agentRemove,
                                         actionLabel = snackbarAction,
+                                        duration = SnackbarDuration.Short,
                                         withDismissAction = true
                                     )
 
