@@ -6,5 +6,6 @@ data class FavoriteUiModel(
     val name: String,
     val uuid: String,
     val imageUrl: String?,
-    val type: FavoriteType
+    val type: FavoriteType,
+    val index: Int
 )

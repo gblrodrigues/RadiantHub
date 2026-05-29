@@ -4,6 +4,7 @@ import androidx.room.Room
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepositoryImpl
 import com.gblrod.radianthub.data.room.database.RadiantHubDatabase
+import com.gblrod.radianthub.data.room.migrations.MIGRATION_1_2
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -15,7 +16,9 @@ val storageModule = module {
             context = androidContext(),
             klass = RadiantHubDatabase::class.java,
             name = "RadiantHub.db"
-        ).build()
+        )
+            .addMigrations(MIGRATION_1_2)
+            .build()
     }
 
     single {

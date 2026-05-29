@@ -12,6 +12,7 @@ interface FavoriteDao {
     @Query(value = """
         SELECT *
         FROM favorites
+        ORDER BY `index` ASC
     """
     )
 

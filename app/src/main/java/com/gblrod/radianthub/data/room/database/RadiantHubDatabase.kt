@@ -7,7 +7,7 @@ import com.gblrod.radianthub.data.room.entity.FavoriteEntity
 
 @Database(
     entities = [FavoriteEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class RadiantHubDatabase : RoomDatabase() {
