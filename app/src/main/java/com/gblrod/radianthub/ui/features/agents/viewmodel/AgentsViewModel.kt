@@ -11,7 +11,10 @@ import com.gblrod.radianthub.ui.features.agents.state.AgentsUiState
 import com.gblrod.radianthub.ui.shared.utils.safeApiCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class AgentsViewModel(
@@ -23,6 +26,13 @@ class AgentsViewModel(
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
+
+    val favorites =
+        favoriteRepository.observeFavorites().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Eagerly,
+                initialValue = emptyList()
+            )
 
     init {
         if (_agentsState.value !is AgentsUiState.Success) {
@@ -70,12 +80,22 @@ class AgentsViewModel(
 
     fun toggleFavorite(agent: Agent) {
         viewModelScope.launch {
-            favoriteRepository.toggleFavorite(
-                uuid = agent.uuid,
-                name = agent.name,
-                imageUrl = agent.portrait,
-                type = FavoriteType.AGENT
-            )
+            val isFavorite = favoriteRepository.isFavorite(agent.uuid).first()
+
+            if (isFavorite) {
+                favoriteRepository.removeFavorite(
+                    uuid = agent.uuid
+                )
+
+            } else {
+                favoriteRepository.toggleFavorite(
+                    uuid = agent.uuid,
+                    name = agent.name,
+                    imageUrl = agent.portrait,
+                    type = FavoriteType.AGENT,
+                    index = favorites.value.size
+                )
+            }
         }
     }
 

@@ -7,8 +7,9 @@ import com.gblrod.radianthub.data.room.model.FavoriteType
 @Entity(tableName = "favorites")
 data class FavoriteEntity(
     @PrimaryKey
-    val name: String,
     val uuid: String,
+    val name: String,
     val imageUrl: String?,
-    val type: FavoriteType
+    val type: FavoriteType,
+    val index: Int
 )

@@ -39,7 +39,15 @@ class FavoritesViewModel(
         }
     }
 
-    fun toggleFavorite(
+    fun removeFavorite(
+        favorite: FavoriteUiModel
+    ) {
+        viewModelScope.launch {
+            repository.removeFavorite(uuid = favorite.uuid)
+        }
+    }
+
+    fun restoreFavorite(
         favorite: FavoriteUiModel
     ) {
         viewModelScope.launch {
@@ -47,7 +55,8 @@ class FavoritesViewModel(
                 uuid = favorite.uuid,
                 name = favorite.name,
                 imageUrl = favorite.imageUrl,
-                type = favorite.type
+                type = favorite.type,
+                index = favorite.index
             )
         }
     }
