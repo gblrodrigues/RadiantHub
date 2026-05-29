@@ -16,9 +16,7 @@ class FavoriteRepositoryImpl(
         return dao
             .observeFavorites()
             .map { favorites ->
-                favorites.map {
-                    it.toUiModel()
-                }
+                favorites.map { it.toUiModel() }
             }
     }
 
@@ -30,21 +28,21 @@ class FavoriteRepositoryImpl(
         uuid: String,
         name: String,
         imageUrl: String?,
-        type: FavoriteType
+        type: FavoriteType,
+        index: Int
     ) {
-        val exists = dao.exists(uuid)
-
-        if (exists) {
-            dao.deleteFavorite(uuid)
-        } else {
-            dao.insertFavorite(
-                FavoriteEntity(
-                    uuid = uuid,
-                    name = name,
-                    imageUrl = imageUrl,
-                    type = type
-                )
+        dao.insertFavorite(
+            FavoriteEntity(
+                uuid = uuid,
+                name = name,
+                imageUrl = imageUrl,
+                type = type,
+                index = index
             )
-        }
+        )
+    }
+
+    override suspend fun removeFavorite(uuid: String) {
+        dao.deleteFavorite(uuid)
     }
 }

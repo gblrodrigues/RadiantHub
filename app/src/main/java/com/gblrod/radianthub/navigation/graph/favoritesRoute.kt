@@ -1,5 +1,6 @@
 package com.gblrod.radianthub.navigation.graph
 
+import androidx.compose.material3.SnackbarHostState
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -12,7 +13,8 @@ import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 fun NavGraphBuilder.favoritesRoute(
     favoritesViewModel: FavoritesViewModel,
     navHostController: NavHostController,
-    agentsViewModel: AgentsViewModel
+    agentsViewModel: AgentsViewModel,
+    snackbarHostState: SnackbarHostState
 ) {
     composable(route = Routes.Favorites.route) {
         FavoritesScreen(
@@ -20,8 +22,8 @@ fun NavGraphBuilder.favoritesRoute(
             agentsViewModel = agentsViewModel,
             onNavigateAgents = {
                 navHostController.navigateToBottomBar(route = Routes.Agents.route)
-            }
-
+            },
+            snackbarHostState = snackbarHostState
         )
     }
 }

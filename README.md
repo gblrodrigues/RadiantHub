@@ -21,7 +21,7 @@ I built this project to practice API integration, local persistence, state manag
 - [Koin](https://insert-koin.io/) — Dependency Injection for simpler and cleaner dependency management
 - [Coil](https://coil-kt.github.io/coil/compose/) — Asynchronous image loading via URL
 - [Navigation](https://developer.android.com/jetpack/compose/navigation) — Navigation management between screens
-- [Room](https://developer.android.com/training/data-storage/room) — Local database persistence for storing favorite agents
+- [Room](https://developer.android.com/training/data-storage/room) — Local persistence for favorites, including migration handling and state restoration
 - [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) — User preference persistence
 - MVVM Architecture — Project organization using ViewModel and StateFlow for state management and separation of responsibilities
 - Text management with `strings.xml` — Centralized text management for easier maintenance and future localization
@@ -56,6 +56,8 @@ I built this project to practice API integration, local persistence, state manag
 
 ### Favorites
 * Persistent local favorites system for agents
+* Undo support when removing favorites
+* Favorite restoration to original position
 * Grid-based favorites screen
 * Empty state experience for users without saved favorites
 * Dynamic favorite toggling directly from agent pages
@@ -92,7 +94,7 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/0c7f747c-577a-4ba1-910f-b8e1d7838ca2" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/b5f2ebd4-c917-4f57-9fa0-855165737bd1
+> https://github.com/user-attachments/assets/89939fe4-2ce7-48d5-b850-3a741aa9f1d9
 
 ## Technical Decisions
 

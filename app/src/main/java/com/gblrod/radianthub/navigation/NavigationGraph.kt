@@ -42,7 +42,8 @@ fun NavigationGraph(
         favoritesRoute(
             favoritesViewModel = favoritesViewModel,
             agentsViewModel = agentsViewModel,
-            navHostController = navHostController
+            navHostController = navHostController,
+            snackbarHostState = snackbarHostState
         )
     }
 }

@@ -57,6 +57,10 @@
     <string name="dialog_action_confirm">Confirm</string>
     <string name="dialog_action_dismiss">Cancel</string>
 
+    <!-- SnackBar -->
+    <string name="snackbar_message_removed">%1$s removed from favorites</string>
+    <string name="snackbar_action_label">Undo</string>
+
     <!-- Types name -->
     <string name="type_name_agents_title">Agents</string>
     <string name="type_name_cards_title">Cards</string>
