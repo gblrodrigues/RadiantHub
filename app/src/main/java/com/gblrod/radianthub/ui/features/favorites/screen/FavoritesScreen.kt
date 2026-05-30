@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
 fun FavoritesScreen(
     favoritesViewModel: FavoritesViewModel,
     agentsViewModel: AgentsViewModel,
-    onNavigateAgents: () -> Unit,
+    onNavigateHome: () -> Unit,
     snackbarHostState: SnackbarHostState
 ) {
     val uiState by favoritesViewModel.favoritesState.collectAsState()
@@ -73,7 +73,7 @@ fun FavoritesScreen(
         is FavoritesUiState.Success -> {
             if (state.favorites.isEmpty()) {
                 EmptyFavorites(
-                    onNavigateAgents = { onNavigateAgents() }
+                    onNavigateHome = { onNavigateHome() }
                 )
 
             } else {

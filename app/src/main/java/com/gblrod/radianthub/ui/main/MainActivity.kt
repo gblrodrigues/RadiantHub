@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.gblrod.radianthub.navigation.NavigationGraph
 import com.gblrod.radianthub.navigation.state.mapRouteToNavigationUiState
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
+import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import com.gblrod.radianthub.ui.shared.components.RadiantBackground
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
             val themeViewModel: ThemeViewModel = koinViewModel()
             val mapsViewModel: MapsViewModel = koinViewModel()
             val favoritesViewModel: FavoritesViewModel = koinViewModel()
+            val cardsViewModel: CardsViewModel = koinViewModel()
 
             val navHostController = rememberNavController()
             val scope = rememberCoroutineScope()
@@ -91,16 +93,18 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier.fillMaxSize(),
                                 containerColor = Color.Transparent,
                                 topBar = {
-                                    RadiantHubTopBar(
-                                        onOpenDrawer = {
-                                            scope.launch {
-                                                if (drawerState.isClosed) drawerState.open()
-                                                else drawerState.close()
-                                            }
-                                        },
-                                        navHostController = navHostController,
-                                        navigationUiState = navigationUiState
-                                    )
+                                    if (navigationUiState.showTopBar) {
+                                        RadiantHubTopBar(
+                                            onOpenDrawer = {
+                                                scope.launch {
+                                                    if (drawerState.isClosed) drawerState.open()
+                                                    else drawerState.close()
+                                                }
+                                            },
+                                            navHostController = navHostController,
+                                            navigationUiState = navigationUiState
+                                        )
+                                    }
                                 },
                                 snackbarHost = {
                                     SnackbarHost(
@@ -108,7 +112,9 @@ class MainActivity : ComponentActivity() {
                                     )
                                 },
                                 bottomBar = {
-                                    RadiantHubBottomBar(navHostController = navHostController)
+                                    if (navigationUiState.showBottomBar) {
+                                        RadiantHubBottomBar(navHostController = navHostController)
+                                    }
                                 }
                             ) { paddingValues ->
                                 Box(
@@ -118,6 +124,7 @@ class MainActivity : ComponentActivity() {
                                         agentsViewModel = agentsViewModel,
                                         mapsViewModel = mapsViewModel,
                                         favoritesViewModel = favoritesViewModel,
+                                        cardsViewModel = cardsViewModel,
                                         navHostController = navHostController,
                                         paddingValues = paddingValues,
                                         snackbarHostState = snackbarHostState

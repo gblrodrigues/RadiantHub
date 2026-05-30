@@ -3,12 +3,15 @@ package com.gblrod.radianthub.ui.features.favorites.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CloudOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,7 +29,7 @@ import com.gblrod.radianthub.ui.theme.ButtonHome
 
 @Composable
 fun EmptyFavorites(
-    onNavigateAgents: () -> Unit,
+    onNavigateHome: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -55,13 +58,13 @@ fun EmptyFavorites(
             text = stringResource(id = R.string.favorites_empty_description),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(
-            onClick = { onNavigateAgents() },
+            onClick = { onNavigateHome() },
             shape = RoundedCornerShape(16.dp),
             border = BorderStroke(
                 width = 2.dp,
@@ -69,10 +72,19 @@ fun EmptyFavorites(
             ),
             colors = ButtonDefaults.buttonColors(containerColor = ButtonHome),
         ) {
-            Text(
-                text = stringResource(id = R.string.favorites_agents),
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            Row {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Text(
+                    text = stringResource(id = R.string.favorites_empty_discover_content),
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
         }
     }
 }
