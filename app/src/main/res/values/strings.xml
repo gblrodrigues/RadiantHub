@@ -5,6 +5,7 @@
     <string name="topbar_home_title">Home</string>
     <string name="topbar_agents_title">Agents</string>
     <string name="topbar_maps_title">Maps</string>
+    <string name="topbar_cards_title">Cards</string>
     <string name="topbar_favorites_title">Favorites</string>
     <string name="topbar_principal_title">Radiant Hub</string>
 
@@ -20,6 +21,7 @@
     <string name="drawer_item_home">Home</string>
     <string name="drawer_item_agents">Agents</string>
     <string name="drawer_item_maps">Maps</string>
+    <string name="drawer_item_cards">Cards</string>
     <string name="drawer_item_favorites">Favorites</string>
     <string name="drawer_item_theme">Theme</string>
     <string name="drawer_item_language">Language</string>
@@ -33,7 +35,7 @@
     <!-- Empty Favorites Screen -->
     <string name="favorites_empty_title">No favorites yet</string>
     <string name="favorites_empty_description">Start exploring and save your favorite content.</string>
-    <string name="favorites_agents">Agents</string>
+    <string name="favorites_empty_discover_content">Discover Content</string>
 
     <!-- Buttons -->
     <string name="button_retry">Try again</string>

@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Style
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -56,21 +57,33 @@ fun DrawerContent(
 
     val theme = themeViewModel.theme.collectAsState().value ?: ThemeOptions.SYSTEM
 
+    val bottomBarScreens = setOf(
+        Routes.Home.route,
+        Routes.Agents.route,
+        Routes.Maps.route,
+        Routes.Favorites.route
+    )
+
     val items = listOf(
         NavigationItem(
-            label = stringResource(id = R.string.bottom_bar_home_title),
+            label = stringResource(id = R.string.drawer_item_home),
             icon = Icons.Default.Home,
             route = Routes.Home.route
         ),
         NavigationItem(
-            label = stringResource(id = R.string.bottom_bar_agents_title),
+            label = stringResource(id = R.string.drawer_item_agents),
             icon = Icons.Default.Person,
             route = Routes.Agents.route
         ),
         NavigationItem(
-            label = stringResource(id = R.string.bottom_bar_maps_title),
+            label = stringResource(id = R.string.drawer_item_maps),
             icon = Icons.Default.Map,
             route = Routes.Maps.route
+        ),
+        NavigationItem(
+            label = stringResource(id = R.string.drawer_item_cards),
+            icon = Icons.Default.Style,
+            route = Routes.Cards.route
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_favorites_title),
@@ -143,12 +156,17 @@ fun DrawerContent(
                 selected = currentRoute == item.route,
                 onClick = {
                     onItemClick()
-                    navController.navigate(item.route) {
-                        popUpTo(navController.graph.findStartDestination().id) {
-                            saveState = true
+                    if (item.route in bottomBarScreens) {
+                        navController.navigate(item.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+
+                            launchSingleTop = true
+                            restoreState = true
                         }
-                        launchSingleTop = true
-                        restoreState = true
+                    } else {
+                        navController.navigate(item.route)
                     }
                 },
                 shape = RoundedCornerShape(16.dp)

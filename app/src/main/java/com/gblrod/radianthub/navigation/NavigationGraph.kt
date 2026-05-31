@@ -8,10 +8,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.gblrod.radianthub.navigation.graph.agentsRoute
+import com.gblrod.radianthub.navigation.graph.cardsRoute
 import com.gblrod.radianthub.navigation.graph.favoritesRoute
 import com.gblrod.radianthub.navigation.graph.homeRoute
 import com.gblrod.radianthub.navigation.graph.mapsRoute
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
+import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 
@@ -20,6 +22,7 @@ fun NavigationGraph(
     agentsViewModel: AgentsViewModel,
     mapsViewModel: MapsViewModel,
     favoritesViewModel: FavoritesViewModel,
+    cardsViewModel: CardsViewModel,
     paddingValues: PaddingValues,
     navHostController: NavHostController,
     snackbarHostState: SnackbarHostState
@@ -37,6 +40,10 @@ fun NavigationGraph(
 
         mapsRoute(
             mapsViewModel = mapsViewModel
+        )
+
+        cardsRoute(
+            cardsViewModel = cardsViewModel
         )
 
         favoritesRoute(
