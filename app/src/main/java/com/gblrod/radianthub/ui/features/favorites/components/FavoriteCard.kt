@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.gblrod.radianthub.data.room.model.FavoriteType
 import com.gblrod.radianthub.ui.features.favorites.model.FavoriteUiModel
 import com.gblrod.radianthub.ui.theme.PinkActions
 import com.gblrod.radianthub.ui.theme.PurpleActions
@@ -41,10 +42,14 @@ fun FavoriteCard(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable(onClick = { onClick() }),
+            .clickable(
+                enabled = item.type == FavoriteType.AGENT,
+                onClick = { onClick() }
+            ),
         shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.surfaceContainer
         ),
         border = BorderStroke(
             width = 2.dp,
@@ -92,7 +97,7 @@ fun FavoriteCard(
                         text = item.name,
                         modifier = Modifier.weight(1f),
                         style = MaterialTheme.typography.titleMedium,
-                        maxLines = 1,
+                        maxLines = 2,
                         overflow = TextOverflow.Ellipsis
                     )
 

@@ -20,8 +20,8 @@ fun NavGraphBuilder.favoritesRoute(
         FavoritesScreen(
             favoritesViewModel = favoritesViewModel,
             agentsViewModel = agentsViewModel,
-            onNavigateAgents = {
-                navHostController.navigateToBottomBar(route = Routes.Agents.route)
+            onNavigateHome = {
+                navHostController.navigateToBottomBar(route = Routes.Home.route)
             },
             snackbarHostState = snackbarHostState
         )

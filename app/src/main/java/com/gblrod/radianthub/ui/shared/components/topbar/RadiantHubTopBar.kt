@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.shared.components.topbar
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -40,15 +41,36 @@ fun RadiantHubTopBar(
             )
         },
         navigationIcon = {
-            IconButton(
-                onClick = { onOpenDrawer() }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Menu,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier.size(28.dp)
-                )
+            when {
+                navigationUiState.showBackButton -> {
+                    IconButton(
+                        onClick = {
+                            if (navHostController.previousBackStackEntry != null) {
+                                navHostController.popBackStack()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Default.ArrowBack,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.size(28.dp)
+                        )
+                    }
+                }
+
+                navigationUiState.showDrawerIcon -> {
+                    IconButton(
+                        onClick = { onOpenDrawer() }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Menu,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier.size(28.dp)
+                        )
+                    }
+                }
             }
         },
         actions = {

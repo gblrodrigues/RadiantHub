@@ -2,13 +2,17 @@ package com.gblrod.radianthub.di
 
 import com.gblrod.radianthub.data.agents.remote.api.AgentsApi
 import com.gblrod.radianthub.data.agents.repository.AgentsRepositoryImpl
+import com.gblrod.radianthub.data.cards.remote.api.CardsApi
+import com.gblrod.radianthub.data.cards.repository.CardsRepositoryImpl
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepositoryImpl
 import com.gblrod.radianthub.data.maps.remote.api.MapsApi
 import com.gblrod.radianthub.data.maps.repository.MapsRepositoryImpl
 import com.gblrod.radianthub.domain.agents.repository.AgentsRepository
+import com.gblrod.radianthub.domain.cards.repository.CardsRepository
 import com.gblrod.radianthub.domain.maps.repository.MapsRepository
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
+import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import org.koin.core.module.dsl.viewModel
@@ -44,6 +48,12 @@ val appModule = module {
         )
     }
 
+    single<CardsRepository> {
+        CardsRepositoryImpl(
+            api = get()
+        )
+    }
+
     // API (Agents)
     single<AgentsApi> {
         get<Retrofit>().create(AgentsApi::class.java)
@@ -52,6 +62,11 @@ val appModule = module {
     // API (Maps)
     single<MapsApi> {
         get<Retrofit>().create(MapsApi::class.java)
+    }
+
+    // API (Cards)
+    single<CardsApi> {
+        get<Retrofit>().create(CardsApi::class.java)
     }
 
     // ViewModels
@@ -71,6 +86,13 @@ val appModule = module {
     viewModel {
         FavoritesViewModel(
             repository = get()
+        )
+    }
+
+    viewModel {
+        CardsViewModel(
+            repository = get(),
+            favoriteRepository = get()
         )
     }
 }
