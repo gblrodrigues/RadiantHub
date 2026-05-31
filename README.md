@@ -14,17 +14,19 @@ I built this project to practice API integration, local persistence, state manag
 
 ## Technologies used
 
-- [Kotlin](https://kotlinlang.org/) — Main development language (my favorite 💜)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose) — Declarative UI toolkit for building modern Android interfaces
-- [Material 3](https://m3.material.io/) — Used to maintain visual consistency and modern UI practices
-- [Retrofit](https://square.github.io/retrofit/) — HTTP client for REST API consumption
-- [Koin](https://insert-koin.io/) — Dependency Injection for simpler and cleaner dependency management
-- [Coil](https://coil-kt.github.io/coil/compose/) — Asynchronous image loading via URL
-- [Navigation](https://developer.android.com/jetpack/compose/navigation) — Navigation management between screens
-- [Room](https://developer.android.com/training/data-storage/room) — Local persistence for favorites, including migration handling and state restoration
-- [DataStore](https://developer.android.com/topic/libraries/architecture/datastore) — User preference persistence
-- MVVM Architecture — Project organization using ViewModel and StateFlow for state management and separation of responsibilities
-- Text management with `strings.xml` — Centralized text management for easier maintenance and future localization
+| Category | Technology | Why |
+|----------|------------|-----|
+| Language | [![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/) | Main development language (my favorite 💜)
+| UI | [![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=for-the-badge&logo=jetpackcompose&logoColor=white)](https://developer.android.com/jetpack/compose) | Declarative UI toolkit for building modern Android interfaces
+| Design System | [![Material 3](https://img.shields.io/badge/Material%203-6750A4?style=for-the-badge&logo=materialdesign&logoColor=white)](https://m3.material.io/) | Used to maintain visual consistency and modern UI practices
+| Networking | [![Retrofit](https://img.shields.io/badge/Retrofit-3DDC84?style=for-the-badge&logo=square&logoColor=white)](https://square.github.io/retrofit/) | HTTP client for REST API consumption
+| DI | [![Koin](https://img.shields.io/badge/Koin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://insert-koin.io/) | Dependency Injection for simpler and cleaner dependency management
+| Persistence | [![Room](https://img.shields.io/badge/Room-4285F4?style=for-the-badge&logo=sqlite&logoColor=white)](https://developer.android.com/training/data-storage/room) | Local persistence for favorites, including migration handling and state restoration
+| Preferences | [![DataStore](https://img.shields.io/badge/DataStore-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/topic/libraries/architecture/datastore) | User preference persistence
+| Image Loading | [![Coil](https://img.shields.io/badge/Coil-FF6F00?style=for-the-badge&logo=kotlin&logoColor=white)](https://coil-kt.github.io/coil/compose/) | Asynchronous image loading via URL
+| Navigation | [![Navigation Compose](https://img.shields.io/badge/Navigation%20Compose-4285F4?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/jetpack/compose/navigation)  | Navigation management between screens
+| Localization | strings.xml | Centralized text management for easier maintenance and future localization
+| Architecture | MVVM + StateFlow | Project organization using ViewModel and StateFlow for state management and separation of responsibilities
 
 ## Features
 
@@ -37,7 +39,6 @@ I built this project to practice API integration, local persistence, state manag
   * Name  
   * Role  
   * Description  
-* Smooth horizontal navigation between agents using `HorizontalPager`
 
 ### Agent Dossier
 * BottomSheet with detailed agent abilities
@@ -49,13 +50,17 @@ I built this project to practice API integration, local persistence, state manag
 ### Maps
 * Browse Valorant maps
 * Fullscreen map presentation
-* Smooth horizontal navigation between maps using `HorizontalPager`
 * Map details
   * Name
   * Visual map overview
+ 
+### Player Cards
+* Browse Valorant player cards
+* Grid-based cards gallery
+* Favorite player cards
 
 ### Favorites
-* Persistent local favorites system for agents
+* Persistent local favorites system for agents and player cards
 * Undo support when removing favorites
 * Favorite restoration to original position
 * Grid-based favorites screen
@@ -88,13 +93,16 @@ I built this project to practice API integration, local persistence, state manag
 ### Maps Screen
 <img src="https://github.com/user-attachments/assets/bbb0f532-370b-454c-bc2a-0b3b59049e0d" width="250"/>
 
+### Cards Screen
+<img src="https://github.com/user-attachments/assets/824b38e5-80d4-4488-9450-f518978075fb" width="250"/>
+
 ### Favorites Screen
-<img src="https://github.com/user-attachments/assets/fd055175-585f-45e4-a271-00668c04905c" width="250"/>
-<img src="https://github.com/user-attachments/assets/c043fb82-1cf2-43e6-9967-acd907fad699" width="250"/>
-<img src="https://github.com/user-attachments/assets/0c7f747c-577a-4ba1-910f-b8e1d7838ca2" width="250"/>
+<img src="https://github.com/user-attachments/assets/9a0f3f74-c4d5-4050-b29a-ff0e732afdc1" width="250"/>
+<img src="https://github.com/user-attachments/assets/986651e4-3e1b-40cb-b760-88396d18f314" width="250"/>
+<img src="https://github.com/user-attachments/assets/5d701d47-d5d8-480d-8776-944757d9d786" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/89939fe4-2ce7-48d5-b850-3a741aa9f1d9
+> https://github.com/user-attachments/assets/9ea694d9-4fe6-4cb7-9c94-87f9132ebda8
 
 ## Technical Decisions
 
