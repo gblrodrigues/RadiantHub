@@ -30,6 +30,14 @@ I built this project to practice API integration, local persistence, state manag
 
 ## Features
 
+### Home
+* Quick access to:
+  * Agents
+  * Maps
+  * Cards
+  * Favorites
+* Themed banners for each section
+
 ### Agents
 * Browse playable Valorant agents  
 * Immersive fullscreen agent presentation:
@@ -86,6 +94,9 @@ I built this project to practice API integration, local persistence, state manag
 * Dynamic UI rendering using Compose State
 
 ## Preview
+### Home Screen
+<img src="https://github.com/user-attachments/assets/bb10902f-9084-4d9f-95f5-a33634c6407b" width="250"/>
+
 ### Agents Screen and Agent Abilities
 <img src="https://github.com/user-attachments/assets/1b8e88ff-fce6-49ba-b115-fd0c6ea13239" width="250"/>
 <img src="https://github.com/user-attachments/assets/d841cfac-046f-4fc8-a82f-d0f03451bc39" width="250"/>
@@ -102,7 +113,7 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/5d701d47-d5d8-480d-8776-944757d9d786" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/9ea694d9-4fe6-4cb7-9c94-87f9132ebda8
+> https://github.com/user-attachments/assets/390a0438-a4de-46df-93ae-c78d9aa174af
 
 ## Technical Decisions
 
