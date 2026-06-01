@@ -68,10 +68,10 @@ I built this project to practice API integration, local persistence, state manag
 * Favorite player cards
 
 ### Favorites
+* Filtering by All, Agents and Cards categories
 * Persistent local favorites system for agents and player cards
 * Undo support when removing favorites
 * Favorite restoration to original position
-* Grid-based favorites screen
 * Empty state experience for users without saved favorites
 * Dynamic favorite toggling directly from agent pages
 
@@ -108,12 +108,12 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/824b38e5-80d4-4488-9450-f518978075fb" width="250"/>
 
 ### Favorites Screen
-<img src="https://github.com/user-attachments/assets/9a0f3f74-c4d5-4050-b29a-ff0e732afdc1" width="250"/>
-<img src="https://github.com/user-attachments/assets/986651e4-3e1b-40cb-b760-88396d18f314" width="250"/>
-<img src="https://github.com/user-attachments/assets/5d701d47-d5d8-480d-8776-944757d9d786" width="250"/>
+<img src="https://github.com/user-attachments/assets/e5d3a9a6-3c82-406e-837c-f75ac3255356" width="250"/>
+<img src="https://github.com/user-attachments/assets/2840d371-92bc-4bf9-9b12-a7be0f579c90" width="250"/>
+<img src="https://github.com/user-attachments/assets/399726f9-550e-4e4c-8fc4-7cc452896ac6" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/390a0438-a4de-46df-93ae-c78d9aa174af
+> https://github.com/user-attachments/assets/b2e63c29-7537-4e99-9683-5535352eb09f
 
 ## Technical Decisions
 
