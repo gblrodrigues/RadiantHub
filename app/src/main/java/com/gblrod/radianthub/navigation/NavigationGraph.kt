@@ -32,7 +32,9 @@ fun NavigationGraph(
         startDestination = Routes.Home.route,
         modifier = Modifier.padding(paddingValues = paddingValues)
     ) {
-        homeRoute()
+        homeRoute(
+            navHostController = navHostController
+        )
 
         agentsRoute(
             agentsViewModel = agentsViewModel

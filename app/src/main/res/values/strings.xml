@@ -37,6 +37,17 @@
     <string name="favorites_empty_description">Start exploring and save your favorite content.</string>
     <string name="favorites_empty_discover_content">Discover Content</string>
 
+    <!-- HomeScreen -->
+    <string name="home_explore_item">Explore</string>
+    <string name="home_favorites_title">Favorites</string>
+    <string name="home_favorites_subtitle">View your saved agents and cards</string>
+    <string name="home_agents_title">Agents</string>
+    <string name="home_agents_subtitle">Browse all playable Valorant agents</string>
+    <string name="home_cards_title">Cards</string>
+    <string name="home_cards_subtitle">Discover Valorant player cards</string>
+    <string name="home_maps_title">Maps</string>
+    <string name="home_maps_subtitle">Explore every Valorant map</string>
+
     <!-- Buttons -->
     <string name="button_retry">Try again</string>
     <string name="view_skills">View Skills</string>
