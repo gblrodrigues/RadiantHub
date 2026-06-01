@@ -1,8 +1,10 @@
 package com.gblrod.radianthub.ui.features.favorites.screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -27,6 +29,7 @@ import com.gblrod.radianthub.ui.features.agents.components.AgentBottomSheet
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.features.favorites.components.EmptyFavorites
 import com.gblrod.radianthub.ui.features.favorites.components.FavoriteCard
+import com.gblrod.radianthub.ui.features.favorites.components.FavoriteFilter
 import com.gblrod.radianthub.ui.features.favorites.state.FavoritesUiState
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
@@ -42,6 +45,7 @@ fun FavoritesScreen(
     snackbarHostState: SnackbarHostState
 ) {
     val uiState by favoritesViewModel.favoritesState.collectAsState()
+    val selectedFilter by favoritesViewModel.selectedFilter.collectAsState()
 
     var selectedAgent by remember { mutableStateOf<Agent?>(null) }
 
@@ -71,62 +75,82 @@ fun FavoritesScreen(
         }
 
         is FavoritesUiState.Success -> {
-            if (state.favorites.isEmpty()) {
-                EmptyFavorites(
-                    onNavigateHome = { onNavigateHome() }
-                )
+            when {
+                state.totalFavorites == 0 -> {
+                    EmptyFavorites(
+                        onNavigateHome = { onNavigateHome() }
+                    )
+                }
 
-            } else {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    items(
-                        items = state.favorites,
-                        key = { it.uuid }
-                    ) { favorite ->
-                        val agentRemove = stringResource(
-                            id = R.string.snackbar_message_removed,
-                            favorite.name
+                else -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        FavoriteFilter(
+                            cardCount = state.cardCount,
+                            agentCount = state.agentCount,
+                            selectedFilter = selectedFilter,
+                            onFilterSelected = { favoritesViewModel.setFilter(it) },
+                            modifier = Modifier.padding(
+                                horizontal = 16.dp,
+                                vertical = 8.dp
+                            )
                         )
-                        val snackbarAction = stringResource(id = R.string.snackbar_action_label)
 
-                        FavoriteCard(
-                            item = favorite,
-                            onClick = {
-                                selectedAgent = agentsViewModel.getAgentByUuid(favorite.uuid)
-                            },
-                            onFavoriteClick = {
-                                favoritesViewModel.removeFavorite(favorite)
+                        LazyVerticalGrid(
+                            columns = GridCells.Fixed(2),
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(16.dp),
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            items(
+                                items = state.favorites,
+                                key = { it.uuid }
+                            ) { favorite ->
+                                val agentRemove = stringResource(
+                                    id = R.string.snackbar_message_removed,
+                                    favorite.name
+                                )
+                                val snackbarAction =
+                                    stringResource(id = R.string.snackbar_action_label)
 
-                                scope.launch {
-                                    val result = snackbarHostState.showSnackbar(
-                                        message = agentRemove,
-                                        actionLabel = snackbarAction,
-                                        duration = SnackbarDuration.Short,
-                                        withDismissAction = true
-                                    )
+                                FavoriteCard(
+                                    item = favorite,
+                                    onClick = {
+                                        selectedAgent =
+                                            agentsViewModel.getAgentByUuid(favorite.uuid)
+                                    },
+                                    onFavoriteClick = {
+                                        favoritesViewModel.removeFavorite(favorite)
 
-                                    if (result == SnackbarResult.ActionPerformed) {
-                                        favoritesViewModel.restoreFavorite(favorite)
-                                    }
-                                }
-                            },
-                            modifier = Modifier.animateItem()
+                                        scope.launch {
+                                            val result = snackbarHostState.showSnackbar(
+                                                message = agentRemove,
+                                                actionLabel = snackbarAction,
+                                                duration = SnackbarDuration.Short,
+                                                withDismissAction = true
+                                            )
+
+                                            if (result == SnackbarResult.ActionPerformed) {
+                                                favoritesViewModel.restoreFavorite(favorite)
+                                            }
+                                        }
+                                    },
+                                    modifier = Modifier.animateItem()
+                                )
+                            }
+                        }
+                    }
+
+                    selectedAgent?.let { selected ->
+                        AgentBottomSheet(
+                            agent = selected,
+                            sheetState = sheetState,
+                            onDismiss = { selectedAgent = null }
                         )
                     }
                 }
-            }
-
-            selectedAgent?.let { selected ->
-                AgentBottomSheet(
-                    agent = selected,
-                    sheetState = sheetState,
-                    onDismiss = { selectedAgent = null }
-                )
             }
         }
     }
