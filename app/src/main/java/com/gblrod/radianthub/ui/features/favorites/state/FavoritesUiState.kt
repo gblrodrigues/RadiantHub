@@ -6,7 +6,10 @@ sealed class FavoritesUiState {
     object Loading : FavoritesUiState()
 
     data class Success(
-        val favorites: List<FavoriteUiModel>
+        val favorites: List<FavoriteUiModel>,
+        val agentCount: Int,
+        val cardCount: Int,
+        val totalFavorites: Int
     ) : FavoritesUiState()
 
     data class Error(
