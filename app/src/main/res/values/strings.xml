@@ -81,6 +81,21 @@
     <string name="type_name_agents_title">Agents</string>
     <string name="type_name_cards_title">Cards</string>
 
+    <!-- SearchBar -->
+    <string name="search_placeholder" tools:ignore="TypographyEllipsis">
+        Search agents, cards...
+    </string>
+
+    <string name="search_query_empty">
+        Search for Agents, Maps, and/or Cards\n
+        by name to quickly locate them
+    </string>
+
+    <string name="search_result_empty">
+        No results found "%1$s"\n
+        Try another search term
+    </string>
+
     <!-- Features (Coming soon) -->
     <string name="feat_coming_soon">Coming Soon</string>
 </resources>

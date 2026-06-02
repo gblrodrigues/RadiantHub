@@ -16,6 +16,9 @@ class MapsViewModel(
     private val _mapsState = MutableStateFlow<MapsUiState>(MapsUiState.Loading)
     val mapsState: StateFlow<MapsUiState> = _mapsState
 
+    private val _initialMapUuid = MutableStateFlow<String?>(null)
+    val initialMapUuid: StateFlow<String?> = _initialMapUuid
+
     init {
         if (_mapsState.value !is MapsUiState.Success) {
             fetchMaps()
@@ -49,6 +52,14 @@ class MapsViewModel(
                 _mapsState.value = MapsUiState.Success(maps = maps)
             }
         }
+    }
+
+    fun selectMap(uuid: String) {
+        _initialMapUuid.value = uuid
+    }
+
+    fun clearSelectedMap() {
+        _initialMapUuid.value = null
     }
 
     fun retry() {
