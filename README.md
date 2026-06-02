@@ -72,8 +72,13 @@ I built this project to practice API integration, local persistence, state manag
 * Persistent local favorites system for agents and player cards
 * Undo support when removing favorites
 * Favorite restoration to original position
-* Empty state experience for users without saved favorites
 * Dynamic favorite toggling directly from agent pages
+
+### Search
+* Global search across agents, maps and player cards
+* Real time filtering while typing
+* Automatic agent, card and map selection from search results
+* Automatic scrolling and visual highlighting for searched player cards
 
 ### Navigation & UI
 * TopBar and BottomBar navigation
@@ -111,6 +116,10 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/e5d3a9a6-3c82-406e-837c-f75ac3255356" width="250"/>
 <img src="https://github.com/user-attachments/assets/2840d371-92bc-4bf9-9b12-a7be0f579c90" width="250"/>
 <img src="https://github.com/user-attachments/assets/399726f9-550e-4e4c-8fc4-7cc452896ac6" width="250"/>
+
+### Search 
+<img src="https://github.com/user-attachments/assets/c0af0f39-fce6-42b3-9b0a-15a4ac65af03" width="250"/>
+<img src="https://github.com/user-attachments/assets/fdffe5ab-1d62-4cd5-9888-65218846e0de" width="250"/>
 
 Below I will provide a video showing how the application looks:  
 > https://github.com/user-attachments/assets/b2e63c29-7537-4e99-9683-5535352eb09f

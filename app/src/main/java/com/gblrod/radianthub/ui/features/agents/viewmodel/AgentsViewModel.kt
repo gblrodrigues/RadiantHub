@@ -24,15 +24,15 @@ class AgentsViewModel(
     private val _agentsState = MutableStateFlow<AgentsUiState>(AgentsUiState.Loading)
     val agentsState: StateFlow<AgentsUiState> = _agentsState
 
-    private val _searchQuery = MutableStateFlow("")
-    val searchQuery: StateFlow<String> = _searchQuery
+    private val _initialAgentUuid = MutableStateFlow<String?>(null)
+    val initialAgentUuid: StateFlow<String?> = _initialAgentUuid
 
     val favorites =
         favoriteRepository.observeFavorites().stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.Eagerly,
-                initialValue = emptyList()
-            )
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
+            initialValue = emptyList()
+        )
 
     init {
         if (_agentsState.value !is AgentsUiState.Success) {
@@ -109,12 +109,12 @@ class AgentsViewModel(
         }
     }
 
-    fun onSearchQueryChanged(query: String) {
-        _searchQuery.value = query
+    fun selectAgent(uuid: String) {
+        _initialAgentUuid.value = uuid
     }
 
-    fun clearSearch() {
-        _searchQuery.value = ""
+    fun clearSelectedAgent() {
+        _initialAgentUuid.value = null
     }
 
     fun retry() {
