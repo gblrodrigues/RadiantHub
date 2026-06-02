@@ -1,6 +1,5 @@
 package com.gblrod.radianthub.ui.features.search.screen
 
-import android.util.Log
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -101,7 +100,6 @@ fun SearchScreen(
                                     onClick = {
                                         when (item.type) {
                                             SearchType.AGENT -> {
-                                                Log.d("SEARCH", "Navigate to ${Routes.Agents.route}")
                                                 agentsViewModel.selectAgent(item.uuid)
                                                 searchViewModel.clearSearch()
                                                 navHostController.popBackStack()
