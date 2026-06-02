@@ -12,10 +12,12 @@ import com.gblrod.radianthub.navigation.graph.cardsRoute
 import com.gblrod.radianthub.navigation.graph.favoritesRoute
 import com.gblrod.radianthub.navigation.graph.homeRoute
 import com.gblrod.radianthub.navigation.graph.mapsRoute
+import com.gblrod.radianthub.navigation.graph.searchRoute
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
+import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
 
 @Composable
 fun NavigationGraph(
@@ -23,6 +25,7 @@ fun NavigationGraph(
     mapsViewModel: MapsViewModel,
     favoritesViewModel: FavoritesViewModel,
     cardsViewModel: CardsViewModel,
+    searchViewModel: SearchViewModel,
     paddingValues: PaddingValues,
     navHostController: NavHostController,
     snackbarHostState: SnackbarHostState
@@ -53,6 +56,14 @@ fun NavigationGraph(
             agentsViewModel = agentsViewModel,
             navHostController = navHostController,
             snackbarHostState = snackbarHostState
+        )
+
+        searchRoute(
+            searchViewModel = searchViewModel,
+            agentsViewModel = agentsViewModel,
+            cardsViewModel = cardsViewModel,
+            mapsViewModel = mapsViewModel,
+            navHostController = navHostController
         )
     }
 }

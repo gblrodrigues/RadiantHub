@@ -29,6 +29,7 @@ import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
+import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
 import com.gblrod.radianthub.ui.shared.components.RadiantBackground
 import com.gblrod.radianthub.ui.shared.components.bottombar.RadiantHubBottomBar
 import com.gblrod.radianthub.ui.shared.components.drawer.DrawerContent
@@ -52,6 +53,7 @@ class MainActivity : ComponentActivity() {
             val mapsViewModel: MapsViewModel = koinViewModel()
             val favoritesViewModel: FavoritesViewModel = koinViewModel()
             val cardsViewModel: CardsViewModel = koinViewModel()
+            val searchViewModel: SearchViewModel = koinViewModel()
 
             val navHostController = rememberNavController()
             val scope = rememberCoroutineScope()
@@ -125,6 +127,7 @@ class MainActivity : ComponentActivity() {
                                         mapsViewModel = mapsViewModel,
                                         favoritesViewModel = favoritesViewModel,
                                         cardsViewModel = cardsViewModel,
+                                        searchViewModel = searchViewModel,
                                         navHostController = navHostController,
                                         paddingValues = paddingValues,
                                         snackbarHostState = snackbarHostState

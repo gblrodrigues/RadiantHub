@@ -15,6 +15,7 @@ import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
+import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -93,6 +94,14 @@ val appModule = module {
         CardsViewModel(
             repository = get(),
             favoriteRepository = get()
+        )
+    }
+
+    viewModel {
+        SearchViewModel(
+            agentsRepository = get(),
+            mapsRepository = get(),
+            cardsRepository = get()
         )
     }
 }

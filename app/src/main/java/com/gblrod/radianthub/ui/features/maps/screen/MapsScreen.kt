@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -19,6 +20,7 @@ fun MapsScreen(
     mapsViewModel: MapsViewModel
 ) {
     val uiState by mapsViewModel.mapsState.collectAsState()
+    val initialMapUuid by mapsViewModel.initialMapUuid.collectAsState()
 
     when(val state = uiState) {
         is MapsUiState.Loading -> {
@@ -39,7 +41,23 @@ fun MapsScreen(
         }
 
         is MapsUiState.Success -> {
-            val pagerState = rememberPagerState { state.maps.size }
+            val pagerState = rememberPagerState(
+                pageCount = { state.maps.size }
+            )
+
+            LaunchedEffect(initialMapUuid) {
+                initialMapUuid?.let { uuid ->
+                    val index = state.maps.indexOfFirst {
+                        it.uuid == uuid
+                    }
+
+                    if (index >= 0) {
+                        pagerState.animateScrollToPage(index)
+                    }
+
+                    mapsViewModel.clearSelectedMap()
+                }
+            }
 
             HorizontalPager(
                 state = pagerState,
