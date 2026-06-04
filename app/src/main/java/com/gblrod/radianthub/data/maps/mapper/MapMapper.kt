@@ -7,5 +7,7 @@ fun MapsDto.toDomain() = Maps(
     uuid = uuid,
     name = displayName,
     splash = splash,
-    icon = displayIcon
+    icon = displayIcon,
+    coordinates = coordinates,
+    callouts = callouts?.map { it.toDomain() }.orEmpty()
 )
