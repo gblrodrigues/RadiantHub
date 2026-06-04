@@ -48,12 +48,21 @@
     <string name="home_maps_title">Maps</string>
     <string name="home_maps_subtitle">Explore every Valorant map</string>
 
+    <!-- MapsScreen -->
+    <string name="map_information_title">Map Information</string>
+    <string name="map_coordinates_title">Coordinates</string>
+    <string name="map_no_available_coordinates">No Coordinates Available</string>
+    <string name="map_callouts_title">Callouts</string>
+    <string name="map_regions_title">Regions</string>
+    <string name="map_view_no_available_callouts">No Callouts Available</string>
+
     <!-- Buttons -->
     <string name="button_retry">Try again</string>
     <string name="button_view_skills">View Skills</string>
     <string name="button_favorite_filter_all">All (%1$d)</string>
     <string name="button_favorite_filter_agents">Agents (%1$d)</string>
     <string name="button_favorite_filter_cards">Cards (%1$d)</string>
+    <string name="button_view_callouts">View Callouts</string>
 
     <!-- UiState -->
     <string name="ui_state_io_exception">

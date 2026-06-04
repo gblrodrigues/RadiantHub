@@ -4,9 +4,16 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -23,6 +30,8 @@ fun MapPage(
     currentPage: Int,
     pageCount: Int
 ) {
+    var showCallouts by remember { mutableStateOf(false) }
+
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -36,17 +45,30 @@ fun MapPage(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SectionHeader(
-                name = maps.name,
-                onFavoriteClick = {}
+                name = maps.name
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-            AsyncImage(
-                model = maps.icon,
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.weight(1f)
+            Card(
+                shape = RoundedCornerShape(16.dp)
+            ) {
+                AsyncImage(
+                    model = maps.splash,
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(220.dp)
+                )
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            MapInfoSection(
+                callouts = maps.callouts,
+                maps = maps,
+                onViewCallouts = { showCallouts = true }
             )
         }
 
@@ -55,7 +77,14 @@ fun MapPage(
             pageCount = pageCount,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 24.dp),
+                .padding(bottom = 20.dp),
+        )
+    }
+
+    if (showCallouts) {
+        MapCalloutsBottomSheet(
+            onDismiss = { showCallouts = false },
+            callouts = maps.callouts
         )
     }
 }

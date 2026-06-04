@@ -56,11 +56,15 @@ I built this project to practice API integration, local persistence, state manag
   * Description
 
 ### Maps
-* Browse Valorant maps
-* Fullscreen map presentation
-* Map details
-  * Name
-  * Visual map overview
+* Browse all Valorant maps
+* Fullscreen tactical map visualization
+* Detailed map information
+  * Coordinates
+  * Callout count
+  * Region count
+* Interactive callouts explorer
+  * Grouped by tactical regions
+  * Quick access through bottom sheet
  
 ### Player Cards
 * Browse Valorant player cards
@@ -107,7 +111,8 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/d841cfac-046f-4fc8-a82f-d0f03451bc39" width="250"/>
 
 ### Maps Screen
-<img src="https://github.com/user-attachments/assets/bbb0f532-370b-454c-bc2a-0b3b59049e0d" width="250"/>
+<img src="https://github.com/user-attachments/assets/d2385739-1f11-499b-b899-13ab02aafab7" width="250"/>
+<img src="https://github.com/user-attachments/assets/33b7fa4d-d6f7-418e-a54e-0980621975bf" width="250"/>
 
 ### Cards Screen
 <img src="https://github.com/user-attachments/assets/824b38e5-80d4-4488-9450-f518978075fb" width="250"/>
@@ -122,7 +127,7 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/fdffe5ab-1d62-4cd5-9888-65218846e0de" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/b2e63c29-7537-4e99-9683-5535352eb09f
+> https://github.com/user-attachments/assets/993e39a3-07f9-4a81-af20-c8ed2f11a855
 
 ## Technical Decisions
 
