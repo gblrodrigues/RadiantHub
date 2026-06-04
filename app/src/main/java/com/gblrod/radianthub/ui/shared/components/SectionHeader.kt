@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.font.FontWeight
 
 @Composable
 fun SectionHeader(
@@ -18,7 +19,8 @@ fun SectionHeader(
         Text(
             text = name.uppercase(),
             color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.displayMedium
+            style = MaterialTheme.typography.displayMedium,
+            fontWeight = FontWeight.Bold
         )
 
         if (isFavorite != null && onFavoriteClick != null) {

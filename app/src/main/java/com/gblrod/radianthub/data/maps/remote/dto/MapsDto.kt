@@ -4,5 +4,7 @@ data class MapsDto(
     val displayName: String,
     val uuid: String,
     val displayIcon: String?,
-    val splash: String?
+    val splash: String?,
+    val coordinates: String?,
+    val callouts: List<CalloutDto>?
 )

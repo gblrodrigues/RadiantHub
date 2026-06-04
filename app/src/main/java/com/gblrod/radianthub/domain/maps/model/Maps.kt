@@ -4,5 +4,7 @@ data class Maps(
     val name: String,
     val uuid: String,
     val icon: String?,
-    val splash: String?
+    val splash: String?,
+    val coordinates: String?,
+    val callouts: List<Callout>
 )
