@@ -87,12 +87,18 @@ I built this project to practice API integration, local persistence, state manag
 ### Navigation & UI
 * TopBar and BottomBar navigation
 * Navigation Drawer with:
-  * App routes  
+  * App routes
+  * Language preferences
   * Theme preferences  
 * Theme support:
   * `Dark`
   * `Light`
   * `System`
+* Language support:
+  * `English`
+  * `Português (Brasil)`
+  * `Español`
+* Dynamic API localization based on selected language
 * Synchronization with:
   * Status Bar  
   * Navigation Bar
@@ -101,6 +107,9 @@ I built this project to practice API integration, local persistence, state manag
 * Handling of loading and error states with retry option
 * Public API integration with Valorant API
 * Dynamic UI rendering using Compose State
+* Runtime language switching
+* Persistent language preferences
+* API content localization
 
 ## Preview
 ### Home Screen
@@ -127,7 +136,7 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/fdffe5ab-1d62-4cd5-9888-65218846e0de" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/993e39a3-07f9-4a81-af20-c8ed2f11a855
+> https://github.com/user-attachments/assets/9d8f7c79-4c4b-488f-af85-77fd83e509c9
 
 ## Technical Decisions
 
@@ -153,7 +162,7 @@ This allowed me to practice:
 
 ### Data Persistence (Room + DataStore)
 
-I implemented Room for local persistence of favorite agents and DataStore for managing user personalization preferences such as theme selection.
+I implemented Room for local persistence of favorite agents and DataStore for managing user personalization preferences such as theme and language selection.
 
 ### UI State Management (UiState)
 To handle screen states (loading, success, and error), I used an approach with sealed class (UiState) along with StateFlow.  

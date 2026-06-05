@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.cards.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
 import com.gblrod.radianthub.data.room.model.FavoriteType
 import com.gblrod.radianthub.domain.cards.model.Card
@@ -38,6 +39,12 @@ class CardsViewModel(
     init {
         if (_cardsState.value !is CardsUiState.Success) {
             fetchCards()
+        }
+
+        viewModelScope.launch {
+            AppEvents.languageChanged.collect {
+                fetchCards()
+            }
         }
     }
 

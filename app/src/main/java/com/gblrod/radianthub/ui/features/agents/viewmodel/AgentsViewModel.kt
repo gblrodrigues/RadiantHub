@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.agents.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
 import com.gblrod.radianthub.data.room.model.FavoriteType
 import com.gblrod.radianthub.domain.agents.model.Agent
@@ -37,6 +38,12 @@ class AgentsViewModel(
     init {
         if (_agentsState.value !is AgentsUiState.Success) {
             fetchAgents()
+        }
+
+        viewModelScope.launch {
+            AppEvents.languageChanged.collect {
+                fetchAgents()
+            }
         }
     }
 

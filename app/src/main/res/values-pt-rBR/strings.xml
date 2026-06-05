@@ -1,0 +1,113 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">RadiantHub</string>
+
+    <!-- TopBar -->
+    <string name="topbar_home_title">Início</string>
+    <string name="topbar_agents_title">Agentes</string>
+    <string name="topbar_maps_title">Mapas</string>
+    <string name="topbar_cards_title">Cards</string>
+    <string name="topbar_favorites_title">Favoritos</string>
+    <string name="topbar_principal_title">Radiant Hub</string>
+
+    <!-- BottomBar -->
+    <string name="bottom_bar_home_title">Início</string>
+    <string name="bottom_bar_agents_title">Agentes</string>
+    <string name="bottom_bar_maps_title">Mapas</string>
+    <string name="bottom_bar_favorites_title">Favoritos</string>
+
+    <!-- NavigationDrawer -->
+    <string name="drawer_title">Radiant Hub</string>
+    <string name="drawer_sub_title">Explore agentes, mapas e muito mais</string>
+    <string name="drawer_item_home">Início</string>
+    <string name="drawer_item_agents">Agentes</string>
+    <string name="drawer_item_maps">Mapas</string>
+    <string name="drawer_item_cards">Cards</string>
+    <string name="drawer_item_favorites">Favoritos</string>
+    <string name="drawer_item_theme">Tema</string>
+    <string name="drawer_item_language">Idioma</string>
+    <string name="drawer_item_themes_cd">Tema</string>
+    <string name="drawer_item_language_cd">Idioma</string>
+    <string name="drawer_category_preference">Preferências</string>
+
+    <!-- LoadingScreen -->
+    <string name="loading_screen_label" tools:ignore="TypographyEllipsis">Carregando...</string>
+
+    <!-- Empty Favorites Screen -->
+    <string name="favorites_empty_title">Nenhum favorito ainda</string>
+    <string name="favorites_empty_description">Comece a explorar e salve seus conteúdos favoritos.</string>
+    <string name="favorites_empty_discover_content">Descobrir Conteúdo</string>
+
+    <!-- HomeScreen -->
+    <string name="home_explore_item">Explorar</string>
+    <string name="home_favorites_title">Favoritos</string>
+    <string name="home_favorites_subtitle">Veja seus agentes e Cards salvos</string>
+    <string name="home_agents_title">Agentes</string>
+    <string name="home_agents_subtitle">Navegue por todos os agentes jogáveis de Valorant</string>
+    <string name="home_cards_title">Cards</string>
+    <string name="home_cards_subtitle">Descubra os Cards de jogador do Valorant</string>
+    <string name="home_maps_title">Mapas</string>
+    <string name="home_maps_subtitle">Explore todos os mapas do Valorant</string>
+
+    <!-- MapsScreen -->
+    <string name="map_information_title">Informações do Mapa</string>
+    <string name="map_coordinates_title">Coordenadas</string>
+    <string name="map_no_available_coordinates">Nenhuma coordenada disponível</string>
+    <string name="map_callouts_title">Callouts</string>
+    <string name="map_regions_title">Regiões</string>
+    <string name="map_view_no_available_callouts">Nenhuma Callouts disponível</string>
+
+    <!-- Buttons -->
+    <string name="button_retry">Tentar novamente</string>
+    <string name="button_view_skills">Ver Habilidades</string>
+    <string name="button_favorite_filter_all">Todos (%1$d)</string>
+    <string name="button_favorite_filter_agents">Agentes (%1$d)</string>
+    <string name="button_favorite_filter_cards">Cards (%1$d)</string>
+    <string name="button_view_callouts">Ver Callouts</string>
+
+    <!-- UiState -->
+    <string name="ui_state_io_exception">
+        Sem acesso à internet.\n
+        Verifique sua conexão
+    </string>
+    <string name="ui_state_http_exception">Erro do servidor: %1$d</string>
+    <string name="ui_state_generic_error">Ocorreu um erro inesperado!</string>
+
+    <!-- Language -->
+    <string name="language_dialog_title">Escolha um idioma</string>
+    <string name="language_english_label">Inglês (Estados Unidos)</string>
+    <string name="language_portuguese_br_label">Português (Brasil)</string>
+    <string name="language_espanhol_label">Espanhol (Espanha)</string>
+
+    <!-- Theme -->
+    <string name="theme_dialog_title">Escolha um tema</string>
+    <string name="theme_darkmode">Escuro</string>
+    <string name="theme_lightmode">Claro</string>
+    <string name="theme_system">Sistema</string>
+
+    <!-- AlertDialog -->
+    <string name="dialog_action_confirm">Confirmar</string>
+    <string name="dialog_action_dismiss">Cancelar</string>
+
+    <!-- SnackBar -->
+    <string name="snackbar_message_removed">%1$s removido dos favoritos</string>
+    <string name="snackbar_action_label">Desfazer</string>
+
+    <!-- Types name -->
+    <string name="type_name_agents_title">Agentes</string>
+    <string name="type_name_cards_title">Cards</string>
+
+    <!-- SearchBar -->
+    <string name="search_placeholder" tools:ignore="TypographyEllipsis">
+        Pesquisar agentes, Cards...
+    </string>
+
+    <string name="search_query_empty">
+        Pesquise por Agentes, Mapas e/ou Cards\n
+        pelo nome para localizá-los rapidamente
+    </string>
+
+    <string name="search_result_empty">
+        Nenhum resultado encontrado para "%1$s"\n
+        Tente outro termo de pesquisa
+    </string>
+</resources>

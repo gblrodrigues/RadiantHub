@@ -1,5 +1,7 @@
 package com.gblrod.radianthub.ui.shared.components.drawer
 
+import android.app.Activity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,6 +15,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Person
@@ -28,11 +31,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -40,22 +45,35 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import coil.compose.AsyncImage
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.events.AppEvents
+import com.gblrod.radianthub.core.manager.LanguageManager
+import com.gblrod.radianthub.core.utils.orDeviceDefault
 import com.gblrod.radianthub.navigation.Routes
+import com.gblrod.radianthub.ui.language.viewmodel.LanguageViewModel
 import com.gblrod.radianthub.ui.shared.model.DrawerPreferenceItem
 import com.gblrod.radianthub.ui.shared.model.NavigationItem
 import com.gblrod.radianthub.ui.theme.ThemeOptions
 import com.gblrod.radianthub.ui.theme.viewmodel.ThemeViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun DrawerContent(
     navController: NavController,
     onItemClick: () -> Unit,
-    themeViewModel: ThemeViewModel
+    themeViewModel: ThemeViewModel,
+    languageViewModel: LanguageViewModel
 ) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
     var showThemeDialog by remember { mutableStateOf(false) }
+    var showLanguageDialog by remember { mutableStateOf(false) }
+    val scope = rememberCoroutineScope()
 
     val theme = themeViewModel.theme.collectAsState().value ?: ThemeOptions.SYSTEM
+    val language = languageViewModel.language.collectAsState().value
+
+    val effectiveLanguage = language.orDeviceDefault()
+    val activity = LocalActivity.current as Activity
+    val context = LocalContext.current
 
     val bottomBarScreens = setOf(
         Routes.Home.route,
@@ -184,12 +202,41 @@ fun DrawerContent(
         )
 
         DrawerPreferenceItem(
+            title = stringResource(id = R.string.drawer_item_language),
+            label =  stringResource(id = effectiveLanguage.label),
+            icon = Icons.Default.Language,
+            contentDescription = stringResource(id = R.string.drawer_item_language_cd),
+            onClick = { showLanguageDialog = true }
+        )
+
+        DrawerPreferenceItem(
             title = stringResource(id = R.string.drawer_item_theme),
             label =  stringResource(id = theme.label),
             icon = Icons.Default.Palette,
             contentDescription = stringResource(id = R.string.drawer_item_themes_cd),
             onClick = { showThemeDialog = true }
         )
+
+        if (showLanguageDialog) {
+            LanguageMenu(
+                selectedLanguage = effectiveLanguage,
+                onLanguageSelected = { language ->
+                    languageViewModel.setLanguage(language)
+
+                    LanguageManager.persistLanguage(
+                        context = context,
+                        language = language
+                    )
+
+                    scope.launch {
+                        AppEvents.languageChanged.emit(Unit)
+                    }
+
+                    activity.recreate()
+                },
+                onDismiss = { showLanguageDialog = false }
+            )
+        }
 
         if (showThemeDialog) {
             ThemeMenu(

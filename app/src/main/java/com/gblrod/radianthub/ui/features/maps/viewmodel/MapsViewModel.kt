@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.maps.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.domain.maps.repository.MapsRepository
 import com.gblrod.radianthub.ui.features.maps.state.MapsUiState
 import com.gblrod.radianthub.ui.shared.utils.safeApiCall
@@ -22,6 +23,12 @@ class MapsViewModel(
     init {
         if (_mapsState.value !is MapsUiState.Success) {
             fetchMaps()
+        }
+
+        viewModelScope.launch {
+            AppEvents.languageChanged.collect {
+                fetchMaps()
+            }
         }
     }
 
