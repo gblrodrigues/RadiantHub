@@ -8,6 +8,9 @@ interface AgentsApi {
     @GET(value = "v1/agents")
     suspend fun getAgents(
         @Query("isPlayableCharacter")
-        isPlayableCharacter: Boolean = true
+        isPlayableCharacter: Boolean = true,
+
+        @Query("language")
+        language: String
     ): AgentResponseDto
 }

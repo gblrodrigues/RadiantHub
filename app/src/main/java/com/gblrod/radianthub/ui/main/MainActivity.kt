@@ -1,6 +1,7 @@
 package com.gblrod.radianthub.ui.main
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.gblrod.radianthub.core.manager.LanguageManager
 import com.gblrod.radianthub.navigation.NavigationGraph
 import com.gblrod.radianthub.navigation.state.mapRouteToNavigationUiState
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
@@ -30,6 +32,7 @@ import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
+import com.gblrod.radianthub.ui.language.viewmodel.LanguageViewModel
 import com.gblrod.radianthub.ui.shared.components.RadiantBackground
 import com.gblrod.radianthub.ui.shared.components.bottombar.RadiantHubBottomBar
 import com.gblrod.radianthub.ui.shared.components.drawer.DrawerContent
@@ -40,6 +43,13 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 class MainActivity : ComponentActivity() {
+    override fun attachBaseContext(newBase: Context) {
+        val language = LanguageManager.getStoredLanguage(newBase)
+        val locale = LanguageManager.resolveLocale(language)
+        val context = LanguageManager.applyLocale(newBase, locale)
+        super.attachBaseContext(context)
+    }
+
     @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +60,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val agentsViewModel: AgentsViewModel = koinViewModel()
             val themeViewModel: ThemeViewModel = koinViewModel()
+            val languageViewModel: LanguageViewModel = koinViewModel()
             val mapsViewModel: MapsViewModel = koinViewModel()
             val favoritesViewModel: FavoritesViewModel = koinViewModel()
             val cardsViewModel: CardsViewModel = koinViewModel()
@@ -82,6 +93,7 @@ class MainActivity : ComponentActivity() {
                                     DrawerContent(
                                         navController = navHostController,
                                         themeViewModel = themeViewModel,
+                                        languageViewModel = languageViewModel,
                                         onItemClick = {
                                             scope.launch {
                                                 drawerState.close()

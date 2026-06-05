@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.gblrod.radianthub.data.preferences.model.UserPreferences
+import com.gblrod.radianthub.ui.language.LanguageOptions
 import com.gblrod.radianthub.ui.theme.ThemeOptions
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -21,12 +22,18 @@ class UserPreferencesRepository(
                 it.name == prefs[themeKey]
             } ?: ThemeOptions.SYSTEM,
 
-//            language = prefs[languageKey]?.let { langValue ->
-//                LanguageOptions.entries.find {
-//                    it.name == langValue
-//                }
-//            }
+            language = prefs[languageKey]?.let { langValue ->
+                LanguageOptions.entries.find {
+                    it.name == langValue
+                }
+            }
         )
+    }
+
+    suspend fun saveLanguage(language: LanguageOptions) {
+        dataStore.edit { prefs ->
+            prefs[languageKey] = language.name
+        }
     }
 
     suspend fun saveTheme(theme: ThemeOptions) {

@@ -72,6 +72,12 @@
     <string name="ui_state_http_exception">Server error: %1$d</string>
     <string name="ui_state_generic_error">An unexpected error occurred!</string>
 
+    <!-- Language -->
+    <string name="language_dialog_title">Choose a language</string>
+    <string name="language_english_label">English (United States)</string>
+    <string name="language_portuguese_br_label">Português (Brasil)</string>
+    <string name="language_espanhol_label">Español (España)</string>
+
     <!-- Theme -->
     <string name="theme_dialog_title">Choose a theme</string>
     <string name="theme_darkmode">Dark</string>
@@ -104,7 +110,4 @@
         No results found "%1$s"\n
         Try another search term
     </string>
-
-    <!-- Features (Coming soon) -->
-    <string name="feat_coming_soon">Coming Soon</string>
 </resources>

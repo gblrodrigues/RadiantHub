@@ -1,5 +1,6 @@
 package com.gblrod.radianthub.di
 
+import com.gblrod.radianthub.core.localization.ApiLanguageProvider
 import com.gblrod.radianthub.data.agents.remote.api.AgentsApi
 import com.gblrod.radianthub.data.agents.repository.AgentsRepositoryImpl
 import com.gblrod.radianthub.data.cards.remote.api.CardsApi
@@ -16,6 +17,7 @@ import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -33,13 +35,15 @@ val appModule = module {
 
     single<AgentsRepository> {
         AgentsRepositoryImpl(
-            api = get()
+            api = get(),
+            languageProvider = get()
         )
     }
 
     single<MapsRepository> {
         MapsRepositoryImpl(
-            api = get()
+            api = get(),
+            languageProvider = get()
         )
     }
 
@@ -51,7 +55,8 @@ val appModule = module {
 
     single<CardsRepository> {
         CardsRepositoryImpl(
-            api = get()
+            api = get(),
+            languageProvider = get()
         )
     }
 
@@ -68,6 +73,13 @@ val appModule = module {
     // API (Cards)
     single<CardsApi> {
         get<Retrofit>().create(CardsApi::class.java)
+    }
+
+    // Language
+    single {
+        ApiLanguageProvider(
+            context = androidContext()
+        )
     }
 
     // ViewModels
