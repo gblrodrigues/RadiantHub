@@ -6,6 +6,7 @@
     <string name="topbar_agents_title">Agentes</string>
     <string name="topbar_maps_title">Mapas</string>
     <string name="topbar_cards_title">Cards</string>
+    <string name="topbar_tiers_title">Elos</string>
     <string name="topbar_favorites_title">Favoritos</string>
     <string name="topbar_principal_title">Radiant Hub</string>
 
@@ -22,6 +23,7 @@
     <string name="drawer_item_agents">Agentes</string>
     <string name="drawer_item_maps">Mapas</string>
     <string name="drawer_item_cards">Cards</string>
+    <string name="drawer_item_tiers">Elos</string>
     <string name="drawer_item_favorites">Favoritos</string>
     <string name="drawer_item_theme">Tema</string>
     <string name="drawer_item_language">Idioma</string>
@@ -45,6 +47,8 @@
     <string name="home_agents_subtitle">Navegue por todos os agentes jogáveis de Valorant</string>
     <string name="home_cards_title">Cards</string>
     <string name="home_cards_subtitle">Descubra os Cards de jogador do Valorant</string>
+    <string name="home_tiers_title">Elos</string>
+    <string name="home_tiers_subtitle">Saiba mais sobre os elos do Valorant</string>
     <string name="home_maps_title">Mapas</string>
     <string name="home_maps_subtitle">Explore todos os mapas do Valorant</string>
 

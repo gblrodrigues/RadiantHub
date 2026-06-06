@@ -21,6 +21,7 @@ import androidx.compose.material.icons.filled.Palette
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Style
+import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -102,6 +103,11 @@ fun DrawerContent(
             label = stringResource(id = R.string.drawer_item_cards),
             icon = Icons.Default.Style,
             route = Routes.Cards.route
+        ),
+        NavigationItem(
+            label = stringResource(id = R.string.drawer_item_tiers),
+            icon = Icons.Default.WorkspacePremium,
+            route = Routes.Tiers.route
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_favorites_title),

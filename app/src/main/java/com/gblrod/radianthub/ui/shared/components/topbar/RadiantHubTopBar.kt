@@ -21,11 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.state.NavigationUiState
+import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RadiantHubTopBar(
     onOpenDrawer: () -> Unit,
+    searchViewModel: SearchViewModel,
     navHostController: NavHostController,
     navigationUiState: NavigationUiState
 ) {
@@ -75,7 +77,12 @@ fun RadiantHubTopBar(
         },
         actions = {
             IconButton(
-                onClick = { navHostController.navigate(route = Routes.Search.route) }
+                onClick = {
+                    searchViewModel.setOriginRoute(
+                        navHostController.currentBackStackEntry?.destination?.route
+                    )
+                    navHostController.navigate(Routes.Search.route)
+                }
             ) {
                 Icon(
                     imageVector = Icons.Default.Search,

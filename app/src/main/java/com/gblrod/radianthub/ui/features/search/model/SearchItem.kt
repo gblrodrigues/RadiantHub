@@ -4,5 +4,6 @@ data class SearchItem(
     val uuid: String,
     val title: String,
     val imageUrl: String,
-    val type: SearchType
+    val type: SearchType,
+    val tierId: Int? = null
 )

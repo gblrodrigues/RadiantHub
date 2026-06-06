@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.gblrod.radianthub.R
@@ -56,7 +57,9 @@ fun SearchResultItem(
             },
             headlineContent = {
                 Text(
-                    text = item.title
+                    text = item.title,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
                 )
             },
             supportingContent = {

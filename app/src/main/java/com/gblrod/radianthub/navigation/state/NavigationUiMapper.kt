@@ -29,6 +29,7 @@ fun mapRouteToNavigationUiState(
     val titleRes = when (route) {
         Routes.Home.route -> R.string.topbar_home_title
         Routes.Maps.route -> R.string.topbar_maps_title
+        Routes.Tiers.route -> R.string.topbar_tiers_title
         Routes.Cards.route -> R.string.topbar_cards_title
         Routes.Agents.route -> R.string.topbar_agents_title
         Routes.Favorites.route -> R.string.topbar_favorites_title

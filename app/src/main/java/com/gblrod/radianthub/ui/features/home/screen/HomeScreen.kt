@@ -54,6 +54,15 @@ fun HomeScreen(
 
         item {
             HomeItem(
+                title = stringResource(id = R.string.home_tiers_title),
+                subtitle = stringResource(id = R.string.home_tiers_subtitle),
+                background = painterResource(id = R.drawable.tiers_background),
+                onClick = { navHostController.navigate(route = Routes.Tiers.route) }
+            )
+        }
+
+        item {
+            HomeItem(
                 title = stringResource(id = R.string.home_favorites_title),
                 subtitle = stringResource(id = R.string.home_favorites_subtitle),
                 background = painterResource(id = R.drawable.favorites_background),
