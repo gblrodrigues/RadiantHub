@@ -29,6 +29,7 @@ import com.gblrod.radianthub.ui.features.search.components.SearchResultItem
 import com.gblrod.radianthub.ui.features.search.model.SearchType
 import com.gblrod.radianthub.ui.features.search.state.SearchUiState
 import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
+import com.gblrod.radianthub.ui.features.tiers.viewmodel.TiersViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
 
@@ -38,9 +39,11 @@ fun SearchScreen(
     agentsViewModel: AgentsViewModel,
     cardsViewModel: CardsViewModel,
     mapsViewModel: MapsViewModel,
+    tiersViewModel: TiersViewModel,
     navHostController: NavHostController
 ) {
     val uiState by searchViewModel.searchState.collectAsState()
+    val origin by searchViewModel.originRoute.collectAsState()
 
     val focus = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -123,10 +126,18 @@ fun SearchScreen(
                                                 cardsViewModel.selectCard(item.uuid)
                                                 searchViewModel.clearSearch()
                                                 navHostController.popBackStack()
+                                                if (origin != Routes.Cards.route) {
+                                                    navHostController.navigate(Routes.Cards.route)
+                                                }
+                                            }
 
-                                                navHostController.navigate(
-                                                    route = Routes.Cards.route
-                                                )
+                                            SearchType.TIER -> {
+                                                item.tierId?.let { tiersViewModel.selectTier(it) }
+                                                searchViewModel.clearSearch()
+                                                navHostController.popBackStack()
+                                                if (origin != Routes.Tiers.route) {
+                                                    navHostController.navigate(Routes.Tiers.route)
+                                                }
                                             }
                                         }
                                     }

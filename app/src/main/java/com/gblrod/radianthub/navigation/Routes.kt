@@ -26,4 +26,8 @@ sealed class Routes(
     object Cards : Routes(
         route = "cards"
     )
+
+    object Tiers : Routes(
+        route = "tiers"
+    )
 }

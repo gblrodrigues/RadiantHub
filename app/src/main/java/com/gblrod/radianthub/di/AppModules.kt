@@ -9,14 +9,18 @@ import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepositoryImpl
 import com.gblrod.radianthub.data.maps.remote.api.MapsApi
 import com.gblrod.radianthub.data.maps.repository.MapsRepositoryImpl
+import com.gblrod.radianthub.data.tiers.remote.api.TiersApi
+import com.gblrod.radianthub.data.tiers.repository.TiersRepositoryImpl
 import com.gblrod.radianthub.domain.agents.repository.AgentsRepository
 import com.gblrod.radianthub.domain.cards.repository.CardsRepository
 import com.gblrod.radianthub.domain.maps.repository.MapsRepository
+import com.gblrod.radianthub.domain.tiers.repository.TiersRepository
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
+import com.gblrod.radianthub.ui.features.tiers.viewmodel.TiersViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
@@ -60,6 +64,13 @@ val appModule = module {
         )
     }
 
+    single<TiersRepository> {
+        TiersRepositoryImpl(
+            api = get(),
+            languageProvider = get()
+        )
+    }
+
     // API (Agents)
     single<AgentsApi> {
         get<Retrofit>().create(AgentsApi::class.java)
@@ -73,6 +84,11 @@ val appModule = module {
     // API (Cards)
     single<CardsApi> {
         get<Retrofit>().create(CardsApi::class.java)
+    }
+
+    // API (Tiers)
+    single<TiersApi> {
+        get<Retrofit>().create(TiersApi::class.java)
     }
 
     // Language
@@ -113,7 +129,14 @@ val appModule = module {
         SearchViewModel(
             agentsRepository = get(),
             mapsRepository = get(),
-            cardsRepository = get()
+            cardsRepository = get(),
+            tiersRepository = get()
+        )
+    }
+
+    viewModel {
+        TiersViewModel(
+            repository = get()
         )
     }
 }

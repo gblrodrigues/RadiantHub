@@ -32,6 +32,7 @@ import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
+import com.gblrod.radianthub.ui.features.tiers.viewmodel.TiersViewModel
 import com.gblrod.radianthub.ui.language.viewmodel.LanguageViewModel
 import com.gblrod.radianthub.ui.shared.components.RadiantBackground
 import com.gblrod.radianthub.ui.shared.components.bottombar.RadiantHubBottomBar
@@ -65,6 +66,7 @@ class MainActivity : ComponentActivity() {
             val favoritesViewModel: FavoritesViewModel = koinViewModel()
             val cardsViewModel: CardsViewModel = koinViewModel()
             val searchViewModel: SearchViewModel = koinViewModel()
+            val tiersViewModel: TiersViewModel = koinViewModel()
 
             val navHostController = rememberNavController()
             val scope = rememberCoroutineScope()
@@ -115,6 +117,7 @@ class MainActivity : ComponentActivity() {
                                                     else drawerState.close()
                                                 }
                                             },
+                                            searchViewModel = searchViewModel,
                                             navHostController = navHostController,
                                             navigationUiState = navigationUiState
                                         )
@@ -139,6 +142,7 @@ class MainActivity : ComponentActivity() {
                                         mapsViewModel = mapsViewModel,
                                         favoritesViewModel = favoritesViewModel,
                                         cardsViewModel = cardsViewModel,
+                                        tiersViewModel = tiersViewModel,
                                         searchViewModel = searchViewModel,
                                         navHostController = navHostController,
                                         paddingValues = paddingValues,

@@ -6,6 +6,7 @@ import com.gblrod.radianthub.R
 import com.gblrod.radianthub.domain.agents.repository.AgentsRepository
 import com.gblrod.radianthub.domain.cards.repository.CardsRepository
 import com.gblrod.radianthub.domain.maps.repository.MapsRepository
+import com.gblrod.radianthub.domain.tiers.repository.TiersRepository
 import com.gblrod.radianthub.ui.features.search.model.SearchItem
 import com.gblrod.radianthub.ui.features.search.model.SearchType
 import com.gblrod.radianthub.ui.features.search.state.SearchUiState
@@ -17,7 +18,8 @@ import kotlinx.coroutines.launch
 class SearchViewModel(
     private val agentsRepository: AgentsRepository,
     private val mapsRepository: MapsRepository,
-    private val cardsRepository: CardsRepository
+    private val cardsRepository: CardsRepository,
+    private val tiersRepository: TiersRepository,
 ) : ViewModel() {
     private val _searchState =
         MutableStateFlow<SearchUiState>(SearchUiState.Success(
@@ -28,6 +30,9 @@ class SearchViewModel(
     val searchState: StateFlow<SearchUiState> = _searchState
 
     private var allItems: List<SearchItem> = emptyList()
+
+    private val _originRoute = MutableStateFlow<String?>(null)
+    val originRoute: StateFlow<String?> = _originRoute
 
     init {
         loadItems()
@@ -74,6 +79,7 @@ class SearchViewModel(
                 val agents = agentsRepository.getAgents()
                 val cards = cardsRepository.getCards()
                 val maps = mapsRepository.getMaps()
+                val tiers = tiersRepository.getTiers()
 
                val agentsItems = agents.map { agent ->
                     SearchItem(
@@ -102,7 +108,17 @@ class SearchViewModel(
                     )
                 }
 
-                allItems = agentsItems + cardsItems + mapsItems
+                val tiersItems = tiers.map { tiers ->
+                    SearchItem(
+                        uuid = tiers.tierName,
+                        title = tiers.tierName,
+                        imageUrl = tiers.icon.orEmpty(),
+                        type = SearchType.TIER,
+                        tierId = tiers.tier
+                    )
+                }
+
+                allItems = agentsItems + cardsItems + mapsItems + tiersItems
 
                 _searchState.value =
                     SearchUiState.Success(
@@ -111,6 +127,10 @@ class SearchViewModel(
                     )
             }
         }
+    }
+
+    fun setOriginRoute(route: String?) {
+        _originRoute.value = route
     }
 
     fun clearSearch() {

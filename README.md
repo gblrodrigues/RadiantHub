@@ -35,6 +35,7 @@ I built this project to practice API integration, local persistence, state manag
   * Agents
   * Maps
   * Cards
+  * Competitive Tiers
   * Favorites
 * Themed banners for each section
 
@@ -71,6 +72,12 @@ I built this project to practice API integration, local persistence, state manag
 * Grid-based cards gallery
 * Favorite player cards
 
+### Competitive Tiers
+* Browse all Valorant competitive tiers
+* Organized by tier divisions
+* Tier icons and progression visualization
+* Search integration with automatic navigation
+
 ### Favorites
 * Filtering by All, Agents and Cards categories
 * Persistent local favorites system for agents and player cards
@@ -79,10 +86,10 @@ I built this project to practice API integration, local persistence, state manag
 * Dynamic favorite toggling directly from agent pages
 
 ### Search
-* Global search across agents, maps and player cards
+* Global search across agents, maps and player cards and competitive tiers
 * Real time filtering while typing
-* Automatic agent, card and map selection from search results
-* Automatic scrolling and visual highlighting for searched player cards
+* Automatic navigation from search results
+* Automatic scrolling and visual highlighting for searched player cards and competitive tiers
 
 ### Navigation & UI
 * TopBar and BottomBar navigation
@@ -106,6 +113,7 @@ I built this project to practice API integration, local persistence, state manag
 ### General
 * Handling of loading and error states with retry option
 * Public API integration with Valorant API
+* Practicing application localization and internationalization (i18n)
 * Dynamic UI rendering using Compose State
 * Runtime language switching
 * Persistent language preferences
@@ -113,7 +121,7 @@ I built this project to practice API integration, local persistence, state manag
 
 ## Preview
 ### Home Screen
-<img src="https://github.com/user-attachments/assets/bb10902f-9084-4d9f-95f5-a33634c6407b" width="250"/>
+<img src="https://github.com/user-attachments/assets/ac2d8c5b-8d04-4122-8962-d95b6c0d5d52" width="250"/>
 
 ### Agents Screen and Agent Abilities
 <img src="https://github.com/user-attachments/assets/1b8e88ff-fce6-49ba-b115-fd0c6ea13239" width="250"/>
@@ -126,6 +134,9 @@ I built this project to practice API integration, local persistence, state manag
 ### Cards Screen
 <img src="https://github.com/user-attachments/assets/824b38e5-80d4-4488-9450-f518978075fb" width="250"/>
 
+### Tiers Screen
+<img src="https://github.com/user-attachments/assets/3ccef472-e6b7-46a6-b206-6434bb2f06ae" width="250"/>
+
 ### Favorites Screen
 <img src="https://github.com/user-attachments/assets/e5d3a9a6-3c82-406e-837c-f75ac3255356" width="250"/>
 <img src="https://github.com/user-attachments/assets/2840d371-92bc-4bf9-9b12-a7be0f579c90" width="250"/>
@@ -136,7 +147,7 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/fdffe5ab-1d62-4cd5-9888-65218846e0de" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/9d8f7c79-4c4b-488f-af85-77fd83e509c9
+> https://github.com/user-attachments/assets/56936187-aea7-4f68-b48c-dde0c62b02c9
 
 ## Technical Decisions
 
