@@ -124,11 +124,11 @@ I built this project to practice API integration, local persistence, state manag
 <img src="https://github.com/user-attachments/assets/ac2d8c5b-8d04-4122-8962-d95b6c0d5d52" width="250"/>
 
 ### Agents Screen and Agent Abilities
-<img src="https://github.com/user-attachments/assets/1b8e88ff-fce6-49ba-b115-fd0c6ea13239" width="250"/>
+<img src="https://github.com/user-attachments/assets/566ddade-80b6-4977-aa6d-4a16aacf48c8" width="250"/>
 <img src="https://github.com/user-attachments/assets/d841cfac-046f-4fc8-a82f-d0f03451bc39" width="250"/>
 
 ### Maps Screen
-<img src="https://github.com/user-attachments/assets/d2385739-1f11-499b-b899-13ab02aafab7" width="250"/>
+<img src="https://github.com/user-attachments/assets/b82f84c0-95e1-40f9-9524-e8610577eb74" width="250"/>
 <img src="https://github.com/user-attachments/assets/33b7fa4d-d6f7-418e-a54e-0980621975bf" width="250"/>
 
 ### Cards Screen
@@ -144,7 +144,7 @@ I built this project to practice API integration, local persistence, state manag
 
 ### Search 
 <img src="https://github.com/user-attachments/assets/c0af0f39-fce6-42b3-9b0a-15a4ac65af03" width="250"/>
-<img src="https://github.com/user-attachments/assets/fdffe5ab-1d62-4cd5-9888-65218846e0de" width="250"/>
+<img src="https://github.com/user-attachments/assets/0d43acfe-c500-4f09-9d76-94cf887c21ad" width="250"/>
 
 Below I will provide a video showing how the application looks:  
 > https://github.com/user-attachments/assets/56936187-aea7-4f68-b48c-dde0c62b02c9

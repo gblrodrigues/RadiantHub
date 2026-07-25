@@ -75,9 +75,7 @@ fun MapPage(
         PagerIndicator(
             currentPage = currentPage,
             pageCount = pageCount,
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 20.dp),
+            modifier = Modifier.align(Alignment.BottomCenter)
         )
     }
 
