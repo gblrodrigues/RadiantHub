@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.tiers.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.connectivity.RetryManager
 import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.domain.tiers.repository.TiersRepository
 import com.gblrod.radianthub.ui.features.tiers.model.TierGroup
@@ -13,7 +14,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class TiersViewModel(
-    private val repository: TiersRepository
+    private val repository: TiersRepository,
+    private val retryManager: RetryManager
 ) : ViewModel() {
     private val _tiersState = MutableStateFlow<TiersUiState>(TiersUiState.Loading)
     val tiersState: StateFlow<TiersUiState> = _tiersState
@@ -22,12 +24,19 @@ class TiersViewModel(
     val initialTierUuid: StateFlow<Int?> = _initialTierUuid
 
     init {
-        if (_tiersState.value !is TiersUiState.Success) {
-            fetchTiers()
-        }
+        observeRetry()
+        fetchTiers()
 
         viewModelScope.launch {
             AppEvents.languageChanged.collect {
+                fetchTiers()
+            }
+        }
+    }
+
+    private fun observeRetry() {
+        viewModelScope.launch {
+            retryManager.retryAll.collect {
                 fetchTiers()
             }
         }
@@ -88,6 +97,6 @@ class TiersViewModel(
     }
 
     fun retry() {
-        fetchTiers()
+        retryManager.retry()
     }
 }

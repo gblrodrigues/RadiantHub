@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.maps.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.connectivity.RetryManager
 import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.domain.maps.repository.MapsRepository
 import com.gblrod.radianthub.ui.features.maps.state.MapsUiState
@@ -12,7 +13,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class MapsViewModel(
-    private val repository: MapsRepository
+    private val repository: MapsRepository,
+    private val retryManager: RetryManager
 ) : ViewModel() {
     private val _mapsState = MutableStateFlow<MapsUiState>(MapsUiState.Loading)
     val mapsState: StateFlow<MapsUiState> = _mapsState
@@ -21,12 +23,19 @@ class MapsViewModel(
     val initialMapUuid: StateFlow<String?> = _initialMapUuid
 
     init {
-        if (_mapsState.value !is MapsUiState.Success) {
-            fetchMaps()
-        }
+        observeRetry()
+        fetchMaps()
 
         viewModelScope.launch {
             AppEvents.languageChanged.collect {
+                fetchMaps()
+            }
+        }
+    }
+
+    private fun observeRetry() {
+        viewModelScope.launch {
+            retryManager.retryAll.collect {
                 fetchMaps()
             }
         }
@@ -70,6 +79,6 @@ class MapsViewModel(
     }
 
     fun retry() {
-        fetchMaps()
+        retryManager.retry()
     }
 }

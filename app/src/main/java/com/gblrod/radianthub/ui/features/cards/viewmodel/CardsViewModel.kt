@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.cards.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.connectivity.RetryManager
 import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
 import com.gblrod.radianthub.data.room.model.FavoriteType
@@ -20,7 +21,8 @@ import kotlinx.coroutines.launch
 
 class CardsViewModel(
     private val repository: CardsRepository,
-    private val favoriteRepository: FavoriteRepository
+    private val favoriteRepository: FavoriteRepository,
+    private val retryManager: RetryManager
 ) : ViewModel() {
 
     private val _cardsState = MutableStateFlow<CardsUiState>(CardsUiState.Loading)
@@ -37,12 +39,19 @@ class CardsViewModel(
         )
 
     init {
-        if (_cardsState.value !is CardsUiState.Success) {
-            fetchCards()
-        }
+        observeRetry()
+        fetchCards()
 
         viewModelScope.launch {
             AppEvents.languageChanged.collect {
+                fetchCards()
+            }
+        }
+    }
+
+    private fun observeRetry() {
+        viewModelScope.launch {
+            retryManager.retryAll.collect {
                 fetchCards()
             }
         }
@@ -111,6 +120,6 @@ class CardsViewModel(
     }
 
     fun retry() {
-        fetchCards()
+        retryManager.retry()
     }
 }
