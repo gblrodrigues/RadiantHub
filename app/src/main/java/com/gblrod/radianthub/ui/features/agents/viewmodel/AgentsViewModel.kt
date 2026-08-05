@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.agents.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.connectivity.RetryManager
 import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.data.favorite.repository.FavoriteRepository
 import com.gblrod.radianthub.data.room.model.FavoriteType
@@ -20,7 +21,8 @@ import kotlinx.coroutines.launch
 
 class AgentsViewModel(
     private val repository: AgentsRepository,
-    private val favoriteRepository: FavoriteRepository
+    private val favoriteRepository: FavoriteRepository,
+    private val retryManager: RetryManager
 ) : ViewModel() {
     private val _agentsState = MutableStateFlow<AgentsUiState>(AgentsUiState.Loading)
     val agentsState: StateFlow<AgentsUiState> = _agentsState
@@ -36,12 +38,19 @@ class AgentsViewModel(
         )
 
     init {
-        if (_agentsState.value !is AgentsUiState.Success) {
-            fetchAgents()
-        }
+        observeRetry()
+        fetchAgents()
 
         viewModelScope.launch {
             AppEvents.languageChanged.collect {
+                fetchAgents()
+            }
+        }
+    }
+
+    private fun observeRetry() {
+        viewModelScope.launch {
+            retryManager.retryAll.collect {
                 fetchAgents()
             }
         }
@@ -125,6 +134,6 @@ class AgentsViewModel(
     }
 
     fun retry() {
-        fetchAgents()
+        retryManager.retry()
     }
 }

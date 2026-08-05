@@ -3,6 +3,7 @@ package com.gblrod.radianthub.ui.features.search.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.core.connectivity.RetryManager
 import com.gblrod.radianthub.domain.agents.repository.AgentsRepository
 import com.gblrod.radianthub.domain.cards.repository.CardsRepository
 import com.gblrod.radianthub.domain.maps.repository.MapsRepository
@@ -20,6 +21,7 @@ class SearchViewModel(
     private val mapsRepository: MapsRepository,
     private val cardsRepository: CardsRepository,
     private val tiersRepository: TiersRepository,
+    private val retryManager: RetryManager
 ) : ViewModel() {
     private val _searchState =
         MutableStateFlow<SearchUiState>(SearchUiState.Success(
@@ -35,7 +37,16 @@ class SearchViewModel(
     val originRoute: StateFlow<String?> = _originRoute
 
     init {
+        observeRetry()
         loadItems()
+    }
+
+    private fun observeRetry() {
+        viewModelScope.launch {
+            retryManager.retryAll.collect {
+                loadItems()
+            }
+        }
     }
 
     fun updateQuery(query: String) {
@@ -142,6 +153,6 @@ class SearchViewModel(
     }
 
     fun retry() {
-        loadItems()
+        retryManager.retry()
     }
 }
