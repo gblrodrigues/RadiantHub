@@ -12,7 +12,6 @@ import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.collectAsState
@@ -27,6 +26,8 @@ import androidx.navigation.compose.rememberNavController
 import com.gblrod.radianthub.core.manager.LanguageManager
 import com.gblrod.radianthub.navigation.NavigationGraph
 import com.gblrod.radianthub.navigation.state.mapRouteToNavigationUiState
+import com.gblrod.radianthub.ui.connectivity.ConnectivitySnackbar
+import com.gblrod.radianthub.ui.connectivity.NetworkSnackbarHost
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
@@ -83,6 +84,10 @@ class MainActivity : ComponentActivity() {
                 theme == null
             }
 
+            ConnectivitySnackbar(
+                snackbarHostState = snackbarHostState
+            )
+
             if (theme != null) {
                 ThemeConfigDefault(
                     themeOption = theme!!
@@ -124,8 +129,8 @@ class MainActivity : ComponentActivity() {
                                     }
                                 },
                                 snackbarHost = {
-                                    SnackbarHost(
-                                        hostState = snackbarHostState
+                                    NetworkSnackbarHost(
+                                        snackbarHostState = snackbarHostState
                                     )
                                 },
                                 bottomBar = {

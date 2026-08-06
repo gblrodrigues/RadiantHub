@@ -15,6 +15,10 @@ val BackgroundOne = Color(0xFF18BB62)
 val BackgroundTwo = Color(0xFF17A177)
 val BackgroundThree = Color(0xFF3BC0A4)
 
+// Network Status
+val OfflineBackground = Color(0xFF8D8B8B)
+val OnlineBackground = Color(0xFF37983E)
+
 // Navigation
 val NavigationSelected = Color(0xFF00FFAC)
 
