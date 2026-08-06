@@ -1,6 +1,9 @@
 package com.gblrod.radianthub.di
 
 import com.gblrod.radianthub.core.localization.ApiLanguageProvider
+import com.gblrod.radianthub.core.connectivity.AndroidConnectivityObserver
+import com.gblrod.radianthub.core.connectivity.NetworkChecker
+import com.gblrod.radianthub.core.connectivity.RetryManager
 import com.gblrod.radianthub.data.agents.remote.api.AgentsApi
 import com.gblrod.radianthub.data.agents.repository.AgentsRepositoryImpl
 import com.gblrod.radianthub.data.cards.remote.api.CardsApi
@@ -98,17 +101,31 @@ val appModule = module {
         )
     }
 
+    // NetworkChecker (Internet)
+    single<NetworkChecker> {
+        AndroidConnectivityObserver(
+            context = androidContext()
+        )
+    }
+
+    // Retry
+    single {
+        RetryManager()
+    }
+
     // ViewModels
     viewModel {
         AgentsViewModel(
             repository = get(),
-            favoriteRepository = get()
+            favoriteRepository = get(),
+            retryManager = get()
         )
     }
 
     viewModel {
         MapsViewModel(
-            repository = get()
+            repository = get(),
+            retryManager = get()
         )
     }
 
@@ -121,7 +138,8 @@ val appModule = module {
     viewModel {
         CardsViewModel(
             repository = get(),
-            favoriteRepository = get()
+            favoriteRepository = get(),
+            retryManager = get()
         )
     }
 
@@ -130,13 +148,15 @@ val appModule = module {
             agentsRepository = get(),
             mapsRepository = get(),
             cardsRepository = get(),
-            tiersRepository = get()
+            tiersRepository = get(),
+            retryManager = get()
         )
     }
 
     viewModel {
         TiersViewModel(
-            repository = get()
+            repository = get(),
+            retryManager = get()
         )
     }
 }
