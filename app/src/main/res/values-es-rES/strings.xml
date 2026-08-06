@@ -95,6 +95,8 @@
     <!-- SnackBar -->
     <string name="snackbar_message_removed">%1$s se ha eliminado de favoritos</string>
     <string name="snackbar_action_label">Deshacer</string>
+    <string name="connection_restored">Conexión restablecida</string>
+    <string name="no_connection">Sin conexión</string>
 
     <!-- Types name -->
     <string name="type_name_agents_title">Agentes</string>
