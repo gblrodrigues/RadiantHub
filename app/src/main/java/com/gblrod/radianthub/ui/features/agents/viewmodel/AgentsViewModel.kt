@@ -51,7 +51,9 @@ class AgentsViewModel(
     private fun observeRetry() {
         viewModelScope.launch {
             retryManager.retryAll.collect {
-                fetchAgents()
+                if (_agentsState.value is AgentsUiState.Error) {
+                    fetchAgents()
+                }
             }
         }
     }

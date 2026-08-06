@@ -36,7 +36,9 @@ class MapsViewModel(
     private fun observeRetry() {
         viewModelScope.launch {
             retryManager.retryAll.collect {
-                fetchMaps()
+                if (_mapsState.value is MapsUiState.Error) {
+                    fetchMaps()
+                }
             }
         }
     }

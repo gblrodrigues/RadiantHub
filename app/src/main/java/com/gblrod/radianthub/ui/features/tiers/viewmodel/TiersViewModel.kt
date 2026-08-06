@@ -37,7 +37,9 @@ class TiersViewModel(
     private fun observeRetry() {
         viewModelScope.launch {
             retryManager.retryAll.collect {
-                fetchTiers()
+                if (_tiersState.value is TiersUiState.Error) {
+                    fetchTiers()
+                }
             }
         }
     }

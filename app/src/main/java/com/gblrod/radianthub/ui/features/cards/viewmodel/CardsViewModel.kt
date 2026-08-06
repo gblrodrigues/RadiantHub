@@ -52,7 +52,9 @@ class CardsViewModel(
     private fun observeRetry() {
         viewModelScope.launch {
             retryManager.retryAll.collect {
-                fetchCards()
+                if (_cardsState.value is CardsUiState.Error) {
+                    fetchCards()
+                }
             }
         }
     }

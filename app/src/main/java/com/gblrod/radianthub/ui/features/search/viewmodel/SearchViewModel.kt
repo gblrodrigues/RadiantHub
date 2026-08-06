@@ -44,7 +44,9 @@ class SearchViewModel(
     private fun observeRetry() {
         viewModelScope.launch {
             retryManager.retryAll.collect {
-                loadItems()
+                if (_searchState.value is SearchUiState.Error) {
+                    loadItems()
+                }
             }
         }
     }
