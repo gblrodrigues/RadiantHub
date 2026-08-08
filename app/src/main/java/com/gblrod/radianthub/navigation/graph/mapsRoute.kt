@@ -2,16 +2,24 @@ package com.gblrod.radianthub.navigation.graph
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.ui.features.maps.screen.MapsScreen
-import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 
-fun NavGraphBuilder.mapsRoute(
-    mapsViewModel: MapsViewModel
-) {
-    composable(route = Routes.Maps.route) {
+fun NavGraphBuilder.mapsRoute() {
+    composable(
+        route = Routes.Maps.ROUTE_WITH_ARGUMENT,
+        arguments = listOf(
+            navArgument(name = "mapUuid") {
+                nullable = true
+                defaultValue = null
+            }
+        )
+    ) { backStackEntry ->
+        val mapUuid = backStackEntry.arguments?.getString("mapUuid")
+
         MapsScreen(
-            mapsViewModel = mapsViewModel
+            initialMapUuid = mapUuid
         )
     }
 }

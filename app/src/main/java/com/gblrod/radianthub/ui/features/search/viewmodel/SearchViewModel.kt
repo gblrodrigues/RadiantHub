@@ -33,9 +33,6 @@ class SearchViewModel(
 
     private var allItems: List<SearchItem> = emptyList()
 
-    private val _originRoute = MutableStateFlow<String?>(null)
-    val originRoute: StateFlow<String?> = _originRoute
-
     init {
         observeRetry()
         loadItems()
@@ -140,10 +137,6 @@ class SearchViewModel(
                     )
             }
         }
-    }
-
-    fun setOriginRoute(route: String?) {
-        _originRoute.value = route
     }
 
     fun clearSearch() {

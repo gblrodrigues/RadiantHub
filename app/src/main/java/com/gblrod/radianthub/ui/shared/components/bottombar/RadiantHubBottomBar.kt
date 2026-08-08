@@ -41,22 +41,22 @@ fun RadiantHubBottomBar(
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_home_title),
             icon = Icons.Default.Home,
-            route = Routes.Home.route
+            route = Routes.Home.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_agents_title),
             icon = Icons.Default.Person,
-            route = Routes.Agents.route
+            route = Routes.Agents.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_maps_title),
             icon = Icons.Default.Map,
-            route = Routes.Maps.route
+            route = Routes.Maps.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_favorites_title),
             icon = Icons.Default.Star,
-            route = Routes.Favorites.route
+            route = Routes.Favorites.ROUTE
         )
     )
     NavigationBar(

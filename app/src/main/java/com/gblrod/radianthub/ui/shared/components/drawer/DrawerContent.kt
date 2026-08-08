@@ -42,7 +42,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import coil.compose.AsyncImage
 import com.gblrod.radianthub.R
@@ -56,13 +55,14 @@ import com.gblrod.radianthub.ui.shared.model.NavigationItem
 import com.gblrod.radianthub.ui.theme.ThemeOptions
 import com.gblrod.radianthub.ui.theme.viewmodel.ThemeViewModel
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DrawerContent(
     navController: NavController,
     onItemClick: () -> Unit,
-    themeViewModel: ThemeViewModel,
-    languageViewModel: LanguageViewModel
+    themeViewModel: ThemeViewModel = koinViewModel(),
+    languageViewModel: LanguageViewModel = koinViewModel()
 ) {
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
     var showThemeDialog by remember { mutableStateOf(false) }
@@ -76,43 +76,36 @@ fun DrawerContent(
     val activity = LocalActivity.current as Activity
     val context = LocalContext.current
 
-    val bottomBarScreens = setOf(
-        Routes.Home.route,
-        Routes.Agents.route,
-        Routes.Maps.route,
-        Routes.Favorites.route
-    )
-
     val items = listOf(
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_home),
             icon = Icons.Default.Home,
-            route = Routes.Home.route
+            route = Routes.Home.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_agents),
             icon = Icons.Default.Person,
-            route = Routes.Agents.route
+            route = Routes.Agents.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_maps),
             icon = Icons.Default.Map,
-            route = Routes.Maps.route
+            route = Routes.Maps.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_cards),
             icon = Icons.Default.Style,
-            route = Routes.Cards.route
+            route = Routes.Cards.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_tiers),
             icon = Icons.Default.WorkspacePremium,
-            route = Routes.Tiers.route
+            route = Routes.Tiers.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_favorites_title),
             icon = Icons.Default.Star,
-            route = Routes.Favorites.route
+            route = Routes.Favorites.ROUTE
         )
     )
 
@@ -180,17 +173,8 @@ fun DrawerContent(
                 selected = currentRoute == item.route,
                 onClick = {
                     onItemClick()
-                    if (item.route in bottomBarScreens) {
-                        navController.navigate(item.route) {
-                            popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
-                            }
-
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    } else {
-                        navController.navigate(item.route)
+                    navController.navigate(item.route) {
+                        launchSingleTop = true
                     }
                 },
                 shape = RoundedCornerShape(16.dp)
@@ -209,7 +193,7 @@ fun DrawerContent(
 
         DrawerPreferenceItem(
             title = stringResource(id = R.string.drawer_item_language),
-            label =  stringResource(id = effectiveLanguage.label),
+            label = stringResource(id = effectiveLanguage.label),
             icon = Icons.Default.Language,
             contentDescription = stringResource(id = R.string.drawer_item_language_cd),
             onClick = { showLanguageDialog = true }
@@ -217,7 +201,7 @@ fun DrawerContent(
 
         DrawerPreferenceItem(
             title = stringResource(id = R.string.drawer_item_theme),
-            label =  stringResource(id = theme.label),
+            label = stringResource(id = theme.label),
             icon = Icons.Default.Palette,
             contentDescription = stringResource(id = R.string.drawer_item_themes_cd),
             onClick = { showThemeDialog = true }

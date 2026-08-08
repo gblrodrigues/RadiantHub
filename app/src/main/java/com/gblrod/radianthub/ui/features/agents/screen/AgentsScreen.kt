@@ -21,14 +21,15 @@ import com.gblrod.radianthub.ui.features.agents.state.AgentsUiState
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AgentsScreen(
-    agentsViewModel: AgentsViewModel
+    agentsViewModel: AgentsViewModel = koinViewModel(),
+    initialAgentUuid: String?
 ) {
     val uiState by agentsViewModel.agentsState.collectAsState()
-    val initialAgentUuid by agentsViewModel.initialAgentUuid.collectAsState()
 
     var selectedAgent by remember { mutableStateOf<Agent?>(null) }
     val sheetState = rememberModalBottomSheetState()
@@ -78,8 +79,7 @@ fun AgentsScreen(
                     agent = state.agents[page],
                     onViewSkills = { selectedAgent = it },
                     currentPage = pagerState.currentPage,
-                    pageCount = state.agents.size,
-                    agentsViewModel = agentsViewModel
+                    pageCount = state.agents.size
                 )
             }
 

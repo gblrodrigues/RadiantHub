@@ -14,13 +14,14 @@ import com.gblrod.radianthub.ui.features.maps.state.MapsUiState
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MapsScreen(
-    mapsViewModel: MapsViewModel
+    mapsViewModel: MapsViewModel = koinViewModel(),
+    initialMapUuid: String?
 ) {
     val uiState by mapsViewModel.mapsState.collectAsState()
-    val initialMapUuid by mapsViewModel.initialMapUuid.collectAsState()
 
     when(val state = uiState) {
         is MapsUiState.Loading -> {
