@@ -14,64 +14,24 @@ import com.gblrod.radianthub.navigation.graph.homeRoute
 import com.gblrod.radianthub.navigation.graph.mapsRoute
 import com.gblrod.radianthub.navigation.graph.searchRoute
 import com.gblrod.radianthub.navigation.graph.tiersRoute
-import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
-import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
-import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
-import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
-import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
-import com.gblrod.radianthub.ui.features.tiers.viewmodel.TiersViewModel
 
 @Composable
 fun NavigationGraph(
-    agentsViewModel: AgentsViewModel,
-    mapsViewModel: MapsViewModel,
-    favoritesViewModel: FavoritesViewModel,
-    cardsViewModel: CardsViewModel,
-    searchViewModel: SearchViewModel,
-    tiersViewModel: TiersViewModel,
     paddingValues: PaddingValues,
     navHostController: NavHostController,
     snackbarHostState: SnackbarHostState
 ) {
     NavHost(
         navController = navHostController,
-        startDestination = Routes.Home.route,
+        startDestination = Routes.Home.ROUTE,
         modifier = Modifier.padding(paddingValues = paddingValues)
     ) {
-        homeRoute(
-            navHostController = navHostController
-        )
-
-        agentsRoute(
-            agentsViewModel = agentsViewModel
-        )
-
-        mapsRoute(
-            mapsViewModel = mapsViewModel
-        )
-
-        cardsRoute(
-            cardsViewModel = cardsViewModel
-        )
-
-        tiersRoute(
-            tiersViewModel = tiersViewModel
-        )
-
-        favoritesRoute(
-            favoritesViewModel = favoritesViewModel,
-            agentsViewModel = agentsViewModel,
-            navHostController = navHostController,
-            snackbarHostState = snackbarHostState
-        )
-
-        searchRoute(
-            searchViewModel = searchViewModel,
-            agentsViewModel = agentsViewModel,
-            cardsViewModel = cardsViewModel,
-            mapsViewModel = mapsViewModel,
-            tiersViewModel = tiersViewModel,
-            navHostController = navHostController
-        )
+        homeRoute(navHostController = navHostController)
+        agentsRoute()
+        mapsRoute()
+        cardsRoute()
+        tiersRoute()
+        favoritesRoute(navHostController = navHostController, snackbarHostState = snackbarHostState)
+        searchRoute(navHostController = navHostController)
     }
 }

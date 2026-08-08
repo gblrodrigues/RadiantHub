@@ -35,12 +35,13 @@ import com.gblrod.radianthub.ui.features.favorites.viewmodel.FavoritesViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritesScreen(
-    favoritesViewModel: FavoritesViewModel,
-    agentsViewModel: AgentsViewModel,
+    favoritesViewModel: FavoritesViewModel = koinViewModel(),
+    agentsViewModel: AgentsViewModel = koinViewModel(),
     onNavigateHome: () -> Unit,
     snackbarHostState: SnackbarHostState
 ) {

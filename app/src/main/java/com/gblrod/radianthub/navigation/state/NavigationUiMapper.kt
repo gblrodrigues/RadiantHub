@@ -8,15 +8,15 @@ fun mapRouteToNavigationUiState(
 ): NavigationUiState {
 
     val bottomBarScreens = setOf(
-        Routes.Home.route,
-        Routes.Agents.route,
-        Routes.Maps.route,
-        Routes.Favorites.route
+        Routes.Home.ROUTE,
+        Routes.Agents.ROUTE,
+        Routes.Maps.ROUTE,
+        Routes.Favorites.ROUTE
     )
 
     val isBottomBarScreen = route in bottomBarScreens
 
-    if (route == Routes.Search.route) {
+    if (route == Routes.Search.ROUTE) {
         return NavigationUiState(
             titleRes = R.string.topbar_principal_title,
             showTopBar = false,
@@ -27,12 +27,12 @@ fun mapRouteToNavigationUiState(
     }
 
     val titleRes = when (route) {
-        Routes.Home.route -> R.string.topbar_home_title
-        Routes.Maps.route -> R.string.topbar_maps_title
-        Routes.Tiers.route -> R.string.topbar_tiers_title
-        Routes.Cards.route -> R.string.topbar_cards_title
-        Routes.Agents.route -> R.string.topbar_agents_title
-        Routes.Favorites.route -> R.string.topbar_favorites_title
+        Routes.Home.ROUTE -> R.string.topbar_home_title
+        Routes.Maps.ROUTE_WITH_ARGUMENT -> R.string.topbar_maps_title
+        Routes.Tiers.ROUTE_WITH_ARGUMENT -> R.string.topbar_tiers_title
+        Routes.Cards.ROUTE_WITH_ARGUMENT -> R.string.topbar_cards_title
+        Routes.Agents.ROUTE_WITH_ARGUMENT -> R.string.topbar_agents_title
+        Routes.Favorites.ROUTE -> R.string.topbar_favorites_title
         else -> R.string.topbar_principal_title
     }
 

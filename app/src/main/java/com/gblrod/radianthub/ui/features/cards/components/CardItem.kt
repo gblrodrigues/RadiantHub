@@ -3,7 +3,9 @@ package com.gblrod.radianthub.ui.features.cards.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -62,11 +64,20 @@ fun CardItem(
             )
 
             if (isFavorite != null && onFavoriteClick != null) {
-                FavoriteButton(
-                    isFavorite = isFavorite,
-                    onClick = { onFavoriteClick() },
-                    unselectedTint = Color.White
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    FavoriteButton(
+                        isFavorite = isFavorite,
+                        onClick = { onFavoriteClick() },
+                        unselectedTint = Color.White,
+                        size = 30.dp
+                    )
+                }
             }
 
             Box(

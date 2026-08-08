@@ -17,15 +17,16 @@ import androidx.compose.ui.unit.dp
 import com.gblrod.radianthub.domain.agents.model.Agent
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
 import com.gblrod.radianthub.ui.shared.components.PagerIndicator
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AgentPage(
+    modifier: Modifier = Modifier,
     agent: Agent,
     onViewSkills: (Agent) -> Unit,
     currentPage: Int,
     pageCount: Int,
-    agentsViewModel: AgentsViewModel,
-    modifier: Modifier = Modifier
+    agentsViewModel: AgentsViewModel = koinViewModel()
 ) {
     val isFavorite by agentsViewModel.isFavorite(agent.uuid).collectAsState(initial = false)
 
