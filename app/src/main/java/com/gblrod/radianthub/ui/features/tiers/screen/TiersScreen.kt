@@ -22,13 +22,15 @@ import com.gblrod.radianthub.ui.features.tiers.viewmodel.TiersViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun TiersScreen(
-    tiersViewModel: TiersViewModel
+    tiersViewModel: TiersViewModel = koinViewModel(),
+    initialTierId: Int?
 ) {
     val uiState by tiersViewModel.tiersState.collectAsState()
-    val initialTierUuid by tiersViewModel.initialTierUuid.collectAsState()
     val listState = rememberLazyListState()
 
     var highlightedTier by remember { mutableStateOf<Int?>(null) }
@@ -52,8 +54,8 @@ fun TiersScreen(
         }
 
         is TiersUiState.Success -> {
-            LaunchedEffect(initialTierUuid) {
-                initialTierUuid?.let { tierId ->
+            LaunchedEffect(initialTierId) {
+                initialTierId?.let { tierId ->
 
                     highlightedTier = tierId
 
@@ -66,7 +68,7 @@ fun TiersScreen(
                         listState.animateScrollToItem(groupIndex)
                     }
 
-                    delay(5000)
+                    delay(duration = 5000L.milliseconds)
 
                     highlightedTier = null
                     tiersViewModel.clearSelectedTier()

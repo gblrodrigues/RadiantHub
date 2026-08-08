@@ -9,7 +9,7 @@ import com.gblrod.radianthub.ui.features.home.screen.HomeScreen
 fun NavGraphBuilder.homeRoute(
     navHostController: NavHostController
 ) {
-    composable(route = Routes.Home.route) {
+    composable(route = Routes.Home.ROUTE) {
         HomeScreen(
             navHostController = navHostController
         )

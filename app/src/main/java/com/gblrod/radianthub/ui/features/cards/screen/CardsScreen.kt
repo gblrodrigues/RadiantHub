@@ -23,13 +23,15 @@ import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
 import kotlinx.coroutines.delay
+import org.koin.androidx.compose.koinViewModel
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun CardsScreen(
-    cardsViewModel: CardsViewModel
+    cardsViewModel: CardsViewModel = koinViewModel(),
+    initialCardUuid: String?
 ) {
     val uiState by cardsViewModel.cardsState.collectAsState()
-    val initialCardUuid by cardsViewModel.initialCardUuid.collectAsState()
 
     val gridState = rememberLazyGridState()
     var highlightedUuid by remember { mutableStateOf<String?>(null) }
@@ -62,7 +64,7 @@ fun CardsScreen(
                         gridState.animateScrollToItem(index)
                     }
 
-                    delay(5000)
+                    delay(duration = 5000L.milliseconds)
 
                     highlightedUuid = null
                     cardsViewModel.clearSelectedCard()

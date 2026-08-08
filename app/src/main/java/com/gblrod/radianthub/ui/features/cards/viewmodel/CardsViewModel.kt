@@ -29,7 +29,6 @@ class CardsViewModel(
     val cardsState: StateFlow<CardsUiState> = _cardsState
 
     private val _initialCardUuid = MutableStateFlow<String?>(null)
-    val initialCardUuid: StateFlow<String?> = _initialCardUuid
 
     val favorites =
         favoriteRepository.observeFavorites().stateIn(
@@ -111,10 +110,6 @@ class CardsViewModel(
                 )
             }
         }
-    }
-
-    fun selectCard(uuid: String) {
-        _initialCardUuid.value = uuid
     }
 
     fun clearSelectedCard() {

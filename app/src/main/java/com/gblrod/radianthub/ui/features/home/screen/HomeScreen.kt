@@ -30,7 +30,7 @@ fun HomeScreen(
                 title = stringResource(id = R.string.home_agents_title),
                 subtitle = stringResource(id = R.string.home_agents_subtitle),
                 background = painterResource(id = R.drawable.agents_background),
-                onClick = { navHostController.navigateToBottomBar(route = Routes.Agents.route) }
+                onClick = { navHostController.navigateToBottomBar(route = Routes.Agents.ROUTE) }
             )
         }
 
@@ -39,7 +39,7 @@ fun HomeScreen(
                 title = stringResource(id = R.string.home_maps_title),
                 subtitle = stringResource(id = R.string.home_maps_subtitle),
                 background = painterResource(id = R.drawable.maps_background),
-                onClick = { navHostController.navigateToBottomBar(route = Routes.Maps.route) }
+                onClick = { navHostController.navigateToBottomBar(route = Routes.Maps.ROUTE) }
             )
         }
 
@@ -48,7 +48,7 @@ fun HomeScreen(
                 title = stringResource(id = R.string.home_cards_title),
                 subtitle = stringResource(id = R.string.home_cards_subtitle),
                 background = painterResource(id = R.drawable.cards_background),
-                onClick = { navHostController.navigate(route = Routes.Cards.route) }
+                onClick = { navHostController.navigate(route = Routes.Cards.ROUTE) }
             )
         }
 
@@ -57,7 +57,7 @@ fun HomeScreen(
                 title = stringResource(id = R.string.home_tiers_title),
                 subtitle = stringResource(id = R.string.home_tiers_subtitle),
                 background = painterResource(id = R.drawable.tiers_background),
-                onClick = { navHostController.navigate(route = Routes.Tiers.route) }
+                onClick = { navHostController.navigate(route = Routes.Tiers.ROUTE) }
             )
         }
 
@@ -66,7 +66,7 @@ fun HomeScreen(
                 title = stringResource(id = R.string.home_favorites_title),
                 subtitle = stringResource(id = R.string.home_favorites_subtitle),
                 background = painterResource(id = R.drawable.favorites_background),
-                onClick = { navHostController.navigateToBottomBar(route = Routes.Favorites.route) }
+                onClick = { navHostController.navigateToBottomBar(route = Routes.Favorites.ROUTE) }
             )
         }
     }

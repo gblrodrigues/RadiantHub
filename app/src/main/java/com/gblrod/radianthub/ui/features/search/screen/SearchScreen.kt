@@ -18,10 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.gblrod.radianthub.navigation.Routes
-import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
-import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
-import com.gblrod.radianthub.ui.features.cards.viewmodel.CardsViewModel
-import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
+import com.gblrod.radianthub.navigation.extensions.navigateFromSearch
 import com.gblrod.radianthub.ui.features.search.components.EmptySearchResult
 import com.gblrod.radianthub.ui.features.search.components.SearchField
 import com.gblrod.radianthub.ui.features.search.components.SearchInitialContent
@@ -29,21 +26,17 @@ import com.gblrod.radianthub.ui.features.search.components.SearchResultItem
 import com.gblrod.radianthub.ui.features.search.model.SearchType
 import com.gblrod.radianthub.ui.features.search.state.SearchUiState
 import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
-import com.gblrod.radianthub.ui.features.tiers.viewmodel.TiersViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
+import org.koin.androidx.compose.koinViewModel
+
 
 @Composable
 fun SearchScreen(
-    searchViewModel: SearchViewModel,
-    agentsViewModel: AgentsViewModel,
-    cardsViewModel: CardsViewModel,
-    mapsViewModel: MapsViewModel,
-    tiersViewModel: TiersViewModel,
+    searchViewModel: SearchViewModel = koinViewModel(),
     navHostController: NavHostController
 ) {
     val uiState by searchViewModel.searchState.collectAsState()
-    val origin by searchViewModel.originRoute.collectAsState()
 
     val focus = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -103,41 +96,39 @@ fun SearchScreen(
                                     onClick = {
                                         when (item.type) {
                                             SearchType.AGENT -> {
-                                                agentsViewModel.selectAgent(item.uuid)
                                                 searchViewModel.clearSearch()
-                                                navHostController.popBackStack()
 
-                                                navHostController.navigateToBottomBar(
-                                                    Routes.Agents.route
+                                                navHostController.navigateFromSearch(
+                                                    targetRoute = Routes.Agents.createRoute(item.uuid),
+                                                    targetBaseRoute = Routes.Agents.ROUTE
                                                 )
                                             }
 
                                             SearchType.MAP -> {
-                                                mapsViewModel.selectMap(item.uuid)
                                                 searchViewModel.clearSearch()
-                                                navHostController.popBackStack()
 
-                                                navHostController.navigateToBottomBar(
-                                                    Routes.Maps.route
+                                                navHostController.navigateFromSearch(
+                                                    targetRoute = Routes.Maps.createRoute(item.uuid),
+                                                    targetBaseRoute = Routes.Maps.ROUTE
                                                 )
                                             }
 
                                             SearchType.CARD -> {
-                                                cardsViewModel.selectCard(item.uuid)
                                                 searchViewModel.clearSearch()
-                                                navHostController.popBackStack()
-                                                if (origin != Routes.Cards.route) {
-                                                    navHostController.navigate(Routes.Cards.route)
-                                                }
+
+                                                navHostController.navigateFromSearch(
+                                                    targetRoute = Routes.Cards.createRoute(item.uuid),
+                                                    targetBaseRoute = Routes.Cards.ROUTE
+                                                )
                                             }
 
                                             SearchType.TIER -> {
-                                                item.tierId?.let { tiersViewModel.selectTier(it) }
                                                 searchViewModel.clearSearch()
-                                                navHostController.popBackStack()
-                                                if (origin != Routes.Tiers.route) {
-                                                    navHostController.navigate(Routes.Tiers.route)
-                                                }
+
+                                                navHostController.navigateFromSearch(
+                                                    targetRoute = Routes.Tiers.createRoute(item.tierId),
+                                                    targetBaseRoute = Routes.Tiers.ROUTE
+                                                )
                                             }
                                         }
                                     }

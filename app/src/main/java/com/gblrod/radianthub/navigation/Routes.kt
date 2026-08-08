@@ -1,33 +1,55 @@
 package com.gblrod.radianthub.navigation
 
-sealed class Routes(
-    val route: String
-) {
-    object Home : Routes(
-        route = "home"
-    )
+object Routes {
+    object Home {
+        const val ROUTE = "home"
+    }
 
-    object Agents : Routes(
-        route = "agents"
-    )
+    object Agents {
+        const val ROUTE = "agents"
+        const val ARGUMENT = "agentUuid"
+        const val ROUTE_WITH_ARGUMENT = "$ROUTE?$ARGUMENT={$ARGUMENT}"
 
-    object Maps : Routes(
-        route = "maps"
-    )
+        fun createRoute(agentUuid: String): String {
+            return "$ROUTE?$ARGUMENT=$agentUuid"
+        }
+    }
 
-    object Favorites : Routes(
-        route = "favorites"
-    )
+    object Maps {
+        const val ROUTE = "maps"
+        const val ARGUMENT = "mapUuid"
+        const val ROUTE_WITH_ARGUMENT = "$ROUTE?$ARGUMENT={$ARGUMENT}"
 
-    object Search : Routes(
-        route = "search"
-    )
+        fun createRoute(mapUuid: String): String {
+            return "$ROUTE?$ARGUMENT=$mapUuid"
+        }
+    }
 
-    object Cards : Routes(
-        route = "cards"
-    )
+    object Cards {
+        const val ROUTE = "cards"
+        const val ARGUMENT = "cardUuid"
+        const val ROUTE_WITH_ARGUMENT = "$ROUTE?$ARGUMENT={$ARGUMENT}"
 
-    object Tiers : Routes(
-        route = "tiers"
-    )
+        fun createRoute(cardUuid: String): String {
+            return "$ROUTE?$ARGUMENT=$cardUuid"
+        }
+    }
+
+    object Tiers {
+        const val ROUTE = "tiers"
+        const val ARGUMENT = "tierId"
+        const val ROUTE_WITH_ARGUMENT = "$ROUTE?$ARGUMENT={$ARGUMENT}"
+
+        fun createRoute(tierId: Int?): String {
+            return "$ROUTE?$ARGUMENT=$tierId"
+        }
+    }
+
+    object Favorites {
+        const val ROUTE = "favorites"
+    }
+
+    object Search {
+        const val ROUTE = "search"
+    }
 }
