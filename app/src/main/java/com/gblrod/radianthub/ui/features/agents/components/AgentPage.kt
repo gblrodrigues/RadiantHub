@@ -60,7 +60,9 @@ fun AgentPage(
                 agent = agent,
                 onViewSkills = { onViewSkills(agent) },
                 onFavoriteClick = { agentsViewModel.toggleFavorite(agent) },
-                isFavorite = isFavorite
+                isFavorite = isFavorite,
+                index = currentPage,
+                total = pageCount
             )
 
             PagerIndicator(

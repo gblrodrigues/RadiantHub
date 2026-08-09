@@ -90,9 +90,7 @@ fun CardsScreen(
                     CardItem(
                         card = card,
                         onFavoriteClick = { cardsViewModel.toggleFavorite(card) },
-                        modifier = Modifier.animateItem(),
                         isFavorite = isFavorite,
-                        onClick = {},
                         isHighlighted = card.uuid == highlightedUuid
                     )
                 }

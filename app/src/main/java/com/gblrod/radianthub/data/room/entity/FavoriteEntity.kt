@@ -11,5 +11,6 @@ data class FavoriteEntity(
     val name: String,
     val imageUrl: String?,
     val type: FavoriteType,
-    val index: Int
+    val index: Int,
+    val background: String?
 )

@@ -14,7 +14,8 @@ interface FavoriteRepository {
         name: String,
         imageUrl: String?,
         type: FavoriteType,
-        index: Int
+        index: Int,
+        background: String? = null
     )
 
     suspend fun removeFavorite(uuid: String)

@@ -111,7 +111,8 @@ class FavoritesViewModel(
                 name = favorite.name,
                 imageUrl = favorite.imageUrl,
                 type = favorite.type,
-                index = favorite.index
+                index = favorite.index,
+                background = favorite.background
             )
         }
     }

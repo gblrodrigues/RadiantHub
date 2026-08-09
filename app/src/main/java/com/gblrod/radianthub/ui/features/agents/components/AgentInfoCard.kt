@@ -26,7 +26,9 @@ fun AgentInfoCard(
     onViewSkills: () -> Unit,
     isFavorite: Boolean,
     onFavoriteClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    index: Int,
+    total: Int
 ) {
     Card(
         modifier = modifier
@@ -71,7 +73,9 @@ fun AgentInfoCard(
             Spacer(modifier = Modifier.height(12.dp))
 
             AgentActions(
-                onViewSkills = onViewSkills
+                onViewSkills = onViewSkills,
+                index = index,
+                total = total
             )
         }
     }

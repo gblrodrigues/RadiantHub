@@ -2,7 +2,6 @@ package com.gblrod.radianthub.ui.features.cards.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -31,7 +30,6 @@ import com.gblrod.radianthub.ui.theme.PurpleActions
 fun CardItem(
     card: Card,
     modifier: Modifier = Modifier,
-    onClick: () -> Unit,
     isFavorite: Boolean? = null,
     onFavoriteClick: (() -> Unit)? = null,
     isHighlighted: Boolean = false
@@ -39,7 +37,6 @@ fun CardItem(
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable { onClick() }
             .border(
                 width = if (isHighlighted) 3.dp else 0.dp,
                 brush = Brush.verticalGradient(
@@ -55,7 +52,7 @@ fun CardItem(
     ) {
         Box {
             AsyncImage(
-                model = card.icon,
+                model = card.largeArt,
                 contentDescription = card.name,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
