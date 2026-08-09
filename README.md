@@ -1,8 +1,10 @@
 # RadiantHub
 
-RadiantHub is an Android application developed in Kotlin with Jetpack Compose, designed to explore agents, abilities, maps, and other content from Valorant.
+RadiantHub is an Android application developed in Kotlin with Jetpack Compose, designed to explore agents, abilities, 
+maps, and other content from Valorant.
 
-I built this project to practice API integration, local persistence, state management, and modern Android UI development while exploring a more immersive visual experience.
+I built this project to practice API integration, local persistence, state management, and modern Android UI 
+development while exploring a more immersive visual experience.
 
 - [Technologies](#technologies-used)  
 - [Features](#features)  
@@ -40,7 +42,8 @@ I built this project to practice API integration, local persistence, state manag
 * Themed banners for each section
 
 ### Agents
-* Browse playable Valorant agents  
+* Browse playable Valorant agents
+* Carousel position indicator
 * Immersive fullscreen agent presentation:
   * Blurred cinematic background  
   * Centered agent artwork  
@@ -58,6 +61,7 @@ I built this project to practice API integration, local persistence, state manag
 
 ### Maps
 * Browse all Valorant maps
+* Carousel position indicator
 * Fullscreen tactical map visualization
 * Detailed map information
   * Coordinates
@@ -81,12 +85,14 @@ I built this project to practice API integration, local persistence, state manag
 ### Favorites
 * Filtering by All, Agents and Cards categories
 * Persistent local favorites system for agents and player cards
+* Agent favorites with immersive background and portrait presentation
+* Card favorites using dedicated wide artwork
 * Undo support when removing favorites
 * Favorite restoration to original position
 * Dynamic favorite toggling directly from agent pages
 
 ### Search
-* Global search across agents, maps and player cards and competitive tiers
+* Global search across agents, maps, player cards, and competitive tiers
 * Real time filtering while typing
 * Automatic navigation from search results
 * Automatic scrolling and visual highlighting for searched player cards and competitive tiers
@@ -112,6 +118,9 @@ I built this project to practice API integration, local persistence, state manag
 
 ### General
 * Handling of loading and error states with retry option
+* Network connectivity monitoring
+* Offline and connection-restored feedback
+* Automatic retry of failed requests when connectivity is restored
 * Public API integration with Valorant API
 * Practicing application localization and internationalization (i18n)
 * Dynamic UI rendering using Compose State
@@ -121,33 +130,33 @@ I built this project to practice API integration, local persistence, state manag
 
 ## Preview
 ### Home Screen
-<img src="https://github.com/user-attachments/assets/ac2d8c5b-8d04-4122-8962-d95b6c0d5d52" width="250"/>
+<img src="https://github.com/user-attachments/assets/b54abedb-2cda-4ddd-ad97-30e49bc9e294" width="250"/>
 
 ### Agents Screen and Agent Abilities
-<img src="https://github.com/user-attachments/assets/566ddade-80b6-4977-aa6d-4a16aacf48c8" width="250"/>
-<img src="https://github.com/user-attachments/assets/d841cfac-046f-4fc8-a82f-d0f03451bc39" width="250"/>
+<img src="https://github.com/user-attachments/assets/9dbd353f-a3f5-473b-a196-a3a94df3b96f" width="250"/>
+<img src="https://github.com/user-attachments/assets/fb1110d2-78cd-4614-89cd-3bb92411edd6" width="250"/>
 
 ### Maps Screen
-<img src="https://github.com/user-attachments/assets/b82f84c0-95e1-40f9-9524-e8610577eb74" width="250"/>
-<img src="https://github.com/user-attachments/assets/33b7fa4d-d6f7-418e-a54e-0980621975bf" width="250"/>
+<img src="https://github.com/user-attachments/assets/fb487f80-a93f-4776-9746-fc11c894aacc" width="250"/>
+<img src="https://github.com/user-attachments/assets/8c2b8946-62b2-48cc-a541-08f97843dd62" width="250"/>
 
 ### Cards Screen
-<img src="https://github.com/user-attachments/assets/824b38e5-80d4-4488-9450-f518978075fb" width="250"/>
+<img src="https://github.com/user-attachments/assets/9b3e04a1-6ab8-4005-a5bb-aa2d53bbb1ab" width="250"/>
 
 ### Tiers Screen
-<img src="https://github.com/user-attachments/assets/3ccef472-e6b7-46a6-b206-6434bb2f06ae" width="250"/>
+<img src="https://github.com/user-attachments/assets/badcac2a-f1b2-460e-9c15-25e155949921" width="250"/>
 
 ### Favorites Screen
-<img src="https://github.com/user-attachments/assets/e5d3a9a6-3c82-406e-837c-f75ac3255356" width="250"/>
-<img src="https://github.com/user-attachments/assets/2840d371-92bc-4bf9-9b12-a7be0f579c90" width="250"/>
-<img src="https://github.com/user-attachments/assets/399726f9-550e-4e4c-8fc4-7cc452896ac6" width="250"/>
+<img src="https://github.com/user-attachments/assets/d9b120ea-f4e9-4df6-84b1-418d43c83ff2" width="250"/>
+<img src="https://github.com/user-attachments/assets/7b06e834-7ba5-4fa0-8e33-220b59f43f85" width="250"/>
+<img src="https://github.com/user-attachments/assets/baffc45b-421f-4b84-beb3-a727a8cc88b7" width="250"/>
 
 ### Search 
-<img src="https://github.com/user-attachments/assets/c0af0f39-fce6-42b3-9b0a-15a4ac65af03" width="250"/>
-<img src="https://github.com/user-attachments/assets/0d43acfe-c500-4f09-9d76-94cf887c21ad" width="250"/>
+<img src="https://github.com/user-attachments/assets/59bf320d-1f92-425a-be23-0fd3fcf9977c" width="250"/>
+<img src="https://github.com/user-attachments/assets/3bc20a99-8021-4ffe-9961-0d12b5d300b7" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/56936187-aea7-4f68-b48c-dde0c62b02c9
+> https://github.com/user-attachments/assets/d8433347-0234-45c7-b8de-7e0b51cf92b4
 
 ## Technical Decisions
 
@@ -186,7 +195,9 @@ I used Coil to load remote images asynchronously, ensuring smooth rendering of a
 Material 3 was chosen to maintain a modern and consistent visual design while taking advantage of well-structured components.
 
 ### Screen Navigation (Navigation)
-To organize navigation between screens, I used Navigation Compose. This greatly simplifies route management and navigation flow.
+The application uses Navigation Compose with centralized route definitions for parameterized destinations.
+
+Navigation responsibilities are kept separate from screen specific logic, reducing coupling between screens, `ViewModels`, and the `NavigationGraph`.
 
 ## Project Goal
 
