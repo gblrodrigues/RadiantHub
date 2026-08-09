@@ -6,5 +6,7 @@ import com.gblrod.radianthub.domain.cards.model.Card
 fun CardsDto.toDomain() = Card(
     uuid = uuid,
     name = displayName,
-    icon = largeArt
+    largeArt = largeArt,
+    wideArt = wideArt,
+    smallArt = smallArt
 )

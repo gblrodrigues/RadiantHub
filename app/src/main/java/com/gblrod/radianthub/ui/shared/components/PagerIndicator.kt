@@ -64,7 +64,7 @@ private fun Dot(
     )
 
     val color by animateColorAsState(
-        targetValue = if (selected) RetryActions else MaterialTheme.colorScheme.outline,
+        targetValue = if (selected) RetryActions else MaterialTheme.colorScheme.outlineVariant,
         label = "DotColor"
     )
 

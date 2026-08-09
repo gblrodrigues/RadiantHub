@@ -8,5 +8,6 @@ fun FavoriteEntity.toUiModel() = FavoriteUiModel(
     name = name,
     imageUrl = imageUrl,
     type = type,
-    index = index
+    index = index,
+    background = background
 )

@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.gblrod.radianthub.domain.maps.model.Maps
+import com.gblrod.radianthub.ui.shared.components.IndexBadge
 import com.gblrod.radianthub.ui.shared.components.PagerIndicator
 import com.gblrod.radianthub.ui.shared.components.SectionHeader
 
@@ -53,14 +54,24 @@ fun MapPage(
             Card(
                 shape = RoundedCornerShape(16.dp)
             ) {
-                AsyncImage(
-                    model = maps.splash,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(220.dp)
-                )
+                Box {
+                    AsyncImage(
+                        model = maps.splash,
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(220.dp)
+                    )
+
+                    IndexBadge(
+                        index = currentPage,
+                        total = pageCount,
+                        modifier = Modifier
+                            .align(Alignment.BottomEnd)
+                            .padding(12.dp)
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(16.dp))

@@ -29,7 +29,8 @@ class FavoriteRepositoryImpl(
         name: String,
         imageUrl: String?,
         type: FavoriteType,
-        index: Int
+        index: Int,
+        background: String?
     ) {
         dao.insertFavorite(
             FavoriteEntity(
@@ -37,7 +38,8 @@ class FavoriteRepositoryImpl(
                 name = name,
                 imageUrl = imageUrl,
                 type = type,
-                index = index
+                index = index,
+                background = background
             )
         )
     }

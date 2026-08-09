@@ -3,5 +3,7 @@ package com.gblrod.radianthub.domain.cards.model
 data class Card(
     val uuid: String,
     val name: String,
-    val icon: String?
+    val largeArt: String?,
+    val wideArt: String?,
+    val smallArt: String?
 )
