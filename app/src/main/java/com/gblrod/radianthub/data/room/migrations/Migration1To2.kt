@@ -4,9 +4,9 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 val MIGRATION_1_2 = object : Migration(1, 2) {
-        override fun migrate(db: SupportSQLiteDatabase) {
-            db.execSQL(
-                """
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL(
+            """
                 CREATE TABLE favorites_new (
                     uuid TEXT NOT NULL,
                     name TEXT NOT NULL,
@@ -16,10 +16,10 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
                     PRIMARY KEY(uuid)
                 )
                 """.trimIndent()
-            )
+        )
 
-            db.execSQL(
-                """
+        db.execSQL(
+            """
                 INSERT INTO favorites_new (
                     uuid,
                     name,
@@ -35,19 +35,19 @@ val MIGRATION_1_2 = object : Migration(1, 2) {
                     0
                 FROM favorites
                 """.trimIndent()
-            )
+        )
 
-            db.execSQL(
-                """
+        db.execSQL(
+            """
                 DROP TABLE favorites
                 """.trimIndent()
-            )
+        )
 
-            db.execSQL(
-                """
+        db.execSQL(
+            """
                 ALTER TABLE favorites_new
                 RENAME TO favorites
                 """.trimIndent()
-            )
-        }
+        )
     }
+}

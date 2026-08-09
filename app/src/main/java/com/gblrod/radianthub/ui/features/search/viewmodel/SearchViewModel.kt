@@ -104,7 +104,7 @@ class SearchViewModel(
                     SearchItem(
                         uuid = cards.uuid,
                         title = cards.name,
-                        imageUrl = cards.icon.orEmpty(),
+                        imageUrl = cards.smallArt.orEmpty(),
                         type = SearchType.CARD
                     )
                 }

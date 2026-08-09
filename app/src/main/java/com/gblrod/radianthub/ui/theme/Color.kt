@@ -10,28 +10,32 @@ val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
+// Primary
+val Primary = Color(0xFF61C4B5)
+val PrimaryDark = Color(0xFF438F86)
+
 // Background
-val BackgroundOne = Color(0xFF18BB62)
-val BackgroundTwo = Color(0xFF17A177)
-val BackgroundThree = Color(0xFF3BC0A4)
+val BackgroundOne = Color(0xFF516D7C)
+val BackgroundTwo = Color(0xFF546E7A)
+val BackgroundThree = Color(0xFF61A19C)
 
 // Network Status
 val OfflineBackground = Color(0xFF8D8B8B)
-val OnlineBackground = Color(0xFF37983E)
+val OnlineBackground = Color(0xFF5EAF78)
 
 // Navigation
-val NavigationSelected = Color(0xFF00FFAC)
+val NavigationSelected = Color(0xFF4DE1C8)
 
 // Buttons
-val ButtonRetry = Color(0xFF0CA200)
-val ViewAbilities = Color(0xFF0CAAC2)
-val ButtonContainerDialog = Color(0xFF2FE8BA)
+val ButtonRetry = Primary
+val ViewAbilities = Color(0xFF5FA7C7)
+val ButtonContainerDialog = Primary
 val ButtonHome = Color(0xFF5FA7C7)
 
 // Actions
-val RetryActions = Color(0xFF00FF55)
+val RetryActions = Color(0xFFB8F1E5)
 val YellowActions = Color(0xFFEFEA02)
 val PinkActions = Color(0xFFE74A8E)
-val PurpleActions = Color(0xFF713DEE)
+val PurpleActions = Color(0xFF7962B7)
 val GreenActions = Color(0xFF109621)
-val BlueActions = Color(0xFF0F97FF)
+val BlueActions = Color(0xFF619CC4)

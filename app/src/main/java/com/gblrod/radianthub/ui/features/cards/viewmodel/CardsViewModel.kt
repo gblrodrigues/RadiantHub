@@ -104,7 +104,7 @@ class CardsViewModel(
                 favoriteRepository.toggleFavorite(
                     uuid = card.uuid,
                     name = card.name,
-                    imageUrl = card.icon,
+                    imageUrl = card.wideArt,
                     type = FavoriteType.CARD,
                     index = favorites.value.size
                 )

@@ -28,7 +28,6 @@ class AgentsViewModel(
     val agentsState: StateFlow<AgentsUiState> = _agentsState
 
     private val _initialAgentUuid = MutableStateFlow<String?>(null)
-    val initialAgentUuid: StateFlow<String?> = _initialAgentUuid
 
     val favorites =
         favoriteRepository.observeFavorites().stateIn(
@@ -111,7 +110,8 @@ class AgentsViewModel(
                     name = agent.name,
                     imageUrl = agent.portrait,
                     type = FavoriteType.AGENT,
-                    index = favorites.value.size
+                    index = favorites.value.size,
+                    background = agent.background
                 )
             }
         }
@@ -125,10 +125,6 @@ class AgentsViewModel(
         } else {
             null
         }
-    }
-
-    fun selectAgent(uuid: String) {
-        _initialAgentUuid.value = uuid
     }
 
     fun clearSelectedAgent() {
