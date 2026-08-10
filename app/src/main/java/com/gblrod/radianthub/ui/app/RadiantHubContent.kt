@@ -48,7 +48,7 @@ fun RadiantHubContent() {
             drawerContent = {
                 ModalDrawerSheet {
                     DrawerContent(
-                        navController = navHostController,
+                        navHostController = navHostController,
                         onItemClick = {
                             scope.launch {
                                 drawerState.close()
