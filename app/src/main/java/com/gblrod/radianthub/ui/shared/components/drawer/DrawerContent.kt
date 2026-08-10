@@ -41,7 +41,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import coil.compose.AsyncImage
 import com.gblrod.radianthub.R
@@ -49,6 +49,8 @@ import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.core.manager.LanguageManager
 import com.gblrod.radianthub.core.utils.orDeviceDefault
 import com.gblrod.radianthub.navigation.Routes
+import com.gblrod.radianthub.navigation.bottomBarRoutes
+import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
 import com.gblrod.radianthub.ui.language.viewmodel.LanguageViewModel
 import com.gblrod.radianthub.ui.shared.model.DrawerPreferenceItem
 import com.gblrod.radianthub.ui.shared.model.NavigationItem
@@ -59,12 +61,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun DrawerContent(
-    navController: NavController,
+    navHostController: NavHostController,
     onItemClick: () -> Unit,
     themeViewModel: ThemeViewModel = koinViewModel(),
     languageViewModel: LanguageViewModel = koinViewModel()
 ) {
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+    val currentRoute = navHostController.currentBackStackEntryAsState().value?.destination?.route
     var showThemeDialog by remember { mutableStateOf(false) }
     var showLanguageDialog by remember { mutableStateOf(false) }
     val scope = rememberCoroutineScope()
@@ -85,12 +87,12 @@ fun DrawerContent(
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_agents),
             icon = Icons.Default.Person,
-            route = Routes.Agents.ROUTE
+            route = Routes.Agents.ROUTE_WITH_ARGUMENT
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_maps),
             icon = Icons.Default.Map,
-            route = Routes.Maps.ROUTE
+            route = Routes.Maps.ROUTE_WITH_ARGUMENT
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_cards),
@@ -173,8 +175,10 @@ fun DrawerContent(
                 selected = currentRoute == item.route,
                 onClick = {
                     onItemClick()
-                    navController.navigate(item.route) {
-                        launchSingleTop = true
+                    if (item.route in bottomBarRoutes) {
+                        navHostController.navigateToBottomBar(item.route)
+                    } else {
+                        navHostController.navigate(item.route)
                     }
                 },
                 shape = RoundedCornerShape(16.dp)

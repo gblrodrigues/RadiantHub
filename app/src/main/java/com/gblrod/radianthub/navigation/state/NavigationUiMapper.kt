@@ -2,19 +2,12 @@ package com.gblrod.radianthub.navigation.state
 
 import com.gblrod.radianthub.R
 import com.gblrod.radianthub.navigation.Routes
+import com.gblrod.radianthub.navigation.bottomBarRoutes
 
 fun mapRouteToNavigationUiState(
     route: String?,
 ): NavigationUiState {
-
-    val bottomBarScreens = setOf(
-        Routes.Home.ROUTE,
-        Routes.Agents.ROUTE,
-        Routes.Maps.ROUTE,
-        Routes.Favorites.ROUTE
-    )
-
-    val isBottomBarScreen = route in bottomBarScreens
+    val isBottomBarScreen = route in bottomBarRoutes
 
     if (route == Routes.Search.ROUTE) {
         return NavigationUiState(

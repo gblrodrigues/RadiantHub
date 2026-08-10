@@ -22,11 +22,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.gblrod.radianthub.R
 import com.gblrod.radianthub.navigation.Routes
+import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
 import com.gblrod.radianthub.ui.shared.model.NavigationItem
 import com.gblrod.radianthub.ui.theme.NavigationSelected
 
@@ -46,12 +46,12 @@ fun RadiantHubBottomBar(
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_agents_title),
             icon = Icons.Default.Person,
-            route = Routes.Agents.ROUTE
+            route = Routes.Agents.ROUTE_WITH_ARGUMENT
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_maps_title),
             icon = Icons.Default.Map,
-            route = Routes.Maps.ROUTE
+            route = Routes.Maps.ROUTE_WITH_ARGUMENT
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_favorites_title),
@@ -87,13 +87,7 @@ fun RadiantHubBottomBar(
                     )
                 },
                 onClick = {
-                    navHostController.navigate(item.route) {
-                        launchSingleTop = true
-                        restoreState = true
-                        popUpTo(navHostController.graph.findStartDestination().id) {
-                            saveState = true
-                        }
-                    }
+                    navHostController.navigateToBottomBar(route = item.route)
                 },
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = NavigationSelected,
