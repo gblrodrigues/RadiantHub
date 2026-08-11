@@ -34,6 +34,15 @@ fun AgentsScreen(
     var selectedAgent by remember { mutableStateOf<Agent?>(null) }
     val sheetState = rememberModalBottomSheetState()
 
+    val agentCount = when (val state = uiState) {
+        is AgentsUiState.Success -> state.agents.size
+        else -> 0
+    }
+
+    val pagerState = rememberPagerState(
+        pageCount = { agentCount }
+    )
+
     when (val state = uiState) {
         is AgentsUiState.Loading -> {
             LoadingScreen()
@@ -53,10 +62,6 @@ fun AgentsScreen(
         }
 
         is AgentsUiState.Success -> {
-            val pagerState = rememberPagerState(
-                pageCount = { state.agents.size }
-            )
-
             LaunchedEffect(initialAgentUuid) {
                 initialAgentUuid?.let { uuid ->
                     val index = state.agents.indexOfFirst {
