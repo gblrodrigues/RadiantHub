@@ -1,17 +1,19 @@
 package com.gblrod.radianthub.core.localization
 
-import android.content.Context
 import com.gblrod.radianthub.core.extensions.toApiLanguage
-import com.gblrod.radianthub.core.manager.LanguageManager
 import com.gblrod.radianthub.core.utils.orDeviceDefault
+import com.gblrod.radianthub.data.preferences.repository.UserPreferencesRepository
+import kotlinx.coroutines.flow.first
 
 class ApiLanguageProvider(
-    private val context: Context
+    private val repository: UserPreferencesRepository
 ) {
-    fun getLanguage(): String {
-        val language = LanguageManager
-            .getStoredLanguage(context)
+    suspend fun getLanguage(): String {
+        val language = repository.userPreferences
+            .first()
+            .language
             .orDeviceDefault()
+
         return language.toApiLanguage()
     }
 }
