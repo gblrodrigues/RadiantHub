@@ -133,12 +133,12 @@ development while exploring a more immersive visual experience.
 <img src="https://github.com/user-attachments/assets/b54abedb-2cda-4ddd-ad97-30e49bc9e294" width="250"/>
 
 ### Agents Screen and Agent Abilities
-<img src="https://github.com/user-attachments/assets/9dbd353f-a3f5-473b-a196-a3a94df3b96f" width="250"/>
-<img src="https://github.com/user-attachments/assets/fb1110d2-78cd-4614-89cd-3bb92411edd6" width="250"/>
+<img src="https://github.com/user-attachments/assets/aa77bf66-3587-4360-8549-b820595909f2" width="250"/>
+<img src="https://github.com/user-attachments/assets/440b0c49-d6f1-42ed-853f-9c936c2098f1" width="250"/>
 
 ### Maps Screen
-<img src="https://github.com/user-attachments/assets/fb487f80-a93f-4776-9746-fc11c894aacc" width="250"/>
-<img src="https://github.com/user-attachments/assets/8c2b8946-62b2-48cc-a541-08f97843dd62" width="250"/>
+<img src="https://github.com/user-attachments/assets/0f328026-7a14-4304-9da4-b3d5411e6209" width="250"/>
+<img src="https://github.com/user-attachments/assets/a6c900e4-d615-4665-8de3-35ffb31a548e" width="250"/>
 
 ### Cards Screen
 <img src="https://github.com/user-attachments/assets/9b3e04a1-6ab8-4005-a5bb-aa2d53bbb1ab" width="250"/>
@@ -152,11 +152,11 @@ development while exploring a more immersive visual experience.
 <img src="https://github.com/user-attachments/assets/baffc45b-421f-4b84-beb3-a727a8cc88b7" width="250"/>
 
 ### Search 
-<img src="https://github.com/user-attachments/assets/59bf320d-1f92-425a-be23-0fd3fcf9977c" width="250"/>
-<img src="https://github.com/user-attachments/assets/3bc20a99-8021-4ffe-9961-0d12b5d300b7" width="250"/>
+<img src="https://github.com/user-attachments/assets/f5995847-dcda-4bb7-9031-42b61625ec3f" width="250"/>
+<img src="https://github.com/user-attachments/assets/5cdadfb6-3a6a-4e51-a60c-96feac40fa49" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/d8433347-0234-45c7-b8de-7e0b51cf92b4
+> https://github.com/user-attachments/assets/548d5ac0-4828-40c3-80ae-1939475ca765
 
 ## Technical Decisions
 

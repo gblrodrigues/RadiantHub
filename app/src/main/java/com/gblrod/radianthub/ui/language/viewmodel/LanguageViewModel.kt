@@ -7,7 +7,6 @@ import com.gblrod.radianthub.ui.language.LanguageOptions
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 class LanguageViewModel(
     private val repository: UserPreferencesRepository
@@ -20,9 +19,7 @@ class LanguageViewModel(
             initialValue = null
         )
 
-    fun setLanguage(language: LanguageOptions) {
-        viewModelScope.launch {
-            repository.saveLanguage(language)
-        }
+    suspend fun setLanguage(language: LanguageOptions) {
+        repository.saveLanguage(language)
     }
 }

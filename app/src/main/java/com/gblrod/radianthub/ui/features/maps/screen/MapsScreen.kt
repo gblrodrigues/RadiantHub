@@ -23,6 +23,16 @@ fun MapsScreen(
 ) {
     val uiState by mapsViewModel.mapsState.collectAsState()
 
+    val mapCount = when (val state = uiState) {
+        is MapsUiState.Success -> state.maps.size
+        else -> 0
+    }
+
+    val pagerState = rememberPagerState(
+        pageCount = { mapCount }
+    )
+
+
     when(val state = uiState) {
         is MapsUiState.Loading -> {
             LoadingScreen()
@@ -42,10 +52,6 @@ fun MapsScreen(
         }
 
         is MapsUiState.Success -> {
-            val pagerState = rememberPagerState(
-                pageCount = { state.maps.size }
-            )
-
             LaunchedEffect(initialMapUuid) {
                 initialMapUuid?.let { uuid ->
                     val index = state.maps.indexOfFirst {

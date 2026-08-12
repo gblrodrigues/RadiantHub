@@ -1,7 +1,5 @@
 package com.gblrod.radianthub.ui.shared.components.drawer
 
-import android.app.Activity
-import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -38,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -46,7 +43,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import coil.compose.AsyncImage
 import com.gblrod.radianthub.R
 import com.gblrod.radianthub.core.events.AppEvents
-import com.gblrod.radianthub.core.manager.LanguageManager
 import com.gblrod.radianthub.core.utils.orDeviceDefault
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.bottomBarRoutes
@@ -75,8 +71,6 @@ fun DrawerContent(
     val language = languageViewModel.language.collectAsState().value
 
     val effectiveLanguage = language.orDeviceDefault()
-    val activity = LocalActivity.current as Activity
-    val context = LocalContext.current
 
     val items = listOf(
         NavigationItem(
@@ -215,18 +209,10 @@ fun DrawerContent(
             LanguageMenu(
                 selectedLanguage = effectiveLanguage,
                 onLanguageSelected = { language ->
-                    languageViewModel.setLanguage(language)
-
-                    LanguageManager.persistLanguage(
-                        context = context,
-                        language = language
-                    )
-
                     scope.launch {
+                        languageViewModel.setLanguage(language)
                         AppEvents.languageChanged.emit(Unit)
                     }
-
-                    activity.recreate()
                 },
                 onDismiss = { showLanguageDialog = false }
             )

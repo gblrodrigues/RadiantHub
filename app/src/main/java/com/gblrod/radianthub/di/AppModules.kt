@@ -97,7 +97,7 @@ val appModule = module {
     // Language
     single {
         ApiLanguageProvider(
-            context = androidContext()
+            repository = get()
         )
     }
 
