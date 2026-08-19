@@ -108,12 +108,18 @@
     </string>
 
     <string name="search_query_empty">
-        Search for Agents, Maps, and/or Cards\n
-        by name to quickly locate them
+        Search for Agents, Maps, Cards, or Tiers\n
+        by name
     </string>
 
     <string name="search_result_empty">
         No results found "%1$s"\n
         Try another search term
     </string>
+
+    <!-- SearchType -->
+    <string name="search_type_agent">Agent</string>
+    <string name="search_type_map">Map</string>
+    <string name="search_type_card">Card</string>
+    <string name="search_type_tier">Tier</string>
 </resources>

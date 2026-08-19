@@ -5,7 +5,7 @@
     <string name="topbar_home_title">Inicio</string>
     <string name="topbar_agents_title">Agentes</string>
     <string name="topbar_maps_title">Mapas</string>
-    <string name="topbar_cards_title">Cards</string>
+    <string name="topbar_cards_title">Tarjetas</string>
     <string name="topbar_tiers_title">Rangos</string>
     <string name="topbar_favorites_title">Favoritos</string>
     <string name="topbar_principal_title">Radiant Hub</string>
@@ -22,7 +22,7 @@
     <string name="drawer_item_home">Inicio</string>
     <string name="drawer_item_agents">Agentes</string>
     <string name="drawer_item_maps">Mapas</string>
-    <string name="drawer_item_cards">Cards</string>
+    <string name="drawer_item_cards">Tarjetas</string>
     <string name="drawer_item_tiers">Rangos</string>
     <string name="drawer_item_favorites">Favoritos</string>
     <string name="drawer_item_theme">Tema</string>
@@ -42,11 +42,11 @@
     <!-- HomeScreen -->
     <string name="home_explore_item">Explorar</string>
     <string name="home_favorites_title">Favoritos</string>
-    <string name="home_favorites_subtitle">Ver tus agentes y cards guardados</string>
+    <string name="home_favorites_subtitle">Ver tus agentes y tarjetas guardados</string>
     <string name="home_agents_title">Agentes</string>
     <string name="home_agents_subtitle">Explora todos los agentes jugables de Valorant</string>
-    <string name="home_cards_title">Cards</string>
-    <string name="home_cards_subtitle">Descubre las cards de jugador de Valorant</string>
+    <string name="home_cards_title">Tarjetas</string>
+    <string name="home_cards_subtitle">Descubre las tarjetas de jugador de Valorant</string>
     <string name="home_tiers_title">Rangos</string>
     <string name="home_tiers_subtitle">Aprende sobre los rangos de Valorant</string>
     <string name="home_maps_title">Mapas</string>
@@ -65,7 +65,7 @@
     <string name="button_view_skills">Ver habilidades</string>
     <string name="button_favorite_filter_all">Todos (%1$d)</string>
     <string name="button_favorite_filter_agents">Agentes (%1$d)</string>
-    <string name="button_favorite_filter_cards">Cards (%1$d)</string>
+    <string name="button_favorite_filter_cards">Tarjetas (%1$d)</string>
     <string name="button_view_callouts">Ver callouts</string>
 
     <!-- UiState -->
@@ -100,20 +100,26 @@
 
     <!-- Types name -->
     <string name="type_name_agents_title">Agentes</string>
-    <string name="type_name_cards_title">Cards</string>
+    <string name="type_name_cards_title">Tarjetas</string>
 
     <!-- SearchBar -->
     <string name="search_placeholder" tools:ignore="TypographyEllipsis">
-        Buscar agentes, Cards...
+        Buscar agentes, tarjetas...
     </string>
 
     <string name="search_query_empty">
-        Busca Agentes, Mapas y/o Cards\n
-        por nombre para encontrarlos rápidamente
+        Busca Agentes, Mapas, Tarjetas o Rangos\n
+        por nombre
     </string>
 
     <string name="search_result_empty">
         No se encontraron resultados para "%1$s"\n
         Prueba con otro término de búsqueda
     </string>
+
+    <!-- SearchType -->
+    <string name="search_type_agent">Agente</string>
+    <string name="search_type_map">Mapa</string>
+    <string name="search_type_card">Tarjeta</string>
+    <string name="search_type_tier">Rango</string>
 </resources>
