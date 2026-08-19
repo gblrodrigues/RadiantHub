@@ -104,16 +104,22 @@
 
     <!-- SearchBar -->
     <string name="search_placeholder" tools:ignore="TypographyEllipsis">
-        Pesquisar agentes, Cards...
+        Buscar agentes, cards...
     </string>
 
     <string name="search_query_empty">
-        Pesquise por Agentes, Mapas e/ou Cards\n
-        pelo nome para localizá-los rapidamente
+        Busque Agentes, Mapas, Cards ou Elos\n
+        pelo nome
     </string>
 
     <string name="search_result_empty">
         Nenhum resultado encontrado para "%1$s"\n
         Tente outro termo de pesquisa
     </string>
+
+    <!-- SearchType -->
+    <string name="search_type_agent">Agente</string>
+    <string name="search_type_map">Mapa</string>
+    <string name="search_type_card">Card</string>
+    <string name="search_type_tier">Elo</string>
 </resources>

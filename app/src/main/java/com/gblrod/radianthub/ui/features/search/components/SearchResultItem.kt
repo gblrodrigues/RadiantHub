@@ -2,10 +2,9 @@ package com.gblrod.radianthub.ui.features.search.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
@@ -19,11 +18,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.gblrod.radianthub.R
 import com.gblrod.radianthub.ui.features.search.model.SearchItem
+import com.gblrod.radianthub.ui.features.search.model.SearchType
 
 @Composable
 fun SearchResultItem(
@@ -33,26 +34,26 @@ fun SearchResultItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(70.dp)
-            .padding(4.dp),
+            .clickable { onClick() },
+        shape = RoundedCornerShape(16.dp)
     ) {
         ListItem(
             leadingContent = {
                 AsyncImage(
                     model = item.imageUrl,
-                    contentDescription = null,
+                    contentDescription = item.title,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(40.dp)
                         .clip(shape = CircleShape),
-                    fallback = painterResource(id = R.drawable.ic_agent_placeholder)
+                    fallback = painterResource(id = R.drawable.ic_agent_placeholder),
+                    error = painterResource(id = R.drawable.ic_agent_placeholder)
                 )
             },
             trailingContent = {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    contentDescription = null,
-                    modifier = Modifier.clickable { onClick() }
+                    contentDescription = null
                 )
             },
             headlineContent = {
@@ -64,10 +65,14 @@ fun SearchResultItem(
             },
             supportingContent = {
                 Text(
-                    text = item.type.name
+                    text = when(item.type) {
+                        SearchType.AGENT -> stringResource(id = R.string.search_type_agent)
+                        SearchType.MAP -> stringResource(id = R.string.search_type_map)
+                        SearchType.TIER -> stringResource(id = R.string.search_type_tier)
+                        SearchType.CARD -> stringResource(id = R.string.search_type_card)
+                    }
                 )
             },
-            modifier = Modifier.clickable { onClick() },
             colors = ListItemDefaults.colors(
                 containerColor = Color.Transparent
             )

@@ -12,6 +12,8 @@ import com.gblrod.radianthub.ui.features.search.model.SearchItem
 import com.gblrod.radianthub.ui.features.search.model.SearchType
 import com.gblrod.radianthub.ui.features.search.state.SearchUiState
 import com.gblrod.radianthub.ui.shared.utils.safeApiCall
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -23,12 +25,9 @@ class SearchViewModel(
     private val tiersRepository: TiersRepository,
     private val retryManager: RetryManager
 ) : ViewModel() {
+
     private val _searchState =
-        MutableStateFlow<SearchUiState>(SearchUiState.Success(
-                query = "",
-                results = emptyList()
-            )
-        )
+        MutableStateFlow<SearchUiState>(SearchUiState.Loading())
     val searchState: StateFlow<SearchUiState> = _searchState
 
     private var allItems: List<SearchItem> = emptyList()
@@ -49,26 +48,42 @@ class SearchViewModel(
     }
 
     fun updateQuery(query: String) {
-        val filteredItems = allItems.filter {
-            it.title.contains(
-                other = query,
-                ignoreCase = true
-            )
-        }
+        when (val state = _searchState.value) {
+            is SearchUiState.Loading -> _searchState.value = state.copy(query = query)
+            is SearchUiState.Error -> _searchState.value = state.copy(query = query)
 
-        _searchState.value =
-            SearchUiState.Success(
-                query = query,
-                results = filteredItems
-            )
+            is SearchUiState.Success -> {
+                val filteredItems = allItems.filter { item ->
+                    item.title.contains(
+                        other = query,
+                        ignoreCase = true
+                    )
+                }
+
+                _searchState.value =
+                    state.copy(
+                        query = query,
+                        results = if (query.isBlank()) emptyList() else filteredItems
+                    )
+            }
+        }
     }
 
     private fun loadItems() {
         viewModelScope.launch {
+            val currentQuery = when (val state = _searchState.value) {
+                is SearchUiState.Loading -> state.query
+                is SearchUiState.Success -> state.query
+                is SearchUiState.Error -> state.query
+            }
+
+            _searchState.value = SearchUiState.Loading(query = currentQuery)
+
             safeApiCall(
                 onHttpError = { code ->
                     _searchState.value =
                         SearchUiState.Error(
+                            query = currentQuery,
                             messageResId = R.string.ui_state_http_exception,
                             code = code
                         )
@@ -76,75 +91,113 @@ class SearchViewModel(
                 onIoError = {
                     _searchState.value =
                         SearchUiState.Error(
+                            query = currentQuery,
                             messageResId = R.string.ui_state_io_exception
                         )
                 },
                 onGenericError = {
                     _searchState.value =
                         SearchUiState.Error(
+                            query = currentQuery,
                             messageResId = R.string.ui_state_generic_error
                         )
                 }
             ) {
-                val agents = agentsRepository.getAgents()
-                val cards = cardsRepository.getCards()
-                val maps = mapsRepository.getMaps()
-                val tiers = tiersRepository.getTiers()
+                coroutineScope {
+                    val agentsDeferred = async {
+                        agentsRepository.getAgents()
+                    }
 
-               val agentsItems = agents.map { agent ->
-                    SearchItem(
-                        uuid = agent.uuid,
-                        title = agent.name,
-                        imageUrl = agent.icon.orEmpty(),
-                        type = SearchType.AGENT
-                    )
+                    val cardsDeferred = async {
+                        cardsRepository.getCards()
+                    }
+
+                    val mapsDeferred = async {
+                        mapsRepository.getMaps()
+                    }
+
+                    val tiersDeferred = async {
+                        tiersRepository.getTiers()
+                    }
+
+                    val agents = agentsDeferred.await()
+                    val cards = cardsDeferred.await()
+                    val maps = mapsDeferred.await()
+                    val tiers = tiersDeferred.await()
+
+                    val agentsItems = agents.map { agent ->
+                        SearchItem(
+                            uuid = agent.uuid,
+                            title = agent.name,
+                            imageUrl = agent.icon.orEmpty(),
+                            type = SearchType.AGENT
+                        )
+                    }
+
+                    val cardsItems = cards.map { card ->
+                        SearchItem(
+                            uuid = card.uuid,
+                            title = card.name,
+                            imageUrl = card.smallArt.orEmpty(),
+                            type = SearchType.CARD
+                        )
+                    }
+
+                    val mapsItems = maps.map { map ->
+                        SearchItem(
+                            uuid = map.uuid,
+                            title = map.name,
+                            imageUrl = map.icon.orEmpty(),
+                            type = SearchType.MAP
+                        )
+                    }
+
+                    val tiersItems = tiers.map { tier ->
+                        SearchItem(
+                            uuid = tier.tierName,
+                            title = tier.tierName,
+                            imageUrl = tier.icon.orEmpty(),
+                            type = SearchType.TIER,
+                            tierId = tier.tier
+                        )
+                    }
+
+                    allItems = agentsItems + mapsItems + cardsItems + tiersItems
+
+                    val filteredItems = allItems.filter { item ->
+                        item.title.contains(
+                            other = currentQuery,
+                            ignoreCase = true
+                        )
+                    }
+
+                    _searchState.value =
+                        SearchUiState.Success(
+                            query = currentQuery,
+                            results = if (currentQuery.isBlank()) emptyList() else filteredItems
+                        )
                 }
-
-                val cardsItems = cards.map { cards ->
-                    SearchItem(
-                        uuid = cards.uuid,
-                        title = cards.name,
-                        imageUrl = cards.smallArt.orEmpty(),
-                        type = SearchType.CARD
-                    )
-                }
-
-                val mapsItems = maps.map { maps ->
-                    SearchItem(
-                        uuid = maps.uuid,
-                        title = maps.name,
-                        imageUrl = maps.icon.orEmpty(),
-                        type = SearchType.MAP
-                    )
-                }
-
-                val tiersItems = tiers.map { tiers ->
-                    SearchItem(
-                        uuid = tiers.tierName,
-                        title = tiers.tierName,
-                        imageUrl = tiers.icon.orEmpty(),
-                        type = SearchType.TIER,
-                        tierId = tiers.tier
-                    )
-                }
-
-                allItems = agentsItems + cardsItems + mapsItems + tiersItems
-
-                _searchState.value =
-                    SearchUiState.Success(
-                        query = "",
-                        results = emptyList()
-                    )
             }
         }
     }
 
     fun clearSearch() {
-        _searchState.value =
-            SearchUiState.Success(
-                query = "",
-                results = emptyList()
-            )
+        val state = _searchState.value
+
+        _searchState.value = when (state) {
+            is SearchUiState.Loading -> {
+                state.copy(query = "")
+            }
+
+            is SearchUiState.Success -> {
+                state.copy(
+                    query = "",
+                    results = emptyList()
+                )
+            }
+
+            is SearchUiState.Error -> state.copy(query = "")
+        }
     }
 
     fun retry() {

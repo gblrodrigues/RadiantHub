@@ -1,10 +1,15 @@
 package com.gblrod.radianthub.ui.features.search.screen
 
 import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -41,98 +46,127 @@ fun SearchScreen(
     val focus = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    when (val state = uiState) {
-        is SearchUiState.Loading -> {
-            LoadingScreen()
-        }
-
-        is SearchUiState.Error -> {
-            val message = if (state.code == null) {
-                stringResource(id = state.messageResId)
-            } else {
-                stringResource(id = state.messageResId, state.code)
-            }
-
-            ErrorMessage(
-                message = message,
-                onRetry = { searchViewModel.retry() }
-            )
-        }
-
-        is SearchUiState.Success -> {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .pointerInput(Unit) {
-                        detectTapGestures(
-                            onTap = {
-                                focus.clearFocus(force = true)
-                                keyboardController?.hide()
-                            }
-                        )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .imePadding()
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onTap = {
+                        focus.clearFocus(force = true)
+                        keyboardController?.hide()
                     }
-            ) {
-                SearchField(
-                    query = state.query,
-                    onQueryChange = { searchViewModel.updateQuery(it) },
-                    onBackClick = { navHostController.popBackStack() }
                 )
+            }
+    ) {
+        SearchField(
+            query = when (val state = uiState) {
+                is SearchUiState.Loading -> state.query
+                is SearchUiState.Error -> state.query
+                is SearchUiState.Success -> state.query
+            },
+            onQueryChange = { searchViewModel.updateQuery(it) },
+            onBackClick = { navHostController.popBackStack() }
+        )
 
-                when {
-                    state.query.isBlank() -> {
-                        SearchInitialContent()
-                    }
+        Spacer(modifier = Modifier.height(8.dp))
 
-                    state.results.isEmpty() -> {
-                        EmptySearchResult(query = state.query)
-                    }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 8.dp)
+        ) {
+            when (val state = uiState) {
+                is SearchUiState.Loading -> {
+                    LoadingScreen()
+                }
 
-                    else -> {
-                        Spacer(modifier = Modifier.height(8.dp))
-                        LazyColumn {
-                            items(state.results) { item ->
-                                SearchResultItem(
-                                    item = item,
-                                    onClick = {
-                                        when (item.type) {
-                                            SearchType.AGENT -> {
-                                                searchViewModel.clearSearch()
+                is SearchUiState.Error -> {
+                    val message = state.code?.let {
+                        stringResource(
+                            id = state.messageResId,
+                            it
+                        )
+                    } ?: stringResource(
+                        id = state.messageResId
+                    )
 
-                                                navHostController.navigateFromSearch(
-                                                    targetRoute = Routes.Agents.createRoute(item.uuid),
-                                                    targetBaseRoute = Routes.Agents.ROUTE
-                                                )
-                                            }
+                    ErrorMessage(
+                        message = message,
+                        onRetry = { searchViewModel.retry() }
+                    )
+                }
 
-                                            SearchType.MAP -> {
-                                                searchViewModel.clearSearch()
+                is SearchUiState.Success -> {
+                    when {
+                        state.query.isBlank() -> {
+                            SearchInitialContent()
+                        }
 
-                                                navHostController.navigateFromSearch(
-                                                    targetRoute = Routes.Maps.createRoute(item.uuid),
-                                                    targetBaseRoute = Routes.Maps.ROUTE
-                                                )
-                                            }
+                        state.results.isEmpty() -> {
+                            EmptySearchResult(
+                                query = state.query
+                            )
+                        }
 
-                                            SearchType.CARD -> {
-                                                searchViewModel.clearSearch()
+                        else -> {
+                            LazyColumn(
+                                modifier = Modifier.fillMaxSize(),
+                                contentPadding = PaddingValues(
+                                    top = 4.dp,
+                                    bottom = 16.dp
+                                ),
+                                verticalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                items(
+                                    items = state.results,
+                                    key = { it.uuid + it.type.name }
+                                ) { item ->
+                                    SearchResultItem(
+                                        item = item,
+                                        onClick = {
+                                            when (item.type) {
+                                                SearchType.AGENT -> {
+                                                    searchViewModel.clearSearch()
 
-                                                navHostController.navigateFromSearch(
-                                                    targetRoute = Routes.Cards.createRoute(item.uuid),
-                                                    targetBaseRoute = Routes.Cards.ROUTE
-                                                )
-                                            }
+                                                    navHostController.navigateFromSearch(
+                                                        targetRoute = Routes.Agents.createRoute(agentUuid = item.uuid),
+                                                        targetBaseRoute = Routes.Agents.ROUTE
+                                                    )
+                                                }
 
-                                            SearchType.TIER -> {
-                                                searchViewModel.clearSearch()
+                                                SearchType.MAP -> {
+                                                    searchViewModel.clearSearch()
 
-                                                navHostController.navigateFromSearch(
-                                                    targetRoute = Routes.Tiers.createRoute(item.tierId),
-                                                    targetBaseRoute = Routes.Tiers.ROUTE
-                                                )
+                                                    navHostController.navigateFromSearch(
+                                                        targetRoute = Routes.Maps.createRoute(mapUuid = item.uuid),
+                                                        targetBaseRoute = Routes.Maps.ROUTE
+                                                    )
+                                                }
+
+                                                SearchType.CARD -> {
+                                                    searchViewModel.clearSearch()
+
+                                                    navHostController.navigateFromSearch(
+                                                        targetRoute = Routes.Cards.createRoute(cardUuid = item.uuid),
+                                                        targetBaseRoute = Routes.Cards.ROUTE
+                                                    )
+                                                }
+
+                                                SearchType.TIER -> {
+                                                    item.tierId?.let { tierId ->
+                                                        searchViewModel.clearSearch()
+
+                                                        navHostController.navigateFromSearch(
+                                                            targetRoute = Routes.Tiers.createRoute(tierId = tierId),
+                                                            targetBaseRoute = Routes.Tiers.ROUTE
+                                                        )
+                                                    }
+                                                }
                                             }
                                         }
-                                    }
-                                )
+                                    )
+                                }
                             }
                         }
                     }
