@@ -46,6 +46,7 @@ import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.core.utils.orDeviceDefault
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.bottomBarRoutes
+import com.gblrod.radianthub.navigation.extensions.isNavigationSection
 import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
 import com.gblrod.radianthub.ui.language.viewmodel.LanguageViewModel
 import com.gblrod.radianthub.ui.shared.model.DrawerPreferenceItem
@@ -81,12 +82,12 @@ fun DrawerContent(
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_agents),
             icon = Icons.Default.Person,
-            route = Routes.Agents.ROUTE_WITH_ARGUMENT
+            route = Routes.Agents.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_maps),
             icon = Icons.Default.Map,
-            route = Routes.Maps.ROUTE_WITH_ARGUMENT
+            route = Routes.Maps.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_cards),
@@ -166,7 +167,10 @@ fun DrawerContent(
                         tint = MaterialTheme.colorScheme.onSurface
                     )
                 },
-                selected = currentRoute == item.route,
+                selected = isNavigationSection(
+                    currentRoute = currentRoute,
+                    sectionRoute = item.route
+                ),
                 onClick = {
                     onItemClick()
                     if (item.route in bottomBarRoutes) {

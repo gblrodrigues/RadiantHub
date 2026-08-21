@@ -22,8 +22,10 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.gblrod.radianthub.navigation.NavigationKeys
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.extensions.navigateFromSearch
+import com.gblrod.radianthub.navigation.extensions.navigateToTopLevelFromSearch
 import com.gblrod.radianthub.ui.features.search.components.EmptySearchResult
 import com.gblrod.radianthub.ui.features.search.components.SearchField
 import com.gblrod.radianthub.ui.features.search.components.SearchInitialContent
@@ -34,7 +36,6 @@ import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
 import com.gblrod.radianthub.ui.shared.components.ErrorMessage
 import com.gblrod.radianthub.ui.shared.components.LoadingScreen
 import org.koin.androidx.compose.koinViewModel
-
 
 @Composable
 fun SearchScreen(
@@ -129,18 +130,20 @@ fun SearchScreen(
                                                 SearchType.AGENT -> {
                                                     searchViewModel.clearSearch()
 
-                                                    navHostController.navigateFromSearch(
-                                                        targetRoute = Routes.Agents.createRoute(agentUuid = item.uuid),
-                                                        targetBaseRoute = Routes.Agents.ROUTE
+                                                    navHostController.navigateToTopLevelFromSearch(
+                                                        targetRoute = Routes.Agents.ROUTE,
+                                                        selectionKey = NavigationKeys.SELECTED_AGENT_UUID,
+                                                        selectionValue = item.uuid
                                                     )
                                                 }
 
                                                 SearchType.MAP -> {
                                                     searchViewModel.clearSearch()
 
-                                                    navHostController.navigateFromSearch(
-                                                        targetRoute = Routes.Maps.createRoute(mapUuid = item.uuid),
-                                                        targetBaseRoute = Routes.Maps.ROUTE
+                                                    navHostController.navigateToTopLevelFromSearch(
+                                                        targetRoute = Routes.Maps.ROUTE,
+                                                        selectionKey = NavigationKeys.SELECTED_MAP_UUID,
+                                                        selectionValue = item.uuid
                                                     )
                                                 }
 

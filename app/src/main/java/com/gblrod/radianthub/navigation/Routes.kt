@@ -7,22 +7,10 @@ object Routes {
 
     object Agents {
         const val ROUTE = "agents"
-        const val ARGUMENT = "agentUuid"
-        const val ROUTE_WITH_ARGUMENT = "$ROUTE?$ARGUMENT={$ARGUMENT}"
-
-        fun createRoute(agentUuid: String): String {
-            return "$ROUTE?$ARGUMENT=$agentUuid"
-        }
     }
 
     object Maps {
         const val ROUTE = "maps"
-        const val ARGUMENT = "mapUuid"
-        const val ROUTE_WITH_ARGUMENT = "$ROUTE?$ARGUMENT={$ARGUMENT}"
-
-        fun createRoute(mapUuid: String): String {
-            return "$ROUTE?$ARGUMENT=$mapUuid"
-        }
     }
 
     object Cards {
