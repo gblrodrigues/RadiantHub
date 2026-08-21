@@ -19,8 +19,8 @@ class MapsViewModel(
     private val _mapsState = MutableStateFlow<MapsUiState>(MapsUiState.Loading)
     val mapsState: StateFlow<MapsUiState> = _mapsState
 
-    private val _initialMapUuid = MutableStateFlow<String?>(null)
-    val initialMapUuid: StateFlow<String?> = _initialMapUuid
+    private val _selectedMapUuid = MutableStateFlow<String?>(null)
+    val selectedMapUuid: StateFlow<String?> = _selectedMapUuid
 
     init {
         observeRetry()
@@ -73,11 +73,11 @@ class MapsViewModel(
     }
 
     fun selectMap(uuid: String) {
-        _initialMapUuid.value = uuid
+        _selectedMapUuid.value = uuid
     }
 
     fun clearSelectedMap() {
-        _initialMapUuid.value = null
+        _selectedMapUuid.value = null
     }
 
     fun retry() {

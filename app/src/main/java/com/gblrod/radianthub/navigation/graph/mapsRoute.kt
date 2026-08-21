@@ -1,25 +1,40 @@
 package com.gblrod.radianthub.navigation.graph
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import com.gblrod.radianthub.navigation.NavigationKeys
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.ui.features.maps.screen.MapsScreen
+import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
+import org.koin.androidx.compose.koinViewModel
 
 fun NavGraphBuilder.mapsRoute() {
     composable(
-        route = Routes.Maps.ROUTE_WITH_ARGUMENT,
-        arguments = listOf(
-            navArgument(name = "mapUuid") {
-                nullable = true
-                defaultValue = null
-            }
-        )
+        route = Routes.Maps.ROUTE
     ) { backStackEntry ->
-        val mapUuid = backStackEntry.arguments?.getString("mapUuid")
+        val selectedMapUuid by backStackEntry
+            .savedStateHandle
+            .getStateFlow<String?>(
+                key = NavigationKeys.SELECTED_MAP_UUID,
+                initialValue = null
+            )
+            .collectAsState()
 
-        MapsScreen(
-            initialMapUuid = mapUuid
-        )
+        val mapsViewModel: MapsViewModel = koinViewModel()
+
+        LaunchedEffect(selectedMapUuid) {
+            selectedMapUuid?.let { uuid ->
+                mapsViewModel.selectMap(uuid)
+
+                backStackEntry.savedStateHandle[
+                    NavigationKeys.SELECTED_MAP_UUID
+                ] = null
+            }
+        }
+
+        MapsScreen()
     }
 }

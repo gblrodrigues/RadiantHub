@@ -26,10 +26,10 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AgentsScreen(
-    agentsViewModel: AgentsViewModel = koinViewModel(),
-    initialAgentUuid: String?
+    agentsViewModel: AgentsViewModel = koinViewModel()
 ) {
     val uiState by agentsViewModel.agentsState.collectAsState()
+    val selectedAgentUuid by agentsViewModel.selectedAgentUuid.collectAsState()
 
     var selectedAgent by remember { mutableStateOf<Agent?>(null) }
     val sheetState = rememberModalBottomSheetState()
@@ -62,8 +62,8 @@ fun AgentsScreen(
         }
 
         is AgentsUiState.Success -> {
-            LaunchedEffect(initialAgentUuid) {
-                initialAgentUuid?.let { uuid ->
+            LaunchedEffect(state.agents, selectedAgentUuid) {
+                selectedAgentUuid?.let { uuid ->
                     val index = state.agents.indexOfFirst {
                         it.uuid == uuid
                     }
