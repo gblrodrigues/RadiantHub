@@ -21,11 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.gblrod.radianthub.R
 import com.gblrod.radianthub.navigation.Routes
+import com.gblrod.radianthub.navigation.extensions.isNavigationSection
 import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
 import com.gblrod.radianthub.ui.shared.model.NavigationItem
 import com.gblrod.radianthub.ui.theme.NavigationSelected
@@ -46,12 +46,12 @@ fun RadiantHubBottomBar(
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_agents_title),
             icon = Icons.Default.Person,
-            route = Routes.Agents.ROUTE_WITH_ARGUMENT
+            route = Routes.Agents.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_maps_title),
             icon = Icons.Default.Map,
-            route = Routes.Maps.ROUTE_WITH_ARGUMENT
+            route = Routes.Maps.ROUTE
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_favorites_title),
@@ -72,9 +72,10 @@ fun RadiantHubBottomBar(
     ) {
         items.forEach { item ->
             NavigationBarItem(
-                selected = currentDestination?.hierarchy?.any {
-                    it.route == item.route
-                } == true,
+                selected = isNavigationSection(
+                    currentRoute = currentDestination?.route,
+                    sectionRoute = item.route
+                ),
                 label = {
                     Text(
                         text = item.label

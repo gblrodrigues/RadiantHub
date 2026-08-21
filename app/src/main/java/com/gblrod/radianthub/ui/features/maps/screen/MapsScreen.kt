@@ -18,10 +18,10 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MapsScreen(
-    mapsViewModel: MapsViewModel = koinViewModel(),
-    initialMapUuid: String?
+    mapsViewModel: MapsViewModel = koinViewModel()
 ) {
     val uiState by mapsViewModel.mapsState.collectAsState()
+    val selectedMapUuid by mapsViewModel.selectedMapUuid.collectAsState()
 
     val mapCount = when (val state = uiState) {
         is MapsUiState.Success -> state.maps.size
@@ -52,8 +52,8 @@ fun MapsScreen(
         }
 
         is MapsUiState.Success -> {
-            LaunchedEffect(initialMapUuid) {
-                initialMapUuid?.let { uuid ->
+            LaunchedEffect(state.maps, selectedMapUuid) {
+                selectedMapUuid?.let { uuid ->
                     val index = state.maps.indexOfFirst {
                         it.uuid == uuid
                     }

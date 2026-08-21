@@ -5,6 +5,15 @@ import androidx.navigation.NavHostController
 import com.gblrod.radianthub.navigation.Routes
 
 fun NavHostController.navigateToBottomBar(route: String) {
+    if (
+        isNavigationSection(
+            currentRoute = currentDestination?.route,
+            sectionRoute = route
+        )
+    ) {
+        return
+    }
+
     navigate(route) {
         launchSingleTop = true
         restoreState = true
@@ -36,4 +45,49 @@ fun NavHostController.navigateFromSearch(
             }
         }
     }
+}
+
+fun isNavigationSection(
+    currentRoute: String?,
+    sectionRoute: String
+): Boolean {
+    return currentRoute?.substringBefore(delimiter = "?") == sectionRoute
+}
+
+fun NavHostController.navigateToTopLevelFromSearch(
+    targetRoute: String,
+    selectionKey: String,
+    selectionValue: String
+) {
+    val previousEntry = previousBackStackEntry ?: return
+
+    val previousRoute = previousEntry
+        .destination
+        .route
+        ?.substringBefore(delimiter = "?")
+
+    popBackStack(
+        route = Routes.Search.ROUTE,
+        inclusive = true
+    )
+
+    if (previousRoute == targetRoute) {
+        currentBackStackEntry
+            ?.savedStateHandle
+            ?.set(
+                key = selectionKey,
+                value = selectionValue
+            )
+
+        return
+    }
+
+    navigateToBottomBar(route = targetRoute)
+
+    currentBackStackEntry
+        ?.savedStateHandle
+        ?.set(
+            key = selectionKey,
+            value = selectionValue
+        )
 }
