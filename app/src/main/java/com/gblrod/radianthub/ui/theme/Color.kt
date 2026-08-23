@@ -39,3 +39,10 @@ val PinkActions = Color(0xFFE74A8E)
 val PurpleActions = Color(0xFF7962B7)
 val GreenActions = Color(0xFF109621)
 val BlueActions = Color(0xFF619CC4)
+
+// Home Items
+val AgentsColor = Color(0xFF2DE2C2)
+val MapsColor = Color(0xFF8BEA35)
+val CardsColor = Color(0xFF3EA6FF)
+val TiersColor = Color(0xFFB45CFF)
+val FavoritesColor = Color(0xFFFF4F8B)

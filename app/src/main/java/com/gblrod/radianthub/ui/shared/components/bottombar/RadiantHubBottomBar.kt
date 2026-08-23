@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Map
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -45,7 +45,7 @@ fun RadiantHubBottomBar(
         ),
         NavigationItem(
             label = stringResource(id = R.string.bottom_bar_agents_title),
-            icon = Icons.Default.Person,
+            icon = Icons.Default.Groups,
             route = Routes.Agents.ROUTE
         ),
         NavigationItem(
