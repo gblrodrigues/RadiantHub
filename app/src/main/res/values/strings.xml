@@ -42,15 +42,19 @@
     <!-- HomeScreen -->
     <string name="home_explore_item">Explore</string>
     <string name="home_favorites_title">Favorites</string>
-    <string name="home_favorites_subtitle">View your saved agents and cards</string>
+    <string name="home_favorites_subtitle">View your saved agents \nand cards</string>
     <string name="home_agents_title">Agents</string>
-    <string name="home_agents_subtitle">Browse all playable Valorant agents</string>
+    <string name="home_agents_subtitle">Browse all playable \nValorant agents</string>
     <string name="home_cards_title">Cards</string>
-    <string name="home_cards_subtitle">Discover Valorant player cards</string>
+    <string name="home_cards_subtitle">Discover Valorant \nplayer cards</string>
     <string name="home_tiers_title">Tiers</string>
-    <string name="home_tiers_subtitle">Learn about Valorant ranks</string>
+    <string name="home_tiers_subtitle">Learn about \nValorant ranks</string>
     <string name="home_maps_title">Maps</string>
-    <string name="home_maps_subtitle">Explore every Valorant map</string>
+    <string name="home_maps_subtitle">Explore every \nValorant map</string>
+    <string name="home_welcome_greeting">Welcome, Radiant</string>
+    <string name="home_welcome_intro">Explore the universe \nof</string>
+    <string name="home_welcome_game">Valorant</string>
+    <string name="home_welcome_description">Browse agents, maps, cards, \ntiers, and your favorites.</string>
 
     <!-- MapsScreen -->
     <string name="map_information_title">Map Information</string>

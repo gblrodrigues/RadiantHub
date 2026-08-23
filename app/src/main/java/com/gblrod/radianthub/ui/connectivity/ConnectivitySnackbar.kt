@@ -39,7 +39,7 @@ fun ConnectivitySnackbar(
                     snackbarJob = launch {
                         snackbarHostState.showSnackbar(
                             message = noConnection,
-                            duration = SnackbarDuration.Indefinite
+                            duration = SnackbarDuration.Long
                         )
                     }
                 }
@@ -58,7 +58,7 @@ fun ConnectivitySnackbar(
                 snackbarJob = launch {
                     snackbarHostState.showSnackbar(
                         message = if (connected) connectionRestored else noConnection,
-                        duration = if (connected) SnackbarDuration.Short else SnackbarDuration.Indefinite
+                        duration = if (connected) SnackbarDuration.Short else SnackbarDuration.Long
                     )
                 }
             }

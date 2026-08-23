@@ -4,6 +4,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Groups
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Style
+import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -14,6 +20,12 @@ import com.gblrod.radianthub.R
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
 import com.gblrod.radianthub.ui.features.home.components.HomeItem
+import com.gblrod.radianthub.ui.features.home.components.HomeWelcome
+import com.gblrod.radianthub.ui.theme.AgentsColor
+import com.gblrod.radianthub.ui.theme.CardsColor
+import com.gblrod.radianthub.ui.theme.FavoritesColor
+import com.gblrod.radianthub.ui.theme.MapsColor
+import com.gblrod.radianthub.ui.theme.TiersColor
 
 @Composable
 fun HomeScreen(
@@ -26,8 +38,14 @@ fun HomeScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
+            HomeWelcome()
+        }
+
+        item {
             HomeItem(
                 title = stringResource(id = R.string.home_agents_title),
+                icon = Icons.Default.Groups,
+                color = AgentsColor,
                 subtitle = stringResource(id = R.string.home_agents_subtitle),
                 background = painterResource(id = R.drawable.agents_background),
                 onClick = { navHostController.navigateToBottomBar(route = Routes.Agents.ROUTE) }
@@ -37,6 +55,8 @@ fun HomeScreen(
         item {
             HomeItem(
                 title = stringResource(id = R.string.home_maps_title),
+                icon = Icons.Default.Map,
+                color = MapsColor,
                 subtitle = stringResource(id = R.string.home_maps_subtitle),
                 background = painterResource(id = R.drawable.maps_background),
                 onClick = { navHostController.navigateToBottomBar(route = Routes.Maps.ROUTE) }
@@ -46,6 +66,8 @@ fun HomeScreen(
         item {
             HomeItem(
                 title = stringResource(id = R.string.home_cards_title),
+                icon = Icons.Default.Style,
+                color = CardsColor,
                 subtitle = stringResource(id = R.string.home_cards_subtitle),
                 background = painterResource(id = R.drawable.cards_background),
                 onClick = { navHostController.navigate(route = Routes.Cards.ROUTE) }
@@ -55,6 +77,8 @@ fun HomeScreen(
         item {
             HomeItem(
                 title = stringResource(id = R.string.home_tiers_title),
+                icon = Icons.Default.WorkspacePremium,
+                color = TiersColor,
                 subtitle = stringResource(id = R.string.home_tiers_subtitle),
                 background = painterResource(id = R.drawable.tiers_background),
                 onClick = { navHostController.navigate(route = Routes.Tiers.ROUTE) }
@@ -64,6 +88,8 @@ fun HomeScreen(
         item {
             HomeItem(
                 title = stringResource(id = R.string.home_favorites_title),
+                icon = Icons.Default.Star,
+                color = FavoritesColor,
                 subtitle = stringResource(id = R.string.home_favorites_subtitle),
                 background = painterResource(id = R.drawable.favorites_background),
                 onClick = { navHostController.navigateToBottomBar(route = Routes.Favorites.ROUTE) }

@@ -42,15 +42,19 @@
     <!-- HomeScreen -->
     <string name="home_explore_item">Explorar</string>
     <string name="home_favorites_title">Favoritos</string>
-    <string name="home_favorites_subtitle">Ver tus agentes y tarjetas guardados</string>
+    <string name="home_favorites_subtitle">Ver tus agentes y \ntarjetas guardados</string>
     <string name="home_agents_title">Agentes</string>
-    <string name="home_agents_subtitle">Explora todos los agentes jugables de Valorant</string>
+    <string name="home_agents_subtitle">Explora todos los \nagentes jugables de Valorant</string>
     <string name="home_cards_title">Tarjetas</string>
-    <string name="home_cards_subtitle">Descubre las tarjetas de jugador de Valorant</string>
+    <string name="home_cards_subtitle">Descubre las tarjetas de \njugador de Valorant</string>
     <string name="home_tiers_title">Rangos</string>
-    <string name="home_tiers_subtitle">Aprende sobre los rangos de Valorant</string>
+    <string name="home_tiers_subtitle">Aprende sobre los \nrangos de Valorant</string>
     <string name="home_maps_title">Mapas</string>
-    <string name="home_maps_subtitle">Explora todos los mapas de Valorant</string>
+    <string name="home_maps_subtitle">Explora todos los \nmapas de Valorant</string>
+    <string name="home_welcome_greeting">Bienvenido, Radiante</string>
+    <string name="home_welcome_intro">Explora el universo \nde</string>
+    <string name="home_welcome_game">Valorant</string>
+    <string name="home_welcome_description">Explora agentes, mapas, tarjetas, \nrangos y tus favoritos.</string>
 
     <!-- MapsScreen -->
     <string name="map_information_title">Información del mapa</string>

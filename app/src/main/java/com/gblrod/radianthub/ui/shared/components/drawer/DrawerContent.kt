@@ -13,11 +13,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Groups
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Palette
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Style
 import androidx.compose.material.icons.filled.WorkspacePremium
@@ -85,7 +85,7 @@ fun DrawerContent(
         ),
         NavigationItem(
             label = stringResource(id = R.string.drawer_item_agents),
-            icon = Icons.Default.Person,
+            icon = Icons.Default.Groups,
             route = Routes.Agents.ROUTE
         ),
         NavigationItem(
