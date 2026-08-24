@@ -1,8 +1,5 @@
 package com.gblrod.radianthub.ui.shared.components.bottombar
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Groups
@@ -18,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -28,6 +26,7 @@ import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.extensions.isNavigationSection
 import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
 import com.gblrod.radianthub.ui.shared.model.NavigationItem
+import com.gblrod.radianthub.ui.theme.BackgroundOne
 import com.gblrod.radianthub.ui.theme.NavigationSelected
 
 @Composable
@@ -61,14 +60,13 @@ fun RadiantHubBottomBar(
     )
     NavigationBar(
         modifier = Modifier
-            .navigationBarsPadding()
-            .height(62.dp)
-            .border(
-                width = 0.5.dp,
-                color = MaterialTheme.colorScheme.outline.copy(alpha = 0.15f),
-                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+            .clip(
+                shape = RoundedCornerShape(
+                    topStart = 16.dp,
+                    topEnd = 16.dp
+                )
             ),
-        containerColor = Color.Transparent
+        containerColor = BackgroundOne
     ) {
         items.forEach { item ->
             NavigationBarItem(
