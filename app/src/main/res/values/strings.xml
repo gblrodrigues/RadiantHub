@@ -64,9 +64,13 @@
     <string name="map_regions_title">Regions</string>
     <string name="map_view_no_available_callouts">No Callouts Available</string>
 
+    <!-- AgentBottomSheet -->
+    <string name="agent_skills_title">Skills</string>
+    <string name="agent_description_title">Description</string>
+
     <!-- Buttons -->
     <string name="button_retry">Try again</string>
-    <string name="button_view_skills">View Skills</string>
+    <string name="button_view_details">View Details</string>
     <string name="button_favorite_filter_all">All (%1$d)</string>
     <string name="button_favorite_filter_agents">Agents (%1$d)</string>
     <string name="button_favorite_filter_cards">Cards (%1$d)</string>
