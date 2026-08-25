@@ -8,10 +8,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
-import com.gblrod.radianthub.R
 import com.gblrod.radianthub.core.connectivity.NetworkChecker
 import com.gblrod.radianthub.core.connectivity.RetryManager
+import com.gblrod.radianthub.ui.connectivity.model.NetworkSnackbarType
+import com.gblrod.radianthub.ui.connectivity.state.NetworkSnackbarVisuals
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
@@ -22,9 +22,6 @@ fun ConnectivitySnackbar(
 ) {
     val networkChecker: NetworkChecker = koinInject()
     val retryManager: RetryManager = koinInject()
-
-    val noConnection = stringResource(id = R.string.no_connection)
-    val connectionRestored = stringResource(id = R.string.connection_restored)
 
     var previousState by remember { mutableStateOf<Boolean?>(null) }
     var snackbarJob by remember { mutableStateOf<Job?>(null) }
@@ -38,8 +35,10 @@ fun ConnectivitySnackbar(
                     snackbarJob?.cancel()
                     snackbarJob = launch {
                         snackbarHostState.showSnackbar(
-                            message = noConnection,
-                            duration = SnackbarDuration.Long
+                            visuals = NetworkSnackbarVisuals(
+                                type = NetworkSnackbarType.OFFLINE,
+                                duration = SnackbarDuration.Long
+                            )
                         )
                     }
                 }
@@ -57,8 +56,10 @@ fun ConnectivitySnackbar(
 
                 snackbarJob = launch {
                     snackbarHostState.showSnackbar(
-                        message = if (connected) connectionRestored else noConnection,
-                        duration = if (connected) SnackbarDuration.Short else SnackbarDuration.Long
+                        visuals = NetworkSnackbarVisuals(
+                            type = if (connected) NetworkSnackbarType.ONLINE else NetworkSnackbarType.OFFLINE,
+                            duration = if (connected) SnackbarDuration.Short else SnackbarDuration.Long
+                        )
                     )
                 }
             }

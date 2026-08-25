@@ -16,6 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.ui.connectivity.model.NetworkSnackbarType
+import com.gblrod.radianthub.ui.connectivity.state.NetworkSnackbarVisuals
 import com.gblrod.radianthub.ui.theme.OfflineBackground
 import com.gblrod.radianthub.ui.theme.OnlineBackground
 
@@ -23,36 +25,47 @@ import com.gblrod.radianthub.ui.theme.OnlineBackground
 fun NetworkSnackbarHost(
     snackbarHostState: SnackbarHostState
 ) {
+    val noConnection = stringResource(id = R.string.no_connection)
+    val connectionRestored = stringResource(id = R.string.connection_restored)
+
     SnackbarHost(
         hostState = snackbarHostState
     ) { data ->
-        val noConnection = stringResource(id = R.string.no_connection)
-        val connectionRestored = stringResource(id = R.string.connection_restored)
-        val isNetworkSnackbar = data.visuals.message in listOf(
-            noConnection,
-            connectionRestored
-        )
 
-        if (isNetworkSnackbar) {
+        val visuals = data.visuals
+
+        if (visuals is NetworkSnackbarVisuals) {
+            val message = when (visuals.type) {
+                NetworkSnackbarType.OFFLINE -> noConnection
+                NetworkSnackbarType.ONLINE -> connectionRestored
+            }
+
+            val isOffline = visuals.type == NetworkSnackbarType.OFFLINE
+
             Snackbar(
-                containerColor = if (data.visuals.message == noConnection) OfflineBackground else OnlineBackground
+                containerColor = if (isOffline) {
+                    OfflineBackground
+                } else {
+                    OnlineBackground
+                }
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Icon(
-                        imageVector = if (data.visuals.message == noConnection) Icons.Rounded.WifiOff else Icons.Rounded.Wifi,
+                        imageVector = if (isOffline) Icons.Rounded.WifiOff else Icons.Rounded.Wifi,
                         contentDescription = null,
                         tint = Color.White
                     )
 
                     Text(
-                        text = data.visuals.message,
+                        text = message,
                         color = Color.White
                     )
                 }
             }
+
         } else {
             Snackbar(
                 snackbarData = data
