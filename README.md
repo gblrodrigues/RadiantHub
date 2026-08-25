@@ -52,11 +52,14 @@ development while exploring a more immersive visual experience.
   * Role  
   * Description  
 
-### Agent Dossier
-* BottomSheet with detailed agent abilities
+### Agent Details
+* BottomSheet with detailed agent information
+  * Icon
+  * Agent name
+  * Description
 * Ability list including:
-  * Icon  
-  * Ability name  
+  * Icon
+  * Ability name
   * Description
 
 ### Maps
@@ -78,7 +81,7 @@ development while exploring a more immersive visual experience.
 
 ### Competitive Tiers
 * Browse all Valorant competitive tiers
-* Organized by tier divisions
+* Organized by rank divisions
 * Tier icons and progression visualization
 * Search integration with automatic navigation
 
@@ -130,15 +133,15 @@ development while exploring a more immersive visual experience.
 
 ## Preview
 ### Home Screen
-<img src="https://github.com/user-attachments/assets/b54abedb-2cda-4ddd-ad97-30e49bc9e294" width="250"/>
+<img src="https://github.com/user-attachments/assets/a8446100-6236-4d78-a553-858aa50cf815" width="250"/>
 
-### Agents Screen and Agent Abilities
-<img src="https://github.com/user-attachments/assets/aa77bf66-3587-4360-8549-b820595909f2" width="250"/>
-<img src="https://github.com/user-attachments/assets/440b0c49-d6f1-42ed-853f-9c936c2098f1" width="250"/>
+### Agents Screen and Agent Details
+<img src="https://github.com/user-attachments/assets/53043637-bff7-4b2c-801b-1f53aea9543e" width="250"/>
+<img src="https://github.com/user-attachments/assets/adedda93-c83c-433c-8715-faecb35f006e" width="250"/>
 
 ### Maps Screen
-<img src="https://github.com/user-attachments/assets/0f328026-7a14-4304-9da4-b3d5411e6209" width="250"/>
-<img src="https://github.com/user-attachments/assets/a6c900e4-d615-4665-8de3-35ffb31a548e" width="250"/>
+<img src="https://github.com/user-attachments/assets/873aa49b-ec7a-4fd1-9bc9-01ad7efd1a2b" width="250"/>
+<img src="https://github.com/user-attachments/assets/4880c099-7ed9-4fb1-87f6-3582c3a9e383" width="250"/>
 
 ### Cards Screen
 <img src="https://github.com/user-attachments/assets/9b3e04a1-6ab8-4005-a5bb-aa2d53bbb1ab" width="250"/>
@@ -147,16 +150,16 @@ development while exploring a more immersive visual experience.
 <img src="https://github.com/user-attachments/assets/badcac2a-f1b2-460e-9c15-25e155949921" width="250"/>
 
 ### Favorites Screen
-<img src="https://github.com/user-attachments/assets/d9b120ea-f4e9-4df6-84b1-418d43c83ff2" width="250"/>
-<img src="https://github.com/user-attachments/assets/7b06e834-7ba5-4fa0-8e33-220b59f43f85" width="250"/>
-<img src="https://github.com/user-attachments/assets/baffc45b-421f-4b84-beb3-a727a8cc88b7" width="250"/>
+<img src="https://github.com/user-attachments/assets/bbf2ad2c-6e2c-488c-bc5f-8a27479dfb74" width="250"/>
+<img src="https://github.com/user-attachments/assets/66c7ea9b-3bbc-43a9-9f0f-fbfdd8cc942b" width="250"/>
+<img src="https://github.com/user-attachments/assets/15479e8f-3a71-40df-972a-a94aa6328047" width="250"/>
 
 ### Search 
-<img src="https://github.com/user-attachments/assets/f5995847-dcda-4bb7-9031-42b61625ec3f" width="250"/>
-<img src="https://github.com/user-attachments/assets/5cdadfb6-3a6a-4e51-a60c-96feac40fa49" width="250"/>
+<img src="https://github.com/user-attachments/assets/d0fbf87e-c3ea-44e7-91fa-53739385145b" width="250"/>
+<img src="https://github.com/user-attachments/assets/71835c39-ea68-4b73-bc62-4c646297e8c8" width="250"/>
 
 Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/548d5ac0-4828-40c3-80ae-1939475ca765
+> https://github.com/user-attachments/assets/c7cc0441-8cc8-4455-a632-f9ffaaee480f
 
 ## Technical Decisions
 

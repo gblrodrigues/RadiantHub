@@ -50,7 +50,7 @@ fun AgentPage(
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .fillMaxHeight(0.78f)
-                .offset(y = (-120).dp)
+                .offset(y = (-100).dp)
         )
 
         Column(
