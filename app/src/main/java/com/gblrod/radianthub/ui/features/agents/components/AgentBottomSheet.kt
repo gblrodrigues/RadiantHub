@@ -1,32 +1,19 @@
 package com.gblrod.radianthub.ui.features.agents.components
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import com.gblrod.radianthub.R
 import com.gblrod.radianthub.domain.agents.model.Agent
 import com.gblrod.radianthub.ui.theme.BackgroundOne
 
@@ -37,55 +24,48 @@ fun AgentBottomSheet(
     sheetState: SheetState,
     onDismiss: () -> Unit
 ) {
-    val scroll = rememberScrollState()
-
     ModalBottomSheet(
         onDismissRequest = { onDismiss() },
         sheetState = sheetState,
-        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.92f),
-        scrimColor = BackgroundOne.copy(alpha = 0.18f)
+        containerColor = BackgroundOne
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.75f)
-                .verticalScroll(state = scroll)
-                .clip(shape = RoundedCornerShape(16.dp))
-                .padding(20.dp)
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp, bottom = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Column {
-                agent.abilities.forEach {
-                    Row {
-                        AsyncImage(
-                            model = it.icon,
-                            contentDescription = null,
-                            modifier = Modifier.size(45.dp),
-                            colorFilter = ColorFilter.tint(color = MaterialTheme.colorScheme.onSurface)
-                        )
+            item {
+                AgentBottomSheetSectionTitle(text = R.string.agent_description_title)
+            }
 
-                        Spacer(modifier = Modifier.width(12.dp))
+            item {
+                AgentContentCard(
+                    icon = agent.icon,
+                    iconContentDescription = agent.name,
+                    title = agent.name,
+                    description = agent.description
+                )
+            }
 
-                        Column(
-                            modifier = Modifier.weight(1f)
-                        ) {
-                            Text(
-                                text = it.name,
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
+            item {
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = Color.White.copy(alpha = 0.12f)
+                )
+            }
 
-                            Spacer(modifier = Modifier.height(4.dp))
-                            Text(
-                                text = it.description,
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurface,
-                                textAlign = TextAlign.Justify,
-                            )
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
+            item {
+                AgentBottomSheetSectionTitle(text = R.string.agent_skills_title)
+            }
+
+            items(agent.abilities) {
+                AgentContentCard(
+                    icon = it.icon,
+                    iconContentDescription = it.name,
+                    title = it.name,
+                    description = it.description,
+                    tintIcon = true
+                )
             }
         }
     }

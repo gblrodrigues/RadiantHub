@@ -67,7 +67,7 @@ fun AgentInfoCard(
                 color = MaterialTheme.colorScheme.onSurface,
                 style = MaterialTheme.typography.bodyLarge,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = 5
+                maxLines = 3
             )
 
             Spacer(modifier = Modifier.height(12.dp))

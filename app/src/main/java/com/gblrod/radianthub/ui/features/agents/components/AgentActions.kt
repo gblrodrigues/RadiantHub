@@ -2,10 +2,16 @@ package com.gblrod.radianthub.ui.features.agents.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,13 +37,21 @@ fun AgentActions(
         Button(
             onClick = { onViewSkills() },
             shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = ViewAbilities
-            )
+            elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 6.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = ViewAbilities)
         ) {
             Text(
-                text = stringResource(id = R.string.button_view_skills),
+                text = stringResource(id = R.string.button_view_details),
                 color = MaterialTheme.colorScheme.onSurface
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Icon(
+                imageVector = Icons.Outlined.Info,
+                contentDescription = null,
+                modifier = Modifier.size(18.dp),
+                tint = MaterialTheme.colorScheme.onSurface
             )
         }
         IndexBadge(
