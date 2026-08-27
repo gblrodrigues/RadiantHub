@@ -106,18 +106,9 @@
     <string name="connection_restored">Back online</string>
     <string name="no_connection">No connection</string>
 
-    <!-- Types name -->
-    <string name="type_name_agents_title">Agents</string>
-    <string name="type_name_cards_title">Cards</string>
-
     <!-- SearchBar -->
     <string name="search_placeholder" tools:ignore="TypographyEllipsis">
         Search agents, cards...
-    </string>
-
-    <string name="search_query_empty">
-        Search for Agents, Maps, Cards, or Tiers\n
-        by name
     </string>
 
     <string name="search_result_empty">
@@ -125,9 +116,14 @@
         Try another search term
     </string>
 
-    <!-- SearchType -->
+    <!-- SearchType && SearchFilter -->
     <string name="search_type_agent">Agent</string>
     <string name="search_type_map">Map</string>
     <string name="search_type_card">Card</string>
     <string name="search_type_tier">Tier</string>
+    <string name="search_filter_all">All</string>
+    <string name="search_filter_agents">Agents</string>
+    <string name="search_filter_maps">Maps</string>
+    <string name="search_filter_cards">Cards</string>
+    <string name="search_filter_tiers">Tiers</string>
 </resources>

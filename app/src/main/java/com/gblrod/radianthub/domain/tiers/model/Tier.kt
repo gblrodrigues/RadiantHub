@@ -5,5 +5,6 @@ data class Tier(
     val tierName: String,
     val division: String,
     val divisionName: String,
-    val icon: String?
+    val icon: String?,
+    val rankTriangleDownIcon: String?
 )

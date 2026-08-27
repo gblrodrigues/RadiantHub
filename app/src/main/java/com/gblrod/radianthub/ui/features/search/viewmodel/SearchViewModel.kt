@@ -63,7 +63,7 @@ class SearchViewModel(
                 _searchState.value =
                     state.copy(
                         query = query,
-                        results = if (query.isBlank()) emptyList() else filteredItems
+                        results = filteredItems
                     )
             }
         }
@@ -174,7 +174,7 @@ class SearchViewModel(
                     _searchState.value =
                         SearchUiState.Success(
                             query = currentQuery,
-                            results = if (currentQuery.isBlank()) emptyList() else filteredItems
+                            results = filteredItems
                         )
                 }
             }
@@ -192,7 +192,7 @@ class SearchViewModel(
             is SearchUiState.Success -> {
                 state.copy(
                     query = "",
-                    results = emptyList()
+                    results = allItems
                 )
             }
 

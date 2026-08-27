@@ -32,15 +32,21 @@ fun TierItem(
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
-            .border(
-                width = if (isHighlighted) 3.dp else 0.dp,
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        PinkActions,
-                        PurpleActions
+            .then(
+                other = if (isHighlighted) {
+                    Modifier.border(
+                        width = 3.dp,
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                PinkActions,
+                                PurpleActions
+                            )
+                        ),
+                        shape = RoundedCornerShape(16.dp)
                     )
-                ),
-                shape = RoundedCornerShape(16.dp)
+                } else {
+                    Modifier
+                }
             ),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)

@@ -20,6 +20,7 @@ class TiersRepositoryImpl(
             .data
             .last()
             .tiers
+            .filter { !it.rankTriangleDownIcon.isNullOrBlank() }
             .map { it.toDomain() }
     }
 }
