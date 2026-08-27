@@ -1,5 +1,7 @@
 package com.gblrod.radianthub.ui.features.search.components
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -8,6 +10,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +30,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.gblrod.radianthub.R
+import com.gblrod.radianthub.ui.features.search.model.SearchFilterType
 import com.gblrod.radianthub.ui.theme.BlueActions
 
 @Composable
@@ -35,7 +39,12 @@ fun SearchField(
     query: String,
     maxChar: Int = 32,
     onQueryChange: (String) -> Unit,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    expanded: Boolean = false,
+    onSearchFilterMenu: () -> Unit,
+    onDismissFilterMenu: () -> Unit,
+    selectedFilter: (SearchFilterType),
+    onFilterSelected: (SearchFilterType) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
@@ -71,15 +80,36 @@ fun SearchField(
             }
         },
         trailingIcon = {
-            if (query.isNotBlank()) {
-                IconButton(
-                    onClick = { onQueryChange("") }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Clear,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurface
-                    )
+            Row {
+                if (query.isNotBlank()) {
+                    IconButton(
+                        onClick = { onQueryChange("") }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Clear,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+
+                Box {
+                    IconButton(
+                        onClick = { onSearchFilterMenu() }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.FilterList,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
+                 SearchFilter(
+                     expanded = expanded,
+                     selectedFilter = selectedFilter,
+                     onDismissRequest = onDismissFilterMenu,
+                     onFilterSelected = onFilterSelected
+                 )
                 }
             }
         },

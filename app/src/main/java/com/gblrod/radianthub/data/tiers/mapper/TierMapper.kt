@@ -8,5 +8,6 @@ fun TierDto.toDomain() = Tier(
     tierName = tierName,
     division = division,
     divisionName = divisionName,
-    icon = smallIcon
+    icon = smallIcon,
+    rankTriangleDownIcon = rankTriangleDownIcon
 )

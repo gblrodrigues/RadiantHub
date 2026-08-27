@@ -5,5 +5,6 @@ data class TierDto(
     val tierName: String,
     val division: String,
     val divisionName: String,
-    val smallIcon: String?
+    val smallIcon: String?,
+    val rankTriangleDownIcon: String?
 )
