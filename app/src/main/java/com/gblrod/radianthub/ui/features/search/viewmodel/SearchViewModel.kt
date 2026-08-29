@@ -181,25 +181,6 @@ class SearchViewModel(
         }
     }
 
-    fun clearSearch() {
-        val state = _searchState.value
-
-        _searchState.value = when (state) {
-            is SearchUiState.Loading -> {
-                state.copy(query = "")
-            }
-
-            is SearchUiState.Success -> {
-                state.copy(
-                    query = "",
-                    results = allItems
-                )
-            }
-
-            is SearchUiState.Error -> state.copy(query = "")
-        }
-    }
-
     fun retry() {
         retryManager.retry()
     }

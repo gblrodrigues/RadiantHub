@@ -14,6 +14,17 @@ fun NavHostController.navigateToBottomBar(route: String) {
         return
     }
 
+    val searchEntry = runCatching {
+        getBackStackEntry(Routes.Search.ROUTE)
+    }.getOrNull()
+
+    if (searchEntry != null) {
+        popBackStack(
+            route = Routes.Search.ROUTE,
+            inclusive = true
+        )
+    }
+
     navigate(route) {
         launchSingleTop = true
         restoreState = true
@@ -25,26 +36,9 @@ fun NavHostController.navigateToBottomBar(route: String) {
 }
 
 fun NavHostController.navigateFromSearch(
-    targetRoute: String,
-    targetBaseRoute: String
+    targetRoute: String
 ) {
-    val previousEntry = previousBackStackEntry
-    val previousRoute = previousEntry
-        ?.destination
-        ?.route
-        ?.substringBefore(delimiter = "?")
-
-    navigate(targetRoute) {
-        if (previousEntry != null && previousRoute == targetBaseRoute) {
-            popUpTo(previousEntry.destination.id) {
-                inclusive = true
-            }
-        } else {
-            popUpTo(Routes.Search.ROUTE) {
-                inclusive = true
-            }
-        }
-    }
+    navigate(targetRoute)
 }
 
 fun isNavigationSection(
@@ -60,18 +54,14 @@ fun NavHostController.navigateToTopLevelFromSearch(
     selectionValue: String
 ) {
     val previousEntry = previousBackStackEntry ?: return
-
     val previousRoute = previousEntry
         .destination
         .route
         ?.substringBefore(delimiter = "?")
 
-    popBackStack(
-        route = Routes.Search.ROUTE,
-        inclusive = true
-    )
-
     if (previousRoute == targetRoute) {
+        popBackStack()
+
         currentBackStackEntry
             ?.savedStateHandle
             ?.set(
@@ -82,7 +72,7 @@ fun NavHostController.navigateToTopLevelFromSearch(
         return
     }
 
-    navigateToBottomBar(route = targetRoute)
+    navigate(route = targetRoute)
 
     currentBackStackEntry
         ?.savedStateHandle
