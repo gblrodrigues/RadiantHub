@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.gblrod.radianthub.navigation.NavigationKeys
+import com.gblrod.radianthub.navigation.NavigationKeys.SELECTED_MAP_UUID
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.ui.features.maps.screen.MapsScreen
 import com.gblrod.radianthub.ui.features.maps.viewmodel.MapsViewModel
@@ -18,7 +18,7 @@ fun NavGraphBuilder.mapsRoute() {
         val selectedMapUuid by backStackEntry
             .savedStateHandle
             .getStateFlow<String?>(
-                key = NavigationKeys.SELECTED_MAP_UUID,
+                key = SELECTED_MAP_UUID,
                 initialValue = null
             )
             .collectAsState()
@@ -30,7 +30,7 @@ fun NavGraphBuilder.mapsRoute() {
                 mapsViewModel.selectMap(uuid)
 
                 backStackEntry.savedStateHandle[
-                    NavigationKeys.SELECTED_MAP_UUID
+                    SELECTED_MAP_UUID
                 ] = null
             }
         }

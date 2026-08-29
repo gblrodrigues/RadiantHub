@@ -119,73 +119,57 @@ fun SearchScreen(
                         SearchFilterType.TIERS -> state.results.filter { it.type == SearchType.TIER }
                     }
 
-                    when {
-                        filteredResults.isEmpty() -> {
-                            EmptySearchResult(
-                                query = state.query
-                            )
-                        }
+                    if (filteredResults.isEmpty()) {
+                        EmptySearchResult(query = state.query)
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(
+                                top = 4.dp,
+                                bottom = 16.dp
+                            ),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            items(
+                                items = filteredResults,
+                                key = { it.uuid + it.type.name }
+                            ) { item ->
+                                SearchResultItem(
+                                    item = item,
+                                    onClick = {
+                                        when (item.type) {
+                                            SearchType.AGENT -> {
+                                                navHostController.navigateToTopLevelFromSearch(
+                                                    targetRoute = Routes.Agents.ROUTE,
+                                                    selectionKey = NavigationKeys.SELECTED_AGENT_UUID,
+                                                    selectionValue = item.uuid
+                                                )
+                                            }
 
-                        else -> {
-                            LazyColumn(
-                                modifier = Modifier.fillMaxSize(),
-                                contentPadding = PaddingValues(
-                                    top = 4.dp,
-                                    bottom = 16.dp
-                                ),
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                items(
-                                    items = filteredResults,
-                                    key = { it.uuid + it.type.name }
-                                ) { item ->
-                                    SearchResultItem(
-                                        item = item,
-                                        onClick = {
-                                            when (item.type) {
-                                                SearchType.AGENT -> {
-                                                    searchViewModel.clearSearch()
+                                            SearchType.MAP -> {
+                                                navHostController.navigateToTopLevelFromSearch(
+                                                    targetRoute = Routes.Maps.ROUTE,
+                                                    selectionKey = NavigationKeys.SELECTED_MAP_UUID,
+                                                    selectionValue = item.uuid
+                                                )
+                                            }
 
-                                                    navHostController.navigateToTopLevelFromSearch(
-                                                        targetRoute = Routes.Agents.ROUTE,
-                                                        selectionKey = NavigationKeys.SELECTED_AGENT_UUID,
-                                                        selectionValue = item.uuid
-                                                    )
-                                                }
+                                            SearchType.CARD -> {
+                                                navHostController.navigateFromSearch(
+                                                    targetRoute = Routes.Cards.createRoute(cardUuid = item.uuid)
+                                                )
+                                            }
 
-                                                SearchType.MAP -> {
-                                                    searchViewModel.clearSearch()
-
-                                                    navHostController.navigateToTopLevelFromSearch(
-                                                        targetRoute = Routes.Maps.ROUTE,
-                                                        selectionKey = NavigationKeys.SELECTED_MAP_UUID,
-                                                        selectionValue = item.uuid
-                                                    )
-                                                }
-
-                                                SearchType.CARD -> {
-                                                    searchViewModel.clearSearch()
-
+                                            SearchType.TIER -> {
+                                                item.tierId?.let { tierId ->
                                                     navHostController.navigateFromSearch(
-                                                        targetRoute = Routes.Cards.createRoute(cardUuid = item.uuid),
-                                                        targetBaseRoute = Routes.Cards.ROUTE
+                                                        targetRoute = Routes.Tiers.createRoute(tierId = tierId)
                                                     )
-                                                }
-
-                                                SearchType.TIER -> {
-                                                    item.tierId?.let { tierId ->
-                                                        searchViewModel.clearSearch()
-
-                                                        navHostController.navigateFromSearch(
-                                                            targetRoute = Routes.Tiers.createRoute(tierId = tierId),
-                                                            targetBaseRoute = Routes.Tiers.ROUTE
-                                                        )
-                                                    }
                                                 }
                                             }
                                         }
-                                    )
-                                }
+                                    }
+                                )
                             }
                         }
                     }

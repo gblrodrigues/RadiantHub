@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.gblrod.radianthub.navigation.NavigationKeys
+import com.gblrod.radianthub.navigation.NavigationKeys.SELECTED_AGENT_UUID
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.ui.features.agents.screen.AgentsScreen
 import com.gblrod.radianthub.ui.features.agents.viewmodel.AgentsViewModel
@@ -19,7 +19,7 @@ fun NavGraphBuilder.agentsRoute() {
         val selectedAgentUuid by backStackEntry
             .savedStateHandle
             .getStateFlow<String?>(
-                key = NavigationKeys.SELECTED_AGENT_UUID,
+                key = SELECTED_AGENT_UUID,
                 initialValue = null
             )
             .collectAsState()
@@ -31,7 +31,7 @@ fun NavGraphBuilder.agentsRoute() {
                 agentsViewModel.selectAgent(uuid)
 
                 backStackEntry.savedStateHandle[
-                    NavigationKeys.SELECTED_AGENT_UUID
+                    SELECTED_AGENT_UUID
                 ] = null
             }
         }

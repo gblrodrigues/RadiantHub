@@ -35,16 +35,18 @@ fun SearchFilter(
                     )
                 },
                 leadingIcon = {
+                    Icon(
+                        imageVector = filter.icon,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface
+                    )
+                },
+                trailingIcon = {
                     if (selectedFilter == filter) {
                         Icon(
                             imageVector = Icons.Default.Check,
                             contentDescription = null,
                             tint = NavigationSelected
-                        )
-                    } else {
-                        Icon(
-                            imageVector = filter.icon,
-                            contentDescription = null
                         )
                     }
                 },
