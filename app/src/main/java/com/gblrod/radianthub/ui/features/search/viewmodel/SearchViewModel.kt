@@ -63,7 +63,7 @@ class SearchViewModel(
                 _searchState.value =
                     state.copy(
                         query = query,
-                        results = if (query.isBlank()) emptyList() else filteredItems
+                        results = filteredItems
                     )
             }
         }
@@ -174,29 +174,10 @@ class SearchViewModel(
                     _searchState.value =
                         SearchUiState.Success(
                             query = currentQuery,
-                            results = if (currentQuery.isBlank()) emptyList() else filteredItems
+                            results = filteredItems
                         )
                 }
             }
-        }
-    }
-
-    fun clearSearch() {
-        val state = _searchState.value
-
-        _searchState.value = when (state) {
-            is SearchUiState.Loading -> {
-                state.copy(query = "")
-            }
-
-            is SearchUiState.Success -> {
-                state.copy(
-                    query = "",
-                    results = emptyList()
-                )
-            }
-
-            is SearchUiState.Error -> state.copy(query = "")
         }
     }
 

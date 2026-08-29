@@ -15,6 +15,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
@@ -28,8 +31,8 @@ import com.gblrod.radianthub.navigation.extensions.navigateFromSearch
 import com.gblrod.radianthub.navigation.extensions.navigateToTopLevelFromSearch
 import com.gblrod.radianthub.ui.features.search.components.EmptySearchResult
 import com.gblrod.radianthub.ui.features.search.components.SearchField
-import com.gblrod.radianthub.ui.features.search.components.SearchInitialContent
 import com.gblrod.radianthub.ui.features.search.components.SearchResultItem
+import com.gblrod.radianthub.ui.features.search.model.SearchFilterType
 import com.gblrod.radianthub.ui.features.search.model.SearchType
 import com.gblrod.radianthub.ui.features.search.state.SearchUiState
 import com.gblrod.radianthub.ui.features.search.viewmodel.SearchViewModel
@@ -46,6 +49,9 @@ fun SearchScreen(
 
     val focus = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
+
+    var filterExpanded by rememberSaveable { mutableStateOf(false) }
+    var selectedFilter by rememberSaveable { mutableStateOf(SearchFilterType.ALL) }
 
     Column(
         modifier = Modifier
@@ -67,7 +73,15 @@ fun SearchScreen(
                 is SearchUiState.Success -> state.query
             },
             onQueryChange = { searchViewModel.updateQuery(it) },
-            onBackClick = { navHostController.popBackStack() }
+            onBackClick = { navHostController.popBackStack() },
+            expanded = filterExpanded,
+            onSearchFilterMenu = { filterExpanded = true },
+            onDismissFilterMenu = { filterExpanded = false },
+            selectedFilter = selectedFilter,
+            onFilterSelected = { filter ->
+                selectedFilter = filter
+                filterExpanded = false
+            }
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -88,9 +102,7 @@ fun SearchScreen(
                             id = state.messageResId,
                             it
                         )
-                    } ?: stringResource(
-                        id = state.messageResId
-                    )
+                    } ?: stringResource(id = state.messageResId)
 
                     ErrorMessage(
                         message = message,
@@ -99,77 +111,65 @@ fun SearchScreen(
                 }
 
                 is SearchUiState.Success -> {
-                    when {
-                        state.query.isBlank() -> {
-                            SearchInitialContent()
-                        }
+                    val filteredResults = when (selectedFilter) {
+                        SearchFilterType.ALL -> state.results
+                        SearchFilterType.AGENTS -> state.results.filter { it.type == SearchType.AGENT }
+                        SearchFilterType.MAPS -> state.results.filter { it.type == SearchType.MAP }
+                        SearchFilterType.CARDS -> state.results.filter { it.type == SearchType.CARD }
+                        SearchFilterType.TIERS -> state.results.filter { it.type == SearchType.TIER }
+                    }
 
-                        state.results.isEmpty() -> {
-                            EmptySearchResult(
-                                query = state.query
-                            )
-                        }
+                    if (filteredResults.isEmpty()) {
+                        EmptySearchResult(query = state.query)
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(
+                                top = 4.dp,
+                                bottom = 16.dp
+                            ),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            items(
+                                items = filteredResults,
+                                key = { it.uuid + it.type.name }
+                            ) { item ->
+                                SearchResultItem(
+                                    item = item,
+                                    onClick = {
+                                        when (item.type) {
+                                            SearchType.AGENT -> {
+                                                navHostController.navigateToTopLevelFromSearch(
+                                                    targetRoute = Routes.Agents.ROUTE,
+                                                    selectionKey = NavigationKeys.SELECTED_AGENT_UUID,
+                                                    selectionValue = item.uuid
+                                                )
+                                            }
 
-                        else -> {
-                            LazyColumn(
-                                modifier = Modifier.fillMaxSize(),
-                                contentPadding = PaddingValues(
-                                    top = 4.dp,
-                                    bottom = 16.dp
-                                ),
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                items(
-                                    items = state.results,
-                                    key = { it.uuid + it.type.name }
-                                ) { item ->
-                                    SearchResultItem(
-                                        item = item,
-                                        onClick = {
-                                            when (item.type) {
-                                                SearchType.AGENT -> {
-                                                    searchViewModel.clearSearch()
+                                            SearchType.MAP -> {
+                                                navHostController.navigateToTopLevelFromSearch(
+                                                    targetRoute = Routes.Maps.ROUTE,
+                                                    selectionKey = NavigationKeys.SELECTED_MAP_UUID,
+                                                    selectionValue = item.uuid
+                                                )
+                                            }
 
-                                                    navHostController.navigateToTopLevelFromSearch(
-                                                        targetRoute = Routes.Agents.ROUTE,
-                                                        selectionKey = NavigationKeys.SELECTED_AGENT_UUID,
-                                                        selectionValue = item.uuid
-                                                    )
-                                                }
+                                            SearchType.CARD -> {
+                                                navHostController.navigateFromSearch(
+                                                    targetRoute = Routes.Cards.createRoute(cardUuid = item.uuid)
+                                                )
+                                            }
 
-                                                SearchType.MAP -> {
-                                                    searchViewModel.clearSearch()
-
-                                                    navHostController.navigateToTopLevelFromSearch(
-                                                        targetRoute = Routes.Maps.ROUTE,
-                                                        selectionKey = NavigationKeys.SELECTED_MAP_UUID,
-                                                        selectionValue = item.uuid
-                                                    )
-                                                }
-
-                                                SearchType.CARD -> {
-                                                    searchViewModel.clearSearch()
-
+                                            SearchType.TIER -> {
+                                                item.tierId?.let { tierId ->
                                                     navHostController.navigateFromSearch(
-                                                        targetRoute = Routes.Cards.createRoute(cardUuid = item.uuid),
-                                                        targetBaseRoute = Routes.Cards.ROUTE
+                                                        targetRoute = Routes.Tiers.createRoute(tierId = tierId)
                                                     )
-                                                }
-
-                                                SearchType.TIER -> {
-                                                    item.tierId?.let { tierId ->
-                                                        searchViewModel.clearSearch()
-
-                                                        navHostController.navigateFromSearch(
-                                                            targetRoute = Routes.Tiers.createRoute(tierId = tierId),
-                                                            targetBaseRoute = Routes.Tiers.ROUTE
-                                                        )
-                                                    }
                                                 }
                                             }
                                         }
-                                    )
-                                }
+                                    }
+                                )
                             }
                         }
                     }

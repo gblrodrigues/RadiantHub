@@ -106,18 +106,9 @@
     <string name="connection_restored">Conexão restabelecida</string>
     <string name="no_connection">Sem conexão</string>
 
-    <!-- Types name -->
-    <string name="type_name_agents_title">Agentes</string>
-    <string name="type_name_cards_title">Cards</string>
-
     <!-- SearchBar -->
     <string name="search_placeholder" tools:ignore="TypographyEllipsis">
         Buscar agentes, cards...
-    </string>
-
-    <string name="search_query_empty">
-        Busque Agentes, Mapas, Cards ou Elos\n
-        pelo nome
     </string>
 
     <string name="search_result_empty">
@@ -125,9 +116,14 @@
         Tente outro termo de pesquisa
     </string>
 
-    <!-- SearchType -->
+    <!-- SearchType && SearchFilter -->
     <string name="search_type_agent">Agente</string>
     <string name="search_type_map">Mapa</string>
     <string name="search_type_card">Card</string>
     <string name="search_type_tier">Elo</string>
+    <string name="search_filter_all">Todos</string>
+    <string name="search_filter_agents">Agentes</string>
+    <string name="search_filter_maps">Mapas</string>
+    <string name="search_filter_cards">Cards</string>
+    <string name="search_filter_tiers">Elos</string>
 </resources>
