@@ -6,13 +6,50 @@ maps, and other content from Valorant.
 I built this project to practice API integration, local persistence, state management, and modern Android UI 
 development while exploring a more immersive visual experience.
 
-- [Technologies](#technologies-used)  
 - [Features](#features)  
 - [Preview](#preview)  
+- [Technologies](#technologies-used)  
 - [Technical Decisions](#technical-decisions)   
 - [Project Goal](#project-goal)  
 - [Contact](#contact)  
 - [Disclaimer](#disclaimer)
+
+## Features
+
+| Feature | Highlights |
+|----------|------------|
+| **Home** | Quick access to Agents, Maps, Cards, Competitive Tiers and Favorites with themed banners
+| **Agents** | Agent browsing with carousel navigation, immersive fullscreen presentation and detailed agent information
+| **Maps** | Map browsing with carousel navigation, tactical visualization, map details and interactive callout explorer
+| **Player Cards** | Grid-based player card gallery with favorites
+| **Competitive Tiers** | Rank browsing organized by divisions with search integration and automatic navigation
+| **Favorites** | Persistent favorites for Agents and Cards, category filtering, undo support and favorite restoration
+| **Search** | Global search across Agents, Maps, Cards and Tiers with real-time filtering, navigation and result highlighting
+| **Navigation & UI** | Drawer, TopBar and BottomBar navigation, theme support, multi-language support and dynamic API localization
+
+## Preview
+### Home Screen
+<img src="https://github.com/user-attachments/assets/a8446100-6236-4d78-a553-858aa50cf815" width="250"/>
+
+### Agents Screen and Agent Details
+<img src="https://github.com/user-attachments/assets/53043637-bff7-4b2c-801b-1f53aea9543e" width="250"/>
+<img src="https://github.com/user-attachments/assets/adedda93-c83c-433c-8715-faecb35f006e" width="250"/>
+
+### Maps Screen
+<img src="https://github.com/user-attachments/assets/873aa49b-ec7a-4fd1-9bc9-01ad7efd1a2b" width="250"/>
+<img src="https://github.com/user-attachments/assets/4880c099-7ed9-4fb1-87f6-3582c3a9e383" width="250"/>
+
+### Favorites Screen
+<img src="https://github.com/user-attachments/assets/bbf2ad2c-6e2c-488c-bc5f-8a27479dfb74" width="250"/>
+<img src="https://github.com/user-attachments/assets/66c7ea9b-3bbc-43a9-9f0f-fbfdd8cc942b" width="250"/>
+<img src="https://github.com/user-attachments/assets/15479e8f-3a71-40df-972a-a94aa6328047" width="250"/>
+
+### Search 
+<img src="https://github.com/user-attachments/assets/abcf2441-2197-4740-a7ef-96ba2e9c4c00" width="250"/>
+<img src="https://github.com/user-attachments/assets/71835c39-ea68-4b73-bc62-4c646297e8c8" width="250"/>
+
+Below I will provide a video showing how the application looks:  
+> https://github.com/user-attachments/assets/eb3b8d2a-eee6-47c2-97e5-c46cbc20e209
 
 ## Technologies used
 
@@ -27,150 +64,15 @@ development while exploring a more immersive visual experience.
 | Preferences | [![DataStore](https://img.shields.io/badge/DataStore-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/topic/libraries/architecture/datastore) | User preference persistence
 | Image Loading | [![Coil](https://img.shields.io/badge/Coil-FF6F00?style=for-the-badge&logo=kotlin&logoColor=white)](https://coil-kt.github.io/coil/compose/) | Asynchronous image loading via URL
 | Navigation | [![Navigation Compose](https://img.shields.io/badge/Navigation%20Compose-4285F4?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/jetpack/compose/navigation)  | Navigation management between screens
-| Localization | strings.xml | Centralized text management for easier maintenance and future localization
-| Architecture | MVVM + StateFlow | Project organization using ViewModel and StateFlow for state management and separation of responsibilities
-
-## Features
-
-### Home
-* Quick access to:
-  * Agents
-  * Maps
-  * Cards
-  * Competitive Tiers
-  * Favorites
-* Themed banners for each section
-
-### Agents
-* Browse playable Valorant agents
-* Carousel position indicator
-* Immersive fullscreen agent presentation:
-  * Blurred cinematic background  
-  * Centered agent artwork  
-* Agent details:
-  * Name  
-  * Role  
-  * Description  
-
-### Agent Details
-* BottomSheet with detailed agent information
-  * Icon
-  * Agent name
-  * Description
-* Ability list including:
-  * Icon
-  * Ability name
-  * Description
-
-### Maps
-* Browse all Valorant maps
-* Carousel position indicator
-* Fullscreen tactical map visualization
-* Detailed map information
-  * Coordinates
-  * Callout count
-  * Region count
-* Interactive callouts explorer
-  * Grouped by tactical regions
-  * Quick access through bottom sheet
- 
-### Player Cards
-* Browse Valorant player cards
-* Grid-based cards gallery
-* Favorite player cards
-
-### Competitive Tiers
-* Browse all Valorant competitive tiers
-* Organized by rank divisions
-* Tier icons and progression visualization
-* Search integration with automatic navigation
-
-### Favorites
-* Filtering by All, Agents and Cards categories
-* Persistent local favorites system for agents and player cards
-* Agent favorites with immersive background and portrait presentation
-* Card favorites using dedicated wide artwork
-* Undo support when removing favorites
-* Favorite restoration to original position
-* Dynamic favorite toggling directly from agent pages
-
-### Search
-* Global search across agents, maps, player cards, and competitive tiers
-* Real time filtering while typing
-* Automatic navigation from search results
-* Automatic scrolling and visual highlighting for searched player cards and competitive tiers
-
-### Navigation & UI
-* TopBar and BottomBar navigation
-* Navigation Drawer with:
-  * App routes
-  * Language preferences
-  * Theme preferences  
-* Theme support:
-  * `Dark`
-  * `Light`
-  * `System`
-* Language support:
-  * `English`
-  * `Português (Brasil)`
-  * `Español`
-* Dynamic API localization based on selected language
-* Synchronization with:
-  * Status Bar  
-  * Navigation Bar
-
-### General
-* Handling of loading and error states with retry option
-* Network connectivity monitoring
-* Offline and connection-restored feedback
-* Automatic retry of failed requests when connectivity is restored
-* Public API integration with Valorant API
-* Practicing application localization and internationalization (i18n)
-* Dynamic UI rendering using Compose State
-* Runtime language switching
-* Persistent language preferences
-* API content localization
-
-## Preview
-### Home Screen
-<img src="https://github.com/user-attachments/assets/a8446100-6236-4d78-a553-858aa50cf815" width="250"/>
-
-### Agents Screen and Agent Details
-<img src="https://github.com/user-attachments/assets/53043637-bff7-4b2c-801b-1f53aea9543e" width="250"/>
-<img src="https://github.com/user-attachments/assets/adedda93-c83c-433c-8715-faecb35f006e" width="250"/>
-
-### Maps Screen
-<img src="https://github.com/user-attachments/assets/873aa49b-ec7a-4fd1-9bc9-01ad7efd1a2b" width="250"/>
-<img src="https://github.com/user-attachments/assets/4880c099-7ed9-4fb1-87f6-3582c3a9e383" width="250"/>
-
-### Cards Screen
-<img src="https://github.com/user-attachments/assets/9b3e04a1-6ab8-4005-a5bb-aa2d53bbb1ab" width="250"/>
-
-### Tiers Screen
-<img src="https://github.com/user-attachments/assets/badcac2a-f1b2-460e-9c15-25e155949921" width="250"/>
-
-### Favorites Screen
-<img src="https://github.com/user-attachments/assets/bbf2ad2c-6e2c-488c-bc5f-8a27479dfb74" width="250"/>
-<img src="https://github.com/user-attachments/assets/66c7ea9b-3bbc-43a9-9f0f-fbfdd8cc942b" width="250"/>
-<img src="https://github.com/user-attachments/assets/15479e8f-3a71-40df-972a-a94aa6328047" width="250"/>
-
-### Search 
-<img src="https://github.com/user-attachments/assets/d0fbf87e-c3ea-44e7-91fa-53739385145b" width="250"/>
-<img src="https://github.com/user-attachments/assets/71835c39-ea68-4b73-bc62-4c646297e8c8" width="250"/>
-
-Below I will provide a video showing how the application looks:  
-> https://github.com/user-attachments/assets/c7cc0441-8cc8-4455-a632-f9ffaaee480f
 
 ## Technical Decisions
 
-### Jetpack Compose
-I chose Jetpack Compose because I already had experience with the declarative approach, which makes UI construction more organized. I honestly don't miss XML ;)
-
 ### Architecture (MVVM)
-I chose to structure the project using MVVM to keep the logic separated from the UI.  
-The use of ViewModel with StateFlow allows the UI to automatically react to state changes.  
+The project follows MVVM with a feature-based organization, keeping UI, domain, and data responsibilities separated.
 
-> The project follows a feature-based organization, keeping UI, domain, and data responsibilities separated to reduce coupling and improve scalability.
+ViewModels expose screen state through StateFlow, while sealed `UiState` represents loading, success, and error states.
+
+> This structure helps reduce coupling between UI and business logic while keeping screen state predictable.
 
 ### API Consumption
 The application consumes data from the Valorant public API. This allowed me to practice HTTP requests, data handling, and layer organization within the project.
@@ -181,21 +83,8 @@ This allowed me to practice:
 * Error handling  
 * UI state management for loading, success, and error scenarios
 
-> 🔗 API Link: https://valorant-api.com/
-
 ### Data Persistence (Room + DataStore)
-
 I implemented Room for local persistence of favorite agents and DataStore for managing user personalization preferences such as theme and language selection.
-
-### UI State Management (UiState)
-To handle screen states (loading, success, and error), I used an approach with sealed class (UiState) along with StateFlow.  
-With this, the UI automatically reacts to state changes, making the code more organized and easier to understand.
-
-### Image Loading
-I used Coil to load remote images asynchronously, ensuring smooth rendering of agent portraits, role icons, and backgrounds.
-
-### Material 3
-Material 3 was chosen to maintain a modern and consistent visual design while taking advantage of well-structured components.
 
 ### Screen Navigation (Navigation)
 The application uses Navigation Compose with centralized route definitions for parameterized destinations.
@@ -217,10 +106,13 @@ This project was developed with the goal of:
 🔗 [LinkedIn](https://www.linkedin.com/in/gblrodrigues/)
 
 ## Disclaimer
-
-This project was developed exclusively for educational and portfolio purposes.
-
-**RadiantHub** is not affiliated with, sponsored by, or endorsed by Riot Games.
-
-The data used in this application is provided by public API:  
-* Valorant API: https://valorant-api.com/
+> [!NOTE]
+> This project was developed exclusively for educational and portfolio purposes.
+>
+> **RadiantHub** is not affiliated with, sponsored by, or endorsed by Riot Games.
+>
+> The application uses data provided by the **Valorant Community API**, an unofficial community-maintained API and not an official Riot Games API.
+>
+> **Valorant Community API:** https://valorant-api.com/
+>
+> VALORANT, Riot Games, and all related properties are trademarks or registered trademarks of Riot Games, Inc.
