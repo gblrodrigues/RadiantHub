@@ -25,7 +25,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.gblrod.radianthub.navigation.NavigationKeys
+import com.gblrod.radianthub.navigation.NavigationKeys.SELECTED_AGENT_UUID
+import com.gblrod.radianthub.navigation.NavigationKeys.SELECTED_MAP_UUID
 import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.extensions.navigateFromSearch
 import com.gblrod.radianthub.navigation.extensions.navigateToTopLevelFromSearch
@@ -141,7 +142,7 @@ fun SearchScreen(
                                             SearchType.AGENT -> {
                                                 navHostController.navigateToTopLevelFromSearch(
                                                     targetRoute = Routes.Agents.ROUTE,
-                                                    selectionKey = NavigationKeys.SELECTED_AGENT_UUID,
+                                                    selectionKey = SELECTED_AGENT_UUID,
                                                     selectionValue = item.uuid
                                                 )
                                             }
@@ -149,7 +150,7 @@ fun SearchScreen(
                                             SearchType.MAP -> {
                                                 navHostController.navigateToTopLevelFromSearch(
                                                     targetRoute = Routes.Maps.ROUTE,
-                                                    selectionKey = NavigationKeys.SELECTED_MAP_UUID,
+                                                    selectionKey = SELECTED_MAP_UUID,
                                                     selectionValue = item.uuid
                                                 )
                                             }

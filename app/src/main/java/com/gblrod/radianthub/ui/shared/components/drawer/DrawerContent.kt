@@ -13,14 +13,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
-import androidx.compose.material.icons.filled.Groups
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Language
-import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.Palette
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.filled.Style
-import androidx.compose.material.icons.filled.WorkspacePremium
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -47,7 +41,6 @@ import coil.compose.AsyncImage
 import com.gblrod.radianthub.R
 import com.gblrod.radianthub.core.events.AppEvents
 import com.gblrod.radianthub.core.utils.orDeviceDefault
-import com.gblrod.radianthub.navigation.Routes
 import com.gblrod.radianthub.navigation.bottomBarRoutes
 import com.gblrod.radianthub.navigation.extensions.isNavigationSection
 import com.gblrod.radianthub.navigation.extensions.navigateToBottomBar
@@ -76,39 +69,6 @@ fun DrawerContent(
     val language = languageViewModel.language.collectAsState().value
 
     val effectiveLanguage = language.orDeviceDefault()
-
-    val items = listOf(
-        NavigationItem(
-            label = stringResource(id = R.string.drawer_item_home),
-            icon = Icons.Default.Home,
-            route = Routes.Home.ROUTE
-        ),
-        NavigationItem(
-            label = stringResource(id = R.string.drawer_item_agents),
-            icon = Icons.Default.Groups,
-            route = Routes.Agents.ROUTE
-        ),
-        NavigationItem(
-            label = stringResource(id = R.string.drawer_item_maps),
-            icon = Icons.Default.Map,
-            route = Routes.Maps.ROUTE
-        ),
-        NavigationItem(
-            label = stringResource(id = R.string.drawer_item_cards),
-            icon = Icons.Default.Style,
-            route = Routes.Cards.ROUTE
-        ),
-        NavigationItem(
-            label = stringResource(id = R.string.drawer_item_tiers),
-            icon = Icons.Default.WorkspacePremium,
-            route = Routes.Tiers.ROUTE
-        ),
-        NavigationItem(
-            label = stringResource(id = R.string.bottom_bar_favorites_title),
-            icon = Icons.Default.Star,
-            route = Routes.Favorites.ROUTE
-        )
-    )
 
     Column(
         modifier = Modifier
@@ -155,25 +115,25 @@ fun DrawerContent(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        items.forEach { item ->
+        NavigationItem.entries.forEach { item ->
             NavigationDrawerItem(
                 label = {
                     Text(
-                        text = item.label,
+                        text = stringResource(id = item.label),
                         style = MaterialTheme.typography.bodyLarge
                     )
                 },
                 icon = {
                     Icon(
                         imageVector = item.icon,
-                        contentDescription = item.label
+                        contentDescription = stringResource(id = item.label)
                     )
                 },
                 badge = {
                     if (item.route != currentRoute) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                            contentDescription = item.label,
+                            contentDescription = stringResource(id = item.label),
                             tint = MaterialTheme.colorScheme.onSurface
                         )
                     }
